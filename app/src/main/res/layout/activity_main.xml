@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="531dp"
         android:alpha="1"
-        android:src="@drawable/ic_group_3"
-        app:layout_constraintBottom_toTopOf="@+id/text"
+        android:src="@drawable/ic_group2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,9 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
-        android:layout_marginBottom="32dp"
-        android:autoSizeMaxTextSize="55sp"
-        android:autoSizeMinTextSize="12sp"
+        android:layout_marginBottom="80dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/arsenal"
         android:letterSpacing="0.1"
@@ -36,7 +34,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
