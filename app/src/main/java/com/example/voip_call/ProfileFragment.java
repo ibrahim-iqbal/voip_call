@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment {
     Button save, update;
     Bitmap bitmap;
     String email, name;
-    int i;
     TextView cgpass;
     Context context;
     DatabaseReference db;
@@ -67,12 +66,12 @@ public class ProfileFragment extends Fragment {
 
         db = FirebaseDatabase.getInstance().getReference("userinfo");
         mAuth = FirebaseAuth.getInstance();
-        email = mAuth.getCurrentUser().getEmail();
+        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         db.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dp : dataSnapshot.getChildren()) {
-                    name = dp.child("name").getValue().toString();
+                    name = Objects.requireNonNull(dp.child("name").getValue()).toString();
                     etname.setText(name);
                 }
             }
