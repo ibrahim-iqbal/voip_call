@@ -1,0 +1,170 @@
+package com.example.voip_call;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class ChattingActivity extends AppCompatActivity
+{
+    FirebaseAuth mauth;
+    TextView tname;
+    ImageView send_btn;
+    EditText text_massage;
+    String Email, chatuserEmail, chatId, chatname;
+    RecyclerView show_chat;
+    RecyclerView.Adapter chatAdpter;
+    RecyclerView.LayoutManager chatlayoutManeger;
+    List<Chat_Data> chat_data;
+    androidx.core.widget.NestedScrollView scroll;
+    DatabaseReference r_db, u_db;
+    String c_userId, chaterId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chating);
+        text_massage = findViewById(R.id.textmassge);
+        send_btn = findViewById(R.id.send_button);
+        scroll = findViewById(R.id.scroll);
+        r_db = FirebaseDatabase.getInstance().getReference("chatinfo");
+        u_db = FirebaseDatabase.getInstance().getReference("userinfo");
+
+
+        show_chat = findViewById(R.id.show_chat);
+        chatlayoutManeger = new LinearLayoutManager(this);
+        show_chat.setLayoutManager(chatlayoutManeger);
+
+        mauth = FirebaseAuth.getInstance();
+        Email = Objects.requireNonNull(mauth.getCurrentUser()).getEmail();
+
+        Intent I = getIntent();
+        chatuserEmail = I.getStringExtra("useremail");
+        chatname = I.getStringExtra("name");
+        String img = I.getStringExtra("img");
+
+        tname = findViewById(R.id.tvname);
+        tname.setText(chatname);
+
+
+        assert chatuserEmail != null;
+
+
+        send_btn.setOnClickListener(v -> {
+            if (text_massage.getText().toString().trim().isEmpty()) {
+
+            } else {
+                scroll.fullScroll(ScrollView.FOCUS_DOWN);
+
+                chatInsert(chatId);
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        u_db.orderByChild("email").equalTo(Objects.requireNonNull(mauth.getCurrentUser()).getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot datas : dataSnapshot.getChildren()) {
+                    c_userId = datas.child("id").getValue().toString();
+                    u_db.orderByChild("email").equalTo(chatuserEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot datas : dataSnapshot.getChildren()) {
+                                chaterId = datas.child("id").getValue().toString();
+                                chatId = idgenrater(c_userId, chaterId);
+                                r_db.child(c_userId).child(chatId).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        chat_data = new ArrayList<>();
+                                        for (DataSnapshot datas : dataSnapshot.getChildren()) {
+                                            String mass = Objects.requireNonNull(datas.child("massage").getValue()).toString();
+                                            String senderId = Objects.requireNonNull(datas.child("senderId").getValue()).toString();
+                                            Chat_Data d = new Chat_Data(mass, senderId);
+                                            chat_data.add(d);
+                                            text_massage.requestFocus();
+                                        }
+                                        chatAdpter = new ShowChatRecAdapter(c_userId, ChattingActivity.this, chat_data);
+                                        show_chat.setAdapter(chatAdpter);
+                                        if (chatAdpter.getItemCount() == 0) {
+                                            show_chat.post(() -> show_chat.smoothScrollToPosition(0));
+                                        } else {
+                                            show_chat.post(() -> show_chat.smoothScrollToPosition(chatAdpter.getItemCount() - 1));
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public String idgenrater(String c_userId, String chat_user) {
+        String id="";
+        int id1 = Integer.parseInt(c_userId);
+        int id2 = Integer.parseInt(chat_user);
+        if (id1 > id2) {
+            id = c_userId + "_chat_" + chat_user;
+        } else {
+            id = chat_user + "_chat_" + c_userId;
+        }
+        return id;
+    }
+
+
+    public void chatInsert(String chatId) {
+        String id = r_db.push().getKey();
+        String Massage = text_massage.getText().toString().trim();
+        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0);
+        r_db.child(c_userId).child(chatId).child(id).setValue(chat);
+        reciverchatinsert();
+        text_massage.setText("");
+
+
+    }
+
+    public void reciverchatinsert() {
+        String id = r_db.push().getKey();
+        String Massage = text_massage.getText().toString().trim();
+        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0);
+        r_db.child(chaterId).child(chatId).child(id).setValue(chat);
+    }
+}

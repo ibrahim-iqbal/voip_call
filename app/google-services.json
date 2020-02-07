@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "362214549059",
+    "firebase_url": "https://voipcall-772c4.firebaseio.com",
+    "project_id": "voipcall-772c4",
+    "storage_bucket": "voipcall-772c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362214549059:android:c75bc7a9708f1c0a00d6f6",
+        "android_client_info": {
+          "package_name": "com.example.voip_call"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362214549059-e2vnk6raqp1uj5srempuqb0usoekifvl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.voip_call",
+            "certificate_hash": "b0217e216d4c10898ba0b38603d5b1bdaf2a3d45"
+          }
+        },
+        {
+          "client_id": "362214549059-8jme71gjqbh3j21vi7u7n1n00vukvrs7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUwqOxgcQZbGOZZVyKk70BC7UysaHJoFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362214549059-8jme71gjqbh3j21vi7u7n1n00vukvrs7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
