@@ -6,6 +6,16 @@ public class ChatInsertData {
     String senderId;
     String reciverId;
     int unread;
+    long time;
+
+    public ChatInsertData(String chatid, String massage, String senderId, String reciverId, int unread, long time) {
+        this.chatid = chatid;
+        this.massage = massage;
+        this.senderId = senderId;
+        this.reciverId = reciverId;
+        this.unread = unread;
+        this.time = time;
+    }
 
     public String getChatid() {
         return chatid;
@@ -27,11 +37,7 @@ public class ChatInsertData {
         return unread;
     }
 
-    public ChatInsertData(String chatid, String massage, String senderId, String reciverId, int unread) {
-        this.chatid = chatid;
-        this.massage = massage;
-        this.senderId = senderId;
-        this.reciverId = reciverId;
-        this.unread = unread;
+    public long getTime() {
+        return time;
     }
 }

@@ -2,11 +2,11 @@ package com.example.voip_call;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -151,20 +151,30 @@ public class ChattingActivity extends AppCompatActivity
 
 
     public void chatInsert(String chatId) {
+        long tsLong = System.currentTimeMillis() / 1000;
+
+        Toast.makeText(this, "" + tsLong, Toast.LENGTH_SHORT).show();
         String id = r_db.push().getKey();
+//        Toast.makeText(this, ""+chatId, Toast.LENGTH_SHORT).show();
         String Massage = text_massage.getText().toString().trim();
-        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0);
-        r_db.child(c_userId).child(chatId).child(id).setValue(chat);
+
+        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0, tsLong);
         reciverchatinsert();
+        r_db.child(c_userId).child(chatId).child(id).setValue(chat);
         text_massage.setText("");
 
 
     }
 
     public void reciverchatinsert() {
+        long tsLong = System.currentTimeMillis() / 1000;
+
+        Toast.makeText(this, "" + tsLong, Toast.LENGTH_SHORT).show();
         String id = r_db.push().getKey();
+//        Toast.makeText(this, ""+chatId, Toast.LENGTH_SHORT).show();
         String Massage = text_massage.getText().toString().trim();
-        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0);
+        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0, tsLong);
+
         r_db.child(chaterId).child(chatId).child(id).setValue(chat);
     }
 }
