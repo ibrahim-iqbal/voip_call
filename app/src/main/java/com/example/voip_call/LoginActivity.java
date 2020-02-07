@@ -10,7 +10,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
     EditText emailid, password;
     String id, pass;
-    ImageView topcir;
     private FirebaseAuth mAuth;
 
     @Override
@@ -30,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         emailid = findViewById(R.id.emailid);
         password = findViewById(R.id.password);
-        topcir = findViewById(R.id.topcir);
 
         mAuth = FirebaseAuth.getInstance();
 

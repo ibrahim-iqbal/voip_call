@@ -10,7 +10,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,7 +33,6 @@ import java.util.Objects;
 public class RegistrationActivity extends AppCompatActivity {
     TextInputEditText email, password, name;
     String id, pass, n;
-    ImageView topcir;
     DatabaseReference db;
     long maxid = 0;
     private FirebaseAuth mAuth;
@@ -47,7 +45,6 @@ public class RegistrationActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         name = findViewById(R.id.nameid);
-        topcir = findViewById(R.id.topcir);
 
 
         db = FirebaseDatabase.getInstance().getReference("userinfo");
