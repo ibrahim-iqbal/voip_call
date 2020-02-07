@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aldrich</item>
+        <item>@font/arsenal</item>
         <item>@font/cinzel</item>
         <item>@font/poppins_light</item>
     </array>

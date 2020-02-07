@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         wel = findViewById(R.id.well);
         mp = MediaPlayer.create(this, R.raw.intro_melody);
-        wel.animate().alpha(0.8f).translationY(50f).setDuration(2000);
+        wel.animate().alpha(0.8f).translationY(100f).scaleY(1.1f).scaleX(1.1f).setDuration(2000);
 
         Handler h = new Handler();
         h.postDelayed(() ->
@@ -27,6 +27,6 @@ public class MainActivity extends AppCompatActivity {
             Intent it = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(it);
             finish();
-        }, 4000);
+        }, 10000);
     }
 }
