@@ -8,11 +8,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         emailid = findViewById(R.id.emailid);
         password = findViewById(R.id.password);
         topcir = findViewById(R.id.topcir);
-        topcir.animate().translationY(50f).setDuration(1000);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -66,11 +63,9 @@ public class LoginActivity extends AppCompatActivity {
                 VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE);
                 assert vibrator != null;
                 vibrator.vibrate(100);
-            }
-            else
+            } else
                 Toast.makeText(LoginActivity.this, Build.VERSION.SDK_INT + "", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             if (pass.isEmpty()) {
                 password.setError("Empty");
                 password.requestFocus();
@@ -82,8 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     vibrator.vibrate(100);
                 } else
                     Toast.makeText(LoginActivity.this, Build.VERSION.SDK_INT + "", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 pd.show();
                 mAuth.signInWithEmailAndPassword(id, pass).addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -101,8 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
                         SharedPreferences.Editor ed = sp.edit().putInt("id", 1).putString("email", user.getEmail());
                         ed.apply();
-                    }
-                    else {
+                    } else {
                         pd.dismiss();
                         Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }

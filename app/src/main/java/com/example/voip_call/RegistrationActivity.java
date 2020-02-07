@@ -49,7 +49,6 @@ public class RegistrationActivity extends AppCompatActivity {
         name = findViewById(R.id.nameid);
         topcir = findViewById(R.id.topcir);
 
-        topcir.animate().translationY(-100f).setDuration(1000);
 
         db = FirebaseDatabase.getInstance().getReference("userinfo");
 
