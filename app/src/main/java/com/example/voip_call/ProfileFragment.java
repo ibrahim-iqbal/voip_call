@@ -61,7 +61,6 @@ public class ProfileFragment extends Fragment {
 
         update = v.findViewById(R.id.update);
         save = v.findViewById(R.id.save);
-        cgpass = v.findViewById(R.id.cgpass);
         profileimg = v.findViewById(R.id.profileimg);
         etname = v.findViewById(R.id.etname);
         etemail = v.findViewById(R.id.etemail);
