@@ -27,13 +27,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".VideoCallScreen" />
         <activity android:name=".ChattingActivity" />
         <activity android:name=".CallScreen" />
         <activity android:name=".LandingPage" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ChgPssActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
