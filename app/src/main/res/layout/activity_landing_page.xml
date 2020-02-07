@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:paddingStart="4dp"
     android:paddingEnd="4dp"
-    android:weightSum="10">
+    android:weightSum="10"
+    >
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -57,17 +58,20 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Call" />
+            android:text="Call"
+            android:id="@+id/call"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chat" />
+            android:text="Chat"
+            android:id="@+id/chat"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile" />
+            android:text="Profile"
+            android:id="@+id/profile"/>
 
     </com.google.android.material.tabs.TabLayout>
 
