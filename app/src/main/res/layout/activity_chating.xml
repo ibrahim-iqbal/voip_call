@@ -23,19 +23,20 @@
         <Toolbar
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.4"
             android:background="@color/colorPrimary"
             tools:targetApi="lollipop">
 
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="55dp"
                 android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/tvname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:gravity="center_vertical"
                 android:text="heyy"
                 android:textColor="#fff"
@@ -46,9 +47,9 @@
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4.7"
+            android:layout_weight="4.6"
             android:background="@drawable/bkg"
-            android:paddingBottom="50dp">
+            android:paddingBottom="60dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/show_chat"
