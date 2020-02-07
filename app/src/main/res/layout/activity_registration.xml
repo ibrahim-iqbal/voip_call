@@ -11,8 +11,7 @@
         android:id="@+id/topcir"
         android:layout_width="match_parent"
         android:layout_height="600dp"
-        android:layout_marginBottom="440dp"
-        android:translationY="-200dp"
+        android:layout_marginBottom="424dp"
         android:src="@drawable/semicircle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,14 +102,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             android:padding="4dp"
             app:counterEnabled="true"
             app:counterMaxLength="6"
             app:hintTextColor="#eee"
-            app:layout_constraintBottom_toTopOf="@+id/gsign"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText

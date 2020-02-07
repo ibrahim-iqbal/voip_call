@@ -11,11 +11,11 @@
         android:id="@+id/topcir"
         android:layout_width="match_parent"
         android:layout_height="597dp"
-        android:layout_marginBottom="482dp"
-        android:translationY="-100dp"
+        android:layout_marginBottom="404dp"
         android:src="@drawable/semicircle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
