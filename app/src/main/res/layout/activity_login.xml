@@ -7,17 +7,6 @@
     android:background="@drawable/bkg"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/topcir"
-        android:layout_width="match_parent"
-        android:layout_height="597dp"
-        android:layout_marginBottom="504dp"
-        android:src="@drawable/semicircle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +28,7 @@
             android:letterSpacing="0.1"
             android:text="Sign In"
             android:textAlignment="center"
-            android:textColor="#083864"
+            android:textColor="#fff"
             android:textSize="55sp"
             android:textStyle="bold"
         tools:ignore="HardcodedText" />
