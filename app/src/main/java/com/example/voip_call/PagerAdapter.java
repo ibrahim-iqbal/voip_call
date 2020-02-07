@@ -31,7 +31,7 @@ public class PagerAdapter extends FragmentPagerAdapter
             return new ChatFragment();
         } else
         {
-            return new ProfileFragment(mContext, email);
+            return new ProfileFragment(mContext);
         }
     }
 

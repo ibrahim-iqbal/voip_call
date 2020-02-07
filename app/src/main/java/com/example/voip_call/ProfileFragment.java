@@ -17,10 +17,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -28,23 +36,21 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
-    int[] ids = {R.id.etuser, R.id.etuserid, R.id.etemail, R.id.etmob};
     de.hdodenhof.circleimageview.CircleImageView profileimg;
-    EditText[] ets = new EditText[4];
-    String[] values = new String[5];
+    EditText etname, etemail;
     ImageView camera, gallery;
     AlertDialog alertDialog;
     Button save, update;
-    String encodedImage;
     Bitmap bitmap;
-    String email;
+    String email, name;
     int i;
     TextView cgpass;
     Context context;
+    DatabaseReference db;
+    FirebaseAuth mAuth;
 
-    ProfileFragment(Context context, String id) {
+    ProfileFragment(Context context) {
         this.context = context;
-        email = id;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -57,14 +63,32 @@ public class ProfileFragment extends Fragment {
         save = v.findViewById(R.id.save);
         cgpass = v.findViewById(R.id.cgpass);
         profileimg = v.findViewById(R.id.profileimg);
+        etname = v.findViewById(R.id.etname);
+        etemail = v.findViewById(R.id.etemail);
 
-        for (i = 0; i < ets.length; i++) {
-            ets[i] = v.findViewById(ids[i]);
-            ets[i].setEnabled(false);
-        }
+        db = FirebaseDatabase.getInstance().getReference("userinfo");
+        mAuth = FirebaseAuth.getInstance();
+        email = mAuth.getCurrentUser().getEmail();
+        db.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dp : dataSnapshot.getChildren()) {
+                    name = dp.child("name").getValue().toString();
+                    etname.setText(name);
+                    Toast.makeText(context, "" + name + email, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        etemail.setText(email);
+
         update.setOnClickListener(v1 -> update());
         return v;
     }
+
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
@@ -88,7 +112,7 @@ public class ProfileFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void update() {
 
-        ets[2].setEnabled(false);
+        etemail.setEnabled(false);
         save.animate().alpha(1).setDuration(1000);
         cgpass.animate().alpha(1).setDuration(1000);
         update.animate().alpha(0).setDuration(500);
@@ -134,5 +158,4 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getContext(), "Profile Updated", Toast.LENGTH_LONG).show();
         });
     }
-
 }

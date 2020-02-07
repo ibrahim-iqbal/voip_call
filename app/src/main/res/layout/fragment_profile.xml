@@ -38,7 +38,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etuser"
+                android:id="@+id/etname"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/tvname"
@@ -46,31 +46,10 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvuser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etuser"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="5dp"
-                android:text="User Id"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/etuserid"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/tvuser"
-                android:textColor="#eee"
-                android:textSize="18sp" />
-
-            <TextView
                 android:id="@+id/tvemail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etuserid"
+                android:layout_below="@+id/etname"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
