@@ -75,7 +75,6 @@ public class ProfileFragment extends Fragment {
                 for (DataSnapshot dp : dataSnapshot.getChildren()) {
                     name = dp.child("name").getValue().toString();
                     etname.setText(name);
-                    Toast.makeText(context, "" + name + email, Toast.LENGTH_SHORT).show();
                 }
             }
 
