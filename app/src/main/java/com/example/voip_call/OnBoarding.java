@@ -1,7 +1,6 @@
 package com.example.voip_call;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -25,17 +24,6 @@ public class OnBoarding extends AppIntro {
         sliderPage.setBgColor(R.color.BlueViolet);
         addSlide(AppIntroFragment.newInstance(sliderPage));
 
-        // OPTIONAL METHODS
-        // Override bar/separator color.
-        setBarColor(Color.parseColor("#3F51B5"));
-        setSeparatorColor(Color.parseColor("#2196F3"));
-
-
-        // Turn vibration on and set intensity.
-        // NOTE: you will probably need to ask VIBRATE permission in Manifest.
-        setVibrate(true);
-        setVibrateIntensity(30);
-
 
         Handler h = new Handler();
         h.postDelayed(() ->
@@ -43,7 +31,7 @@ public class OnBoarding extends AppIntro {
             Intent it = new Intent(this, LoginActivity.class);
             startActivity(it);
             finish();
-        }, 12000);
+        }, 5000);
     }
 
     @Override
