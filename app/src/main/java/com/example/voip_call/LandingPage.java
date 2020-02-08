@@ -78,7 +78,7 @@ public class LandingPage extends AppCompatActivity {
                 builder1.setPositiveButton("Yes", (dialog, ids) -> {
                     SharedPreferences sa = LandingPage.this.getSharedPreferences("user", Context.MODE_PRIVATE);
                     sa.edit().remove("id").apply();
-                    Intent it = new Intent(LandingPage.this, MainActivity.class);
+                    Intent it = new Intent(LandingPage.this, LoginActivity.class);
                     LandingPage.this.startActivity(it);
                     Toast.makeText(LandingPage.this, "Thank you for Login In!", Toast.LENGTH_SHORT).show();
                 });
