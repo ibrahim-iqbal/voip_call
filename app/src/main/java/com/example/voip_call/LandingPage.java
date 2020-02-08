@@ -22,10 +22,12 @@ public class LandingPage extends AppCompatActivity {
     ViewPager pagerv;
     Depth depth;
     String ids;
+    PagerAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
@@ -39,17 +41,21 @@ public class LandingPage extends AppCompatActivity {
         ids = it.getStringExtra("id");
         depth = new Depth();
 
-        Intent back= getIntent();
-        Boolean bk= back.getBooleanExtra("back",false);
-
-        PagerAdapter adapter = new PagerAdapter(this, getSupportFragmentManager(), ids);
-        pagerv.setAdapter(adapter);
+        adapter = new PagerAdapter(this, getSupportFragmentManager(), ids);
         pagerv.setPageTransformer(true, depth);
         tabs.setupWithViewPager(pagerv);
 
-        if(bk)
-        {
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent back = getIntent();
+
+        boolean bk = back.getBooleanExtra("back", false);
+        if (bk == true) {
             adapter.getItem(1);
+            pagerv.setAdapter(adapter);
         }
     }
 
