@@ -22,7 +22,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ChattingActivity extends AppCompatActivity {
@@ -97,6 +99,7 @@ public class ChattingActivity extends AppCompatActivity {
                             for (DataSnapshot datas : dataSnapshot.getChildren()) {
                                 chaterId = datas.child("id").getValue().toString();
                                 chatId = idgenrater(c_userId, chaterId);
+                                updateunradmassage(chatId);
                                 r_db.child(c_userId).child(chatId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -136,12 +139,23 @@ public class ChattingActivity extends AppCompatActivity {
             }
         });
 
-        Query query = r_db.child(chatuserid).child(chatId);
+
+    }
+
+    public void updateunradmassage(String ch) {
+        Query query = r_db.child(c_userId).child(chatId);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot unda : dataSnapshot.getChildren()) {
-                    Toast.makeText(ChattingActivity.this, "" + unda.getKey(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ChattingActivity.this, "" + unda.getKey(), Toast.LENGTH_SHORT).show();
+//                    int unread=Integer.parseInt(unda.child("unread").getValue().toString());
+//                Toast.makeText(ChattingActivity.this, ""+unread, Toast.LENGTH_SHORT).show();
+                    String key = unda.getKey();
+                    Map<String, Object> upd = new HashMap<String, Object>();
+                    upd.put("unread", 1);
+                    r_db.child(c_userId).child(chatId).child(key).updateChildren(upd);
+
                 }
             }
 
@@ -151,7 +165,6 @@ public class ChattingActivity extends AppCompatActivity {
             }
         });
     }
-
     public String idgenrater(String c_userId, String chat_user) {
         String id = "";
         int id1 = Integer.parseInt(c_userId);

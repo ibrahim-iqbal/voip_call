@@ -36,6 +36,7 @@ public class ChatFragment extends Fragment {
     String id, massage, name, Id, img;
     long time;
     Context context;
+    int unreadno = 0;
 
     public ChatFragment(Context mcontext) {
         // Required empty public constructor
@@ -111,13 +112,13 @@ public class ChatFragment extends Fragment {
                     query2.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            int no = 0;
+
                             for (DataSnapshot unda : dataSnapshot.getChildren()) {
-                                if (Integer.parseInt(unda.child("unread").getValue().toString()) >= 0) {
-                                    no++;
+                                if (Integer.parseInt(unda.child("unread").getValue().toString()) <= 0) {
+                                    unreadno++;
                                 }
                             }
-                            Toast.makeText(context, "unread" + no, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "unread" + unreadno, Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -180,7 +181,7 @@ public class ChatFragment extends Fragment {
                     name = userda.child("name").getValue().toString();
                     img = userda.child("imgurl").getValue().toString();
                     Id = userda.child("id").getValue().toString();
-                    userlist.add(new UserinfoList(img, name, mass, Id, tmm));
+                    userlist.add(new UserinfoList(img, name, mass, Id, tmm, unreadno));
                 }
 
 //                sort list according to sending and receiving massage

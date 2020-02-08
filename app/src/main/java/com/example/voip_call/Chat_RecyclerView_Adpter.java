@@ -48,6 +48,8 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
     public void onBindViewHolder(@NonNull final MyViewholder holder, final int position) {
         holder.name.setText(userList.get(position).getName());
         holder.email.setText(userList.get(position).getMassage());
+        //holder.unread.setText(""+userList.get(position).getUnRno());
+
         if (userList.get(position).imageurl.equals("")) {
             Log.d(TAG, "Hey");
         } else {
@@ -89,7 +91,7 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
 
     static class MyViewholder extends RecyclerView.ViewHolder {
         de.hdodenhof.circleimageview.CircleImageView profileppic;
-        TextView name, email;
+        TextView name, email, unread;
         LinearLayout userlayout;
 
         MyViewholder(@NonNull View itemView) {
@@ -97,6 +99,7 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
             profileppic = itemView.findViewById(R.id.profilepic);
             name = itemView.findViewById(R.id.alu_name);
             email = itemView.findViewById(R.id.alu_email);
+            unread = itemView.findViewById(R.id.unreadcount);
             userlayout = itemView.findViewById(R.id.userlayout);
         }
     }

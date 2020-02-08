@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -97,24 +96,6 @@ public class CallFragment extends Fragment {
                 for (final DataSnapshot da : dataSnapshot.getChildren()) {
                     String chatid = da.getKey();
 //                    Toast.makeText(context, ""+chatid, Toast.LENGTH_SHORT).show();
-                    Query query2 = db.child(id).child(chatid);
-                    query2.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            int no = 0;
-                            for (DataSnapshot unda : dataSnapshot.getChildren()) {
-                                if (Integer.parseInt(unda.child("unread").getValue().toString()) >= 0) {
-                                    no++;
-                                }
-                            }
-                            Toast.makeText(context, "unread" + no, Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
                     Query query = db.child(id).child(chatid).limitToLast(1).orderByKey();
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
