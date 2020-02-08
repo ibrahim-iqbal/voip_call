@@ -192,8 +192,6 @@ public class CallFragment extends Fragment {
                 madpter.notifyDataSetChanged();
                 review.setAdapter(madpter);
 //                madpter.notifyItemChanged(1);
-
-
             }
 
             @Override

@@ -48,6 +48,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf:19.0.5'
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation (name:'sinch-android-rtc', version:'+', ext:'aar')
+    compile ('com.github.worker8:tourguide:2.0.0-SNAPSHOT@aar') {
+        transitive=true
+    }
     testImplementation 'junit:junit:4.13'
 
     androidTestImplementation 'androidx.test:runner:1.2.0'

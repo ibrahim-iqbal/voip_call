@@ -26,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
+import tourguide.tourguide.TourGuide;
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ProfileFragment extends Fragment {
     de.hdodenhof.circleimageview.CircleImageView profileimg;
@@ -39,6 +41,7 @@ public class ProfileFragment extends Fragment {
     Context context;
     DatabaseReference db;
     FirebaseAuth mAuth;
+    TourGuide tourGuide;
 
     ProfileFragment(Context context) {
         this.context = context;
@@ -55,6 +58,13 @@ public class ProfileFragment extends Fragment {
 
         etname.setEnabled(false);
         etemail.setEnabled(false);
+
+//        tourGuide = new TourGuide(getActivity());
+//        Overlay overlay=new Overlay();
+//
+//        tourGuide.setOverlay(overlay);
+//        Pointer pointer= new Pointer();
+//        tourGuide.playOn(profileimg);
 
         db = FirebaseDatabase.getInstance().getReference("userinfo");
         mAuth = FirebaseAuth.getInstance();
