@@ -2,6 +2,7 @@ package com.example.voip_call;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -176,5 +177,12 @@ public class ChattingActivity extends AppCompatActivity
         ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0, tsLong);
 
         r_db.child(chaterId).child(chatId).child(id).setValue(chat);
+    }
+
+    public void back(View view)
+    {
+        Intent it = new Intent(this,ChatFragment.class);
+        startActivity(it);
+        finish();
     }
 }
