@@ -36,7 +36,8 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment
+{
     de.hdodenhof.circleimageview.CircleImageView profileimg;
     EditText etname, etemail;
     ImageView camera, gallery;
