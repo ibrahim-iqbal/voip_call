@@ -36,6 +36,7 @@ public class ChatFragment extends Fragment {
     String id, massage, name, Id, img;
     long time;
     Context context;
+
     public ChatFragment(Context mcontext) {
         // Required empty public constructor
         context = mcontext;

@@ -12,13 +12,15 @@
         android:background="@android:color/transparent"
         tools:context=".DashActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
             android:background="@drawable/curve"
             android:backgroundTint="@color/colorPrimary"
-            android:padding="20dp"
+            android:padding="10dp"
+            android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,81 +28,92 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileimg"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:elevation="25dp"
-
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:padding="8dp"
                 android:src="@drawable/ic_face_black_24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_optimizationLevel="standard" />
 
-            <EditText
-                android:id="@+id/etname"
-                android:layout_width="180dp"
-                android:layout_height="35dp"
-                android:textColor="#eee"
-                android:textSize="18sp"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                android:layout_weight="1.8"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvname" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvname"
-                android:layout_width="180dp"
-                android:layout_height="25dp"
-                android:paddingStart="4dp"
-                android:text="Name"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:text="Name"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvemail"
-                android:layout_width="180dp"
-                android:layout_height="20sp"
-                android:paddingStart="4dp"
-                android:text="Email"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etname" />
+                <EditText
+                    android:id="@+id/etname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#eee"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvname" />
 
-            <EditText
-                android:id="@+id/etemail"
-                android:layout_width="180dp"
-                android:layout_height="35dp"
-                android:textColor="#eee"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvemail" />
+                <TextView
+                    android:id="@+id/tvemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="20sp"
+                    android:paddingStart="4dp"
+                    android:text="Email"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etname" />
 
-            <TextView
-                android:id="@+id/tvmob"
-                android:layout_width="180dp"
-                android:layout_height="25dp"
-                android:paddingStart="4dp"
-                android:text="Mobile Number"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etemail" />
+                <EditText
+                    android:id="@+id/etemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#eee"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvemail" />
 
-            <EditText
-                android:id="@+id/etmob"
-                android:layout_width="180dp"
-                android:layout_height="35dp"
-                android:textColor="#eee"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvmob" />
+                <TextView
+                    android:id="@+id/tvmob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:text="Mobile Number"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etemail" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <EditText
+                    android:id="@+id/etmob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#eee"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvmob" />
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/curve"
             android:layout_marginTop="10dp"
+            android:background="@drawable/curve"
             android:backgroundTint="#eee"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,9 +130,9 @@
                 android:layout_alignParentBottom="true">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/contactView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/contactView"/>
+                    android:layout_height="wrap_content" />
             </ScrollView>
         </RelativeLayout>
 
