@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,7 +35,6 @@ public class ChatFragment extends Fragment {
     String id, massage, name, Id, img;
     long time;
     Context context;
-    int unreadn;
 
     public ChatFragment(Context mcontext) {
         // Required empty public constructor
@@ -49,11 +47,15 @@ public class ChatFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
         mauth = FirebaseAuth.getInstance();
+        try {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        } catch (Exception e) {
 
+        }
         r_db = FirebaseDatabase.getInstance().getReference("userinfo");
-
+        r_db.keepSynced(true);
         db = FirebaseDatabase.getInstance().getReference("chatinfo");
-
+        db.keepSynced(true);
         userEmail = mauth.getCurrentUser().getEmail();
 
         recyclerView = v.findViewById(R.id.recic);
@@ -104,8 +106,6 @@ public class ChatFragment extends Fragment {
 
 
     public void chatuser(final String id) {
-
-
 
 
         db.child(id).addValueEventListener(new ValueEventListener() {
@@ -164,6 +164,7 @@ public class ChatFragment extends Fragment {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot userda : dataSnapshot.getChildren()) {
                     name = userda.child("name").getValue().toString();
                     img = userda.child("imgurl").getValue().toString();
@@ -188,7 +189,7 @@ public class ChatFragment extends Fragment {
                     }
                 });
                 madpter = new Chat_RecyclerView_Adpter(context, userlist);
-                madpter.notifyDataSetChanged();
+                madpter.notifyItemChanged(1);
                 recyclerView.setAdapter(madpter);
 
 
