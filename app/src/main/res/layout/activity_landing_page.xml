@@ -42,7 +42,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.81"
         android:layout_gravity="bottom"
         app:tabBackground="@color/colorPrimaryDarker"
         app:tabSelectedTextColor="@color/colorAccent"
@@ -52,7 +52,7 @@
         app:tabIndicatorAnimationDuration="800"
         app:tabIndicatorColor="@color/colorAccent"
         app:tabRippleColor="@color/colorPrimaryDark"
-        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorFullWidth="true"
         app:tabInlineLabel="true"
         app:tabIndicatorHeight="3dp">
 

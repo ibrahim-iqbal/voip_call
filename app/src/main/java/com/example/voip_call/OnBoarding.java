@@ -1,6 +1,7 @@
 package com.example.voip_call;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -37,6 +38,13 @@ public class OnBoarding extends AppIntro implements ISlideBackgroundColorHolder 
         addSlide(AppIntroFragment.newInstance(sliderPage2));
 
         setDepthAnimation();
+        isPagerIndicatorEnabled();
+        showPagerIndicator(true);
+
+        SharedPreferences sp = getSharedPreferences("onboard", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit().putInt("id", 1);
+        ed.apply();
+
     }
 
     @Override
