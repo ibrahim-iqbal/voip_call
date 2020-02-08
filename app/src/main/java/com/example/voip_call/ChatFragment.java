@@ -29,14 +29,14 @@ public class ChatFragment extends Fragment {
     RecyclerView.Adapter madpter;
     RecyclerView.LayoutManager layoutManager;
     List<UserinfoList> userlist;
-    DatabaseReference r_db;
-    String id;
-    Context mContext;
+    DatabaseReference r_db, db;
+    String id, massage, name, Id, img;
+    long time;
+    Context context;
 
-
-    public ChatFragment(Context context) {
+    public ChatFragment(Context mcontext) {
         // Required empty public constructor
-        mContext = context;
+        context = mcontext;
     }
 
     @Override
