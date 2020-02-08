@@ -25,8 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ChattingActivity extends AppCompatActivity
-{
+public class ChattingActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     TextView tname;
     ImageView send_btn;
@@ -139,7 +138,7 @@ public class ChattingActivity extends AppCompatActivity
     }
 
     public String idgenrater(String c_userId, String chat_user) {
-        String id="";
+        String id = "";
         int id1 = Integer.parseInt(c_userId);
         int id2 = Integer.parseInt(chat_user);
         if (id1 > id2) {
@@ -179,9 +178,8 @@ public class ChattingActivity extends AppCompatActivity
         r_db.child(chaterId).child(chatId).child(id).setValue(chat);
     }
 
-    public void back(View view)
-    {
-        Intent it = new Intent(this,ChatFragment.class);
+    public void backchat(View view) {
+        Intent it = new Intent(this, ChatFragment.class);
         startActivity(it);
         finish();
     }
