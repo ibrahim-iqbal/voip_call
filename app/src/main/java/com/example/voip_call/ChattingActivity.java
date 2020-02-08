@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ChattingActivity extends AppCompatActivity {
     TextView tname;
     ImageView send_btn, backchat;
     EditText text_massage;
-    String Email, chatuserEmail, chatId, chatname;
+    String Email, chatuserid, chatId, chatname;
     RecyclerView show_chat;
     RecyclerView.Adapter chatAdpter;
     RecyclerView.LayoutManager chatlayoutManeger;
@@ -58,7 +59,7 @@ public class ChattingActivity extends AppCompatActivity {
         Email = Objects.requireNonNull(mauth.getCurrentUser()).getEmail();
 
         Intent I = getIntent();
-        chatuserEmail = I.getStringExtra("userid");
+        chatuserid = I.getStringExtra("userid");
         chatname = I.getStringExtra("name");
         String img = I.getStringExtra("img");
 
@@ -66,7 +67,7 @@ public class ChattingActivity extends AppCompatActivity {
         tname.setText(chatname);
 
 
-        assert chatuserEmail != null;
+        assert chatuserid != null;
         send_btn.setOnClickListener(v -> {
             if (text_massage.getText().toString().trim().isEmpty()) {
 
@@ -83,13 +84,27 @@ public class ChattingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Query query=r_db.child(chatuserid).child(chatId);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot unda:dataSnapshot.getChildren()){
+                    Toast.makeText(ChattingActivity.this, ""+unda.getKey(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         u_db.orderByChild("email").equalTo(Objects.requireNonNull(mauth.getCurrentUser()).getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
                     c_userId = datas.child("id").getValue().toString();
-                    u_db.orderByChild("id").equalTo(chatuserEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                    u_db.orderByChild("id").equalTo(chatuserid).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot datas : dataSnapshot.getChildren()) {
