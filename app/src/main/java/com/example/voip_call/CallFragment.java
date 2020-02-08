@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,10 +28,10 @@ import java.util.List;
 
 public class CallFragment extends Fragment {
     List<UserinfoList> userlist;
-    String userEmail,id,massage,name,img,Id;
+    String userEmail, id, massage, name, img, Id;
     long time;
     FirebaseAuth mauth;
-    DatabaseReference r_db,db;
+    DatabaseReference r_db, db;
     RecyclerView.Adapter madpter;
     RecyclerView review;
 
@@ -50,6 +52,18 @@ public class CallFragment extends Fragment {
         userEmail = mauth.getCurrentUser().getEmail();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         review.setLayoutManager(layoutManager);
+
+        Window window = getActivity().getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
+
         return v;
     }
 
@@ -88,6 +102,7 @@ public class CallFragment extends Fragment {
             }
         });
     }
+
     public void chatuser(final String id) {
 
         db.child(id).addValueEventListener(new ValueEventListener() {
@@ -138,6 +153,7 @@ public class CallFragment extends Fragment {
 
 
     }
+
     public void getuserinfo(final String userid, String massage, long tm) {
 
         final String mass = massage;

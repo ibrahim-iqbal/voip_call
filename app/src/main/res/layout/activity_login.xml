@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bkg"
+    android:background="@drawable/rec1"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:letterSpacing="0.1"
             android:text="Sign In"
             android:textAlignment="center"
-            android:textColor="#fff"
+            android:textColor="@color/colorAccent"
             android:textSize="55sp"
             android:textStyle="bold"
         tools:ignore="HardcodedText" />
@@ -100,17 +100,17 @@
                 android:onClick="register"
                 android:padding="15dp"
                 android:text="REGISTER"
-                android:textColor="#eee"
+                android:textColor="#222222"
                 android:textSize="14sp" />
 
             <Button
-                style="@style/TextAppearance.AppCompat.Widget.Button"
+                style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+                android:backgroundTint="#222222"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp"
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
-                android:backgroundTint="@color/colorPrimaryDark"
                 android:onClick="login"
                 android:padding="15dp"
                 android:text="Login"

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,8 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-import tourguide.tourguide.Pointer;
-import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -57,6 +57,17 @@ public class ProfileFragment extends Fragment {
         profileimg = v.findViewById(R.id.profileimg);
         etname = v.findViewById(R.id.etname);
         etemail = v.findViewById(R.id.etemail);
+
+        Window window = getActivity().getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
 
         etname.setEnabled(false);
         etemail.setEnabled(false);

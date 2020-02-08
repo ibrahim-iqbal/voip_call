@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bkg"
+    android:background="@drawable/rec1"
     tools:context=".CallScreen">
 
 
@@ -15,7 +15,7 @@
         android:layout_marginTop="84dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_user"
-        android:tint="#eee"
+        android:tint="@color/colorPrimaryDarker"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.207" />
 
     <TextView
-        android:textColor="#eee"
+        android:textColor="@color/colorPrimaryDarker"
         android:id="@+id/recipient_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
-        android:textColor="#eee"
+        android:textColor="@color/colorPrimaryDarker"
         android:id="@+id/recipient_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_radio"
-                android:tint="#eee" />
+                android:tint="@color/colorPrimaryDark" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/hold"
@@ -92,7 +92,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="hold"
                 android:src="@drawable/ic_pause"
-                android:tint="#eee" />
+                android:tint="@color/colorPrimaryDarker" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/addcall"
@@ -103,7 +103,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="addcall"
                 android:src="@drawable/ic_plus"
-                android:tint="#eee" />
+                android:tint="@color/colorPrimaryDarker" />
 
 
         </LinearLayout>
@@ -122,7 +122,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="RECORD"
-                android:textColor="#eee" />
+                android:textColor="@color/colorPrimaryDarker" />
 
             <TextView
                 android:layout_width="0dp"
@@ -130,7 +130,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="HOLD"
-                android:textColor="#eee" />
+                android:textColor="@color/colorPrimaryDarker" />
 
             <TextView
                 android:layout_width="0dp"
@@ -139,7 +139,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="ADD CALL"
-                android:textColor="#eee" />
+                android:textColor="@color/colorPrimaryDarker" />
 
         </LinearLayout>
 
@@ -157,7 +157,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="videoswitch"
                 android:src="@drawable/ic_video"
-                android:tint="#eee" />
+                android:tint="@color/colorPrimaryDarker" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/mute"
@@ -167,7 +167,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="mute"
                 android:src="@drawable/ic_mute"
-                android:tint="#eee" />
+                android:tint="@color/colorPrimaryDarker" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/speaker"
@@ -178,7 +178,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="speaker"
                 android:src="@drawable/ic_speaker"
-                android:tint="#eee" />
+                android:tint="@color/colorPrimaryDarker" />
 
 
         </LinearLayout>
@@ -197,7 +197,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="VIDEO"
-                android:textColor="#eee" />
+                android:textColor="@color/colorPrimaryDarker" />
 
             <TextView
                 android:layout_width="0dp"
@@ -205,7 +205,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="MUTE"
-                android:textColor="#eee" />
+                android:textColor="@color/colorPrimaryDarker" />
 
             <TextView
                 android:layout_width="0dp"
@@ -214,7 +214,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="SPEAKER"
-                android:textColor="#eee" />
+                android:textColor="@color/colorPrimaryDarker" />
 
         </LinearLayout>
 

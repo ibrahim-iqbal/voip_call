@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,6 +30,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         emailid = findViewById(R.id.emailid);
         password = findViewById(R.id.password);
+
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDarker));
 
         mAuth = FirebaseAuth.getInstance();
 

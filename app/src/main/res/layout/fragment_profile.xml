@@ -18,9 +18,10 @@
             android:layout_height="180dp"
             android:orientation="horizontal"
             android:background="@drawable/curve"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimaryDarker"
             android:padding="10dp"
             android:weightSum="3"
+            android:elevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

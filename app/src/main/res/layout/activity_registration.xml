@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bkg"
+    android:background="@drawable/rec1"
     tools:context=".RegistrationActivity">
 
     <LinearLayout
@@ -132,7 +132,7 @@
                 android:onClick="cancel"
                 android:padding="16dp"
                 android:text="Cancel"
-                android:textColor="#eee"
+                android:textColor="@color/colorPrimaryDarker"
                 android:textSize="14sp"
                 app:autoSizeTextType="uniform" />
 
@@ -142,7 +142,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDarker"
                 android:onClick="reg"
                 android:padding="16dp"
                 android:text="REGISTER"
