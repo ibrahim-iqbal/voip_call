@@ -179,7 +179,7 @@ public class ChattingActivity extends AppCompatActivity {
     }
 
     public void backchat(View view) {
-        Intent it = new Intent(this, ChatFragment.class);
+        Intent it = new Intent(this, LandingPage.class);
         startActivity(it);
         finish();
     }
