@@ -26,7 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
+        <activity android:name=".OnBoarding"></activity>
         <activity android:name=".ChattingActivity" />
         <activity android:name=".CallScreen" />
         <activity android:name=".LandingPage" />

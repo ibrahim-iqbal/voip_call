@@ -20,13 +20,10 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url "http://tokbox.bintray.com/maven"
-        }
-        flatDir {
-            dirs '/libs'
-        }
+        maven { url "http://tokbox.bintray.com/maven" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url 'https://jitpack.io' }
+        flatDir { dirs '/libs' }
     }
 }
 
