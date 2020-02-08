@@ -1,5 +1,6 @@
 package com.example.voip_call;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,10 +31,12 @@ public class ChatFragment extends Fragment {
     List<UserinfoList> userlist;
     DatabaseReference r_db;
     String id;
+    Context mContext;
 
 
-    public ChatFragment() {
+    public ChatFragment(Context context) {
         // Required empty public constructor
+        mContext = context;
     }
 
     @Override

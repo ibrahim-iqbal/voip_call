@@ -1,8 +1,10 @@
 package com.example.voip_call;
 
 import android.content.Context;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -18,13 +20,14 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
     // This determines the fragment for each tab
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
             return new CallFragment(mContext);
         } else if (position == 1) {
-            return new ChatFragment();
+            return new ChatFragment(mContext);
         } else {
             return new ProfileFragment(mContext);
         }
