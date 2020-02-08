@@ -35,6 +35,7 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ProfileFragment extends Fragment {
     de.hdodenhof.circleimageview.CircleImageView profileimg;
     EditText etname, etemail;
@@ -52,7 +53,6 @@ public class ProfileFragment extends Fragment {
         this.context = context;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -106,7 +106,7 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     private void update() {
 
         etemail.setEnabled(false);
