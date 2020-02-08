@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         h.postDelayed(() ->
         {
             mp.stop();
-            Intent it = new Intent(MainActivity.this, LoginActivity.class);
+            Intent it = new Intent(MainActivity.this, OnBoarding.class);
             startActivity(it);
             finish();
         }, 4000);
