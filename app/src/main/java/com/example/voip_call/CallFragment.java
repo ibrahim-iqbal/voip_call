@@ -59,6 +59,7 @@ public class CallFragment extends Fragment {
         super.onStart();
 
         userlist = new ArrayList<>();
+        userlist.clear();
 
         r_db.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -76,7 +77,7 @@ public class CallFragment extends Fragment {
 //                        Picasso.get().load(imgurl).into(profileimg);
 //                    }
 //                    Toast.makeText(context, "" + id, Toast.LENGTH_SHORT).show();
-                    userlist.clear();
+
                     chatuser(id);
 
                 }
@@ -160,6 +161,7 @@ public class CallFragment extends Fragment {
 
         final String mass = massage;
         final long tmm = tm;
+        userlist.clear();
         r_db.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -167,7 +169,8 @@ public class CallFragment extends Fragment {
                     name = userda.child("name").getValue().toString();
                     img = userda.child("imgurl").getValue().toString();
                     Id = userda.child("id").getValue().toString();
-                    userlist.add(new UserinfoList(img, name, mass, Id, tmm));
+                    String email = userda.child("email").getValue().toString();
+                    userlist.add(new UserinfoList(img, name, Id, email));
                 }
 
 //                sort list according to sending and receiving massage
@@ -186,6 +189,7 @@ public class CallFragment extends Fragment {
                     }
                 });
                 madpter = new RecyclerAdapter(context, userlist);
+                madpter.notifyDataSetChanged();
                 review.setAdapter(madpter);
 //                madpter.notifyItemChanged(1);
 

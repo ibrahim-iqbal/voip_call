@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.voip_call.Notify.CHANNEL1;
@@ -78,6 +79,12 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
     @Override
     public int getItemCount() {
         return userList.size();
+    }
+
+    public void updateData(ArrayList<UserinfoList> viewModels) {
+        userList.clear();
+        userList.addAll(viewModels);
+        notifyDataSetChanged();
     }
 
     static class MyViewholder extends RecyclerView.ViewHolder {

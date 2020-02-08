@@ -66,6 +66,7 @@ public class ChatFragment extends Fragment {
 
 
         userlist = new ArrayList<>();
+        userlist.clear();
 
         r_db.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -83,7 +84,7 @@ public class ChatFragment extends Fragment {
 //                        Picasso.get().load(imgurl).into(profileimg);
 //                    }
 //                    Toast.makeText(context, "" + id, Toast.LENGTH_SHORT).show();
-                    userlist.clear();
+
                     chatuser(id);
 
                 }
@@ -171,6 +172,7 @@ public class ChatFragment extends Fragment {
 
         final String mass = massage;
         final long tmm = tm;
+        userlist.clear();
         r_db.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -197,8 +199,8 @@ public class ChatFragment extends Fragment {
                     }
                 });
                 madpter = new Chat_RecyclerView_Adpter(context, userlist);
+                madpter.notifyDataSetChanged();
                 recyclerView.setAdapter(madpter);
-//                madpter.notifyItemChanged(1);
 
 
             }
