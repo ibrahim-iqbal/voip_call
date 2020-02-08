@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -50,7 +49,7 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
         holder.name.setText(userList.get(position).getName());
         holder.email.setText(userList.get(position).getMassage());
         int n = userList.get(position).getUnRno();
-        Toast.makeText(context, "" + n, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "" + n, Toast.LENGTH_SHORT).show();
         holder.unread.setText("" + n);
 
         if (userList.get(position).imageurl.equals("")) {

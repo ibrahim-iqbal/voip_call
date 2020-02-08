@@ -186,7 +186,7 @@ public class ChattingActivity extends AppCompatActivity {
 //        Toast.makeText(this, ""+chatId, Toast.LENGTH_SHORT).show();
         String Massage = text_massage.getText().toString().trim();
 
-        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0, tsLong);
+        ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 1, tsLong);
         reciverchatinsert();
         r_db.child(c_userId).child(chatId).child(id).setValue(chat);
         text_massage.setText("");
