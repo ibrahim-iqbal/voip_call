@@ -7,30 +7,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class PagerAdapter extends FragmentPagerAdapter
-{
+public class PagerAdapter extends FragmentPagerAdapter {
     String email;
     private Context mContext;
 
-    PagerAdapter(Context context, FragmentManager fm, String email)
-    {
+    PagerAdapter(Context context, FragmentManager fm, String email) {
         super(fm);
         mContext = context;
         this.email = email;
     }
+
     // This determines the fragment for each tab
     @NonNull
     @Override
-    public Fragment getItem(int position)
-    {
-        if (position == 0)
-        {
+    public Fragment getItem(int position) {
+        if (position == 0) {
             return new CallFragment(mContext);
-        } else if (position == 1)
-        {
+        } else if (position == 1) {
             return new ChatFragment();
-        } else
-        {
+        } else {
             return new ProfileFragment(mContext);
         }
     }
@@ -43,11 +38,9 @@ public class PagerAdapter extends FragmentPagerAdapter
 
     // This determines the title for each tab
     @Override
-    public CharSequence getPageTitle(int position)
-    {
+    public CharSequence getPageTitle(int position) {
         // Generate title based on item position
-        switch (position)
-        {
+        switch (position) {
             case 0:
                 return mContext.getString(R.string.call);
             case 1:

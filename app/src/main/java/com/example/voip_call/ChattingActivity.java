@@ -180,6 +180,7 @@ public class ChattingActivity extends AppCompatActivity {
 
     public void backchat(View view) {
         Intent it = new Intent(this, LandingPage.class);
+        it.putExtra("back",true);
         startActivity(it);
         finish();
     }

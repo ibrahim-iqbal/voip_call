@@ -39,10 +39,18 @@ public class LandingPage extends AppCompatActivity {
         ids = it.getStringExtra("id");
         depth = new Depth();
 
+        Intent back= getIntent();
+        Boolean bk= back.getBooleanExtra("back",false);
+
         PagerAdapter adapter = new PagerAdapter(this, getSupportFragmentManager(), ids);
         pagerv.setAdapter(adapter);
         pagerv.setPageTransformer(true, depth);
         tabs.setupWithViewPager(pagerv);
+
+        if(bk)
+        {
+            adapter.getItem(1);
+        }
     }
 
     @Override
