@@ -4,7 +4,6 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +46,7 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
     @Override
     public void onBindViewHolder(@NonNull final MyViewholder holder, final int position) {
         holder.name.setText(userList.get(position).getName());
-        holder.email.setText(userList.get(position).getEmail());
+        holder.email.setText(userList.get(position).getMassage());
         if (userList.get(position).imageurl.equals("")) {
             Log.d(TAG, "Hey");
         } else {
@@ -56,9 +55,9 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
         holder.userlayout.setOnClickListener(v ->
         {
             Intent it = new Intent(context, ChattingActivity.class);
-            it.putExtra("useremail", userList.get(position).getEmail());
-            it.putExtra("name", userList.get(position).getName());
-            it.putExtra("img", userList.get(position).getImageurl());
+            it.putExtra("userid", userList.get(position).getId())
+                    .putExtra("name", userList.get(position).getName())
+                    .putExtra("img", userList.get(position).getImageurl());
 
             Intent intent = new Intent(context, ChattingActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
@@ -66,7 +65,7 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
             Notification notification = new NotificationCompat.Builder(context, CHANNEL1)
                     .setSmallIcon(R.drawable.ic_notifications_active_black_24dp)
                     .setContentTitle(userList.get(position).getName())
-                    .setContentText(userList.get(position).getEmail())
+                    .setContentText(userList.get(position).getId())
                     .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE)

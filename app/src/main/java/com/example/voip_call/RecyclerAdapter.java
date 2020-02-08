@@ -36,7 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position)
     {
         holder.usertag.setText(userList.get(position).getName());
-        holder.userup.setText(userList.get(position).getEmail());
+        holder.userup.setText(userList.get(position).getId());
         holder.call_img.setOnClickListener(v ->
         {
             Intent it = new Intent(context, CallScreen.class);

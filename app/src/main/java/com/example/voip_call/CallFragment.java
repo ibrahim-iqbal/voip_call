@@ -64,7 +64,7 @@ public class CallFragment extends Fragment {
                     if (email.equals(userEmail)) {
                         img = "lkk";
                     } else {
-                        userlist.add(new UserinfoList(img, name, email));
+//                        userlist.add(new UserinfoList(img, name, email));
                     }
                 }
                 madpter = new RecyclerAdapter(Objects.requireNonNull(getContext()), userlist);

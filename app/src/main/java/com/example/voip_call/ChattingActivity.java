@@ -58,7 +58,7 @@ public class ChattingActivity extends AppCompatActivity {
         Email = Objects.requireNonNull(mauth.getCurrentUser()).getEmail();
 
         Intent I = getIntent();
-        chatuserEmail = I.getStringExtra("useremail");
+        chatuserEmail = I.getStringExtra("userid");
         chatname = I.getStringExtra("name");
         String img = I.getStringExtra("img");
 
@@ -89,7 +89,7 @@ public class ChattingActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
                     c_userId = datas.child("id").getValue().toString();
-                    u_db.orderByChild("email").equalTo(chatuserEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                    u_db.orderByChild("id").equalTo(chatuserEmail).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot datas : dataSnapshot.getChildren()) {
