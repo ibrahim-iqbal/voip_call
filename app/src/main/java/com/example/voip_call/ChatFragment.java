@@ -51,7 +51,7 @@ public class ChatFragment extends Fragment {
         mauth = FirebaseAuth.getInstance();
         r_db = FirebaseDatabase.getInstance().getReference("userinfo");
         db = FirebaseDatabase.getInstance().getReference("chatinfo");
-        userEmail=mauth.getCurrentUser().getEmail();
+        userEmail = mauth.getCurrentUser().getEmail();
 
         recyclerView = v.findViewById(R.id.recic);
         layoutManager = new LinearLayoutManager(getContext());
