@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 public class CallFragment extends Fragment {
     List<UserinfoList> userlist;
@@ -186,7 +185,7 @@ public class CallFragment extends Fragment {
 
                     }
                 });
-                madpter = new Chat_RecyclerView_Adpter(context, userlist);
+                madpter = new RecyclerAdapter(context, userlist);
                 review.setAdapter(madpter);
 //                madpter.notifyItemChanged(1);
 
