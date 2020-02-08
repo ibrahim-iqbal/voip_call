@@ -53,6 +53,9 @@ public class ProfileFragment extends Fragment {
         etname = v.findViewById(R.id.etname);
         etemail = v.findViewById(R.id.etemail);
 
+        etname.setEnabled(false);
+        etemail.setEnabled(false);
+
         db = FirebaseDatabase.getInstance().getReference("userinfo");
         mAuth = FirebaseAuth.getInstance();
         email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
