@@ -94,30 +94,6 @@ public class ChatFragment extends Fragment {
             }
         });
 
-//        r_db.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                userlist = new ArrayList<>();
-//                for (DataSnapshot data : dataSnapshot.getChildren()) {
-//                    String name = Objects.requireNonNull(data.child("name").getValue()).toString();
-//                    String img = Objects.requireNonNull(data.child("imgurl").getValue()).toString();
-//                    String email = Objects.requireNonNull(data.child("email").getValue()).toString();
-//
-//                    if (email.equals(userEmail)) {
-//                        img = "lkk";
-//                    } else {
-//                        userlist.add(new UserinfoList(img, name, email));
-//                    }
-//                }
-//                madpter = new Chat_RecyclerView_Adpter(Objects.requireNonNull(getContext()), userlist);
-//                recyclerView.setAdapter(madpter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
     }
 
 
@@ -139,7 +115,7 @@ public class ChatFragment extends Fragment {
                                     no++;
                                 }
                             }
-                            Toast.makeText(context, "" + no, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "unread" + no, Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -165,8 +141,8 @@ public class ChatFragment extends Fragment {
                                 getuserinfo(show_userid, massage, time);
 
 
-                                Toast.makeText(context, "" + show_userid, Toast.LENGTH_SHORT).show();
-                                Toast.makeText(context, "last" + massage, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "" + show_userid, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "last" + massage, Toast.LENGTH_SHORT).show();
                             }
 
                         }
