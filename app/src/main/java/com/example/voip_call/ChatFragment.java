@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,7 +36,7 @@ public class ChatFragment extends Fragment {
     String id, massage, name, Id, img;
     long time;
     Context context;
-    int unreadno = 0;
+    int unreadn;
 
     public ChatFragment(Context mcontext) {
         // Required empty public constructor
@@ -49,20 +48,12 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        Window window = getActivity().getWindow();
-
-// clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-// finally change the color
-        window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
-
         mauth = FirebaseAuth.getInstance();
+
         r_db = FirebaseDatabase.getInstance().getReference("userinfo");
+
         db = FirebaseDatabase.getInstance().getReference("chatinfo");
+
         userEmail = mauth.getCurrentUser().getEmail();
 
         recyclerView = v.findViewById(R.id.recic);
@@ -114,30 +105,16 @@ public class ChatFragment extends Fragment {
 
     public void chatuser(final String id) {
 
+
+
+
         db.child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot da : dataSnapshot.getChildren()) {
                     String chatid = da.getKey();
-//                    Toast.makeText(context, ""+chatid, Toast.LENGTH_SHORT).show();
-                    Query query2 = db.child(id).child(chatid);
-                    query2.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            for (DataSnapshot unda : dataSnapshot.getChildren()) {
-                                if (Integer.parseInt(unda.child("unread").getValue().toString()) <= 0) {
-                                    unreadno++;
-                                }
-                            }
-//                            Toast.makeText(context, "unread" + unreadno, Toast.LENGTH_SHORT).show();
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
                     Query query = db.child(id).child(chatid).limitToLast(1).orderByKey();
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -153,11 +130,8 @@ public class ChatFragment extends Fragment {
                                 } else {
                                     show_userid = s_Id;
                                 }
+
                                 getuserinfo(show_userid, massage, time);
-
-
-//                                Toast.makeText(context, "" + show_userid, Toast.LENGTH_SHORT).show();
-//                                Toast.makeText(context, "last" + massage, Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -187,13 +161,15 @@ public class ChatFragment extends Fragment {
         final long tmm = tm;
         userlist.clear();
         r_db.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot userda : dataSnapshot.getChildren()) {
                     name = userda.child("name").getValue().toString();
                     img = userda.child("imgurl").getValue().toString();
                     Id = userda.child("id").getValue().toString();
-                    userlist.add(new UserinfoList(img, name, mass, Id, tmm, unreadno));
+                    userlist.add(new UserinfoList(img, name, mass, Id, tmm));
+
                 }
 
 //                sort list according to sending and receiving massage
@@ -225,4 +201,5 @@ public class ChatFragment extends Fragment {
         });
 
     }
+
 }

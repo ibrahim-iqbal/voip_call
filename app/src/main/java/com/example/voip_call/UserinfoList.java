@@ -3,7 +3,7 @@ package com.example.voip_call;
 public class UserinfoList
 {
     String imageurl, name, massage, id, Email;
-    int unRno;
+
 
     public UserinfoList(String imageurl, String name, String id, String email) {
         this.imageurl = imageurl;
@@ -17,17 +17,13 @@ public class UserinfoList
     }
     long tm;
 
-    public UserinfoList(String imageurl, String name, String massage, String Id, long tm, int unreadno) {
+    public UserinfoList(String imageurl, String name, String massage, String Id, long tm) {
         this.imageurl = imageurl;
         this.name = name;
         this.massage = massage;
         id = Id;
-        unRno = unreadno;
-        this.tm = tm;
-    }
 
-    public int getUnRno() {
-        return unRno;
+        this.tm = tm;
     }
 
     public long getTm() {
