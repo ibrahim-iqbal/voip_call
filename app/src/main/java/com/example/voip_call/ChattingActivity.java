@@ -84,12 +84,12 @@ public class ChattingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Query query=r_db.child(chatuserid).child(chatId);
+        Query query = r_db.child(chatuserid).child(chatId);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot unda:dataSnapshot.getChildren()){
-                    Toast.makeText(ChattingActivity.this, ""+unda.getKey(), Toast.LENGTH_SHORT).show();
+                for (DataSnapshot unda : dataSnapshot.getChildren()) {
+                    Toast.makeText(ChattingActivity.this, "" + unda.getKey(), Toast.LENGTH_SHORT).show();
                 }
             }
 
