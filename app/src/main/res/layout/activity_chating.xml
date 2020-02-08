@@ -28,11 +28,10 @@
             tools:targetApi="lollipop">
 
             <ImageView
-                android:id="@+id/imageView"
                 android:layout_width="55dp"
                 android:layout_height="match_parent"
                 android:padding="12dp"
-                android:onClick="backchat"
+                android:id="@+id/backchat"
                 android:src="@drawable/ic_arrow_back_black_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +43,7 @@
                 android:layout_height="match_parent"
                 android:padding="10dp"
                 android:src="@drawable/ic_user"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/backchat"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

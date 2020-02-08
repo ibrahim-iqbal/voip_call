@@ -26,8 +26,7 @@ public class LandingPage extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
@@ -42,21 +41,10 @@ public class LandingPage extends AppCompatActivity {
         depth = new Depth();
 
         adapter = new PagerAdapter(this, getSupportFragmentManager(), ids);
+        pagerv.setAdapter(adapter);
         pagerv.setPageTransformer(true, depth);
         tabs.setupWithViewPager(pagerv);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Intent back = getIntent();
-
-        boolean bk = back.getBooleanExtra("back", false);
-        if (bk == true) {
-            adapter.getItem(1);
-            pagerv.setAdapter(adapter);
-        }
     }
 
     @Override

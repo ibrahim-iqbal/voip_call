@@ -2,7 +2,6 @@ package com.example.voip_call;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -28,7 +27,7 @@ import java.util.Objects;
 public class ChattingActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     TextView tname;
-    ImageView send_btn;
+    ImageView send_btn, backchat;
     EditText text_massage;
     String Email, chatuserEmail, chatId, chatname;
     RecyclerView show_chat;
@@ -46,6 +45,7 @@ public class ChattingActivity extends AppCompatActivity {
         text_massage = findViewById(R.id.textmassge);
         send_btn = findViewById(R.id.send_button);
         scroll = findViewById(R.id.scroll);
+        backchat = findViewById(R.id.backchat);
         r_db = FirebaseDatabase.getInstance().getReference("chatinfo");
         u_db = FirebaseDatabase.getInstance().getReference("userinfo");
 
@@ -67,8 +67,6 @@ public class ChattingActivity extends AppCompatActivity {
 
 
         assert chatuserEmail != null;
-
-
         send_btn.setOnClickListener(v -> {
             if (text_massage.getText().toString().trim().isEmpty()) {
 
@@ -79,7 +77,7 @@ public class ChattingActivity extends AppCompatActivity {
             }
         });
 
-
+        backchat.setOnClickListener(v -> onBackPressed());
     }
 
     @Override
@@ -178,10 +176,8 @@ public class ChattingActivity extends AppCompatActivity {
         r_db.child(chaterId).child(chatId).child(id).setValue(chat);
     }
 
-    public void backchat(View view) {
-        Intent it = new Intent(this, LandingPage.class);
-        it.putExtra("back",true);
-        startActivity(it);
-        finish();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
