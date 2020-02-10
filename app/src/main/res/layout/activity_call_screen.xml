@@ -5,61 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rec1"
-    android:padding="50dp"
+    android:padding="60dp"
     tools:context=".CallScreen">
 
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_user"
-        android:tint="@color/colorPrimaryDarker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:textColor="@color/colorPrimaryDarker"
-        android:id="@+id/recipient_id"
+    <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <TextView
-        android:id="@+id/recipient_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="+1 234567890"
-        android:textColor="@color/colorPrimaryDarker"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipient_id" />
-
-    <TextView
-        android:id="@+id/state"
-        android:layout_width="130dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:textColor="@color/colorPrimaryDarker"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipient_num" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_user"
+            android:tint="@color/colorPrimaryDarker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recipient_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/colorPrimaryDarker"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/recipient_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="+1 234567890"
+            android:textColor="@color/colorPrimaryDarker"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipient_id" />
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDarker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipient_num" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="6"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,17 +90,14 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_radio"
                 android:tint="@color/colorPrimaryDarker" />
-
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/hold"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:onClick="hold"
                 android:src="@drawable/ic_pause"
                 android:tint="@color/colorPrimaryDarker" />
-
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/addcall"
                 android:layout_width="0dp"
@@ -97,11 +105,8 @@
                 android:layout_marginStart="50dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:onClick="addcall"
                 android:src="@drawable/ic_plus"
                 android:tint="@color/colorPrimaryDarker" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -119,7 +124,6 @@
                 android:gravity="center"
                 android:text="RECORD"
                 android:textColor="@color/colorPrimaryDarker" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -127,7 +131,6 @@
                 android:gravity="center"
                 android:text="HOLD"
                 android:textColor="@color/colorPrimaryDarker" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -136,14 +139,12 @@
                 android:gravity="center"
                 android:text="ADD CALL"
                 android:textColor="@color/colorPrimaryDarker" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:weightSum="3">
-
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/videoswitch"
                 android:layout_width="0dp"
@@ -151,20 +152,16 @@
                 android:layout_marginEnd="50dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:onClick="videoswitch"
                 android:src="@drawable/ic_video"
                 android:tint="@color/colorPrimaryDarker" />
-
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/mute"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:onClick="mute"
                 android:src="@drawable/ic_mute"
                 android:tint="@color/colorPrimaryDarker" />
-
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/speaker"
                 android:layout_width="0dp"
@@ -172,11 +169,8 @@
                 android:layout_marginStart="50dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:onClick="speaker"
                 android:src="@drawable/ic_speaker"
                 android:tint="@color/colorPrimaryDarker" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -185,7 +179,6 @@
             android:layout_marginBottom="20dp"
             android:baselineAligned="false"
             android:weightSum="3">
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -194,7 +187,6 @@
                 android:gravity="center"
                 android:text="VIDEO"
                 android:textColor="@color/colorPrimaryDarker" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -202,7 +194,6 @@
                 android:gravity="center"
                 android:text="MUTE"
                 android:textColor="@color/colorPrimaryDarker" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -211,7 +202,6 @@
                 android:gravity="center"
                 android:text="SPEAKER"
                 android:textColor="@color/colorPrimaryDarker" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -222,6 +212,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="55dp"
+                android:id="@+id/endbtn"
                 android:layout_height="match_parent"
                 android:backgroundTint="#e71d1d"
                 app:cardCornerRadius="50dp">
@@ -231,7 +222,7 @@
                     android:layout_height="match_parent"
                     android:padding="15dp"
                     android:src="@drawable/ic_end"
-                    android:tint="#FFFFFF" />
+                    android:tint="#E6E6E6" />
             </androidx.cardview.widget.CardView>
 
 
