@@ -86,7 +86,6 @@ public class CallFragment extends Fragment {
 
                     chatuser(id);
 
-
                 }
             }
 
