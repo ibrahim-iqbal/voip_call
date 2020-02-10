@@ -16,12 +16,12 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:orientation="horizontal"
             android:background="@drawable/curve"
             android:backgroundTint="@color/colorPrimaryDarker"
+            android:elevation="20dp"
+            android:orientation="horizontal"
             android:padding="14dp"
             android:weightSum="3"
-            android:elevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -51,14 +51,14 @@
                     android:weightSum="2">
 
                     <Button
+                        android:id="@+id/save"
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:alpha="0"
-                        android:id="@+id/save"
-                        android:text="Save"
                         android:enabled="false"
+                        android:text="Save"
                         android:textColor="@color/colorPrimaryDarker" />
 
                     <Button
@@ -79,15 +79,16 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/montserrat"
                     android:id="@+id/tvname"
-                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
                     android:paddingStart="4dp"
                     android:text="Name"
                     android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/etname"
                     android:layout_width="match_parent"
@@ -96,15 +97,16 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/tvemail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvemail"
                     android:fontFamily="@font/montserrat"
-                    android:textSize="16sp"
                     android:paddingStart="4dp"
                     android:text="Email"
                     android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/etemail"
                     android:layout_width="match_parent"
@@ -113,20 +115,21 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/montserrat"
                     android:id="@+id/tvmob"
-                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
                     android:paddingStart="4dp"
                     android:text="Mobile Number"
                     android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/etmob"
-                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:textColor="#eee"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -139,7 +142,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/curve"
-            android:backgroundTint="#eee"
+            android:backgroundTint="@color/colorPrimaryDarker"
             android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
