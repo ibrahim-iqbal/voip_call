@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,7 @@ public class CallFragment extends Fragment {
     RecyclerView review;
     FirebaseRecyclerAdapter<alluserinfo, allcalluserViewholder> adapter;
     private Context context;
+    String chatid;
     ValueEventListener listener;
 
     public CallFragment(Context context) {
@@ -74,11 +76,6 @@ public class CallFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-//        Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
-
-
-        userlist = new ArrayList<>();
-        userlist.clear();
 
         r_db.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -89,6 +86,7 @@ public class CallFragment extends Fragment {
 
                     chatuser(id);
 
+
                 }
             }
 
@@ -97,15 +95,22 @@ public class CallFragment extends Fragment {
 
             }
         });
+//        Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
+
+
+        userlist = new ArrayList<>();
+        userlist.clear();
+
+
     }
 
     public void chatuser(final String id) {
 
-        listener = db.child(id).addValueEventListener(new ValueEventListener() {
+        db.child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot da : dataSnapshot.getChildren()) {
-                    String chatid = da.getKey();
+                    chatid = da.getKey();
 //                    Toast.makeText(context, ""+chatid, Toast.LENGTH_SHORT).show();
                     Query query = db.child(id).child(chatid).limitToLast(1).orderByKey();
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -122,6 +127,7 @@ public class CallFragment extends Fragment {
                                 } else {
                                     show_userid = s_Id;
                                 }
+                                Toast.makeText(context, "jhjk" + show_userid, Toast.LENGTH_SHORT).show();
                                 getuserinfo(show_userid, massage, time);
 
 
@@ -151,8 +157,8 @@ public class CallFragment extends Fragment {
     }
 
 
-    public void getuserinfo(final String userid, String massage, long tm) {
-
+    public void getuserinfo(String userid, String massage, long tm) {
+        String uid = userid;
         final String mass = massage;
         final long tmm = tm;
         userlist.clear();
@@ -211,8 +217,8 @@ public class CallFragment extends Fragment {
 
         public allcalluserViewholder(@NonNull View itemView) {
             super(itemView);
-            all_name = itemView.findViewById(R.id.all_name);
-            all_email = itemView.findViewById(R.id.all_email);
+            all_name = itemView.findViewById(R.id.usertag);
+            all_email = itemView.findViewById(R.id.userup);
         }
     }
 }
