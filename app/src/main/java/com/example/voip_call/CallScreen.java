@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,6 +21,7 @@ import com.sinch.android.rtc.SinchClient;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallListener;
 
+import java.io.File;
 import java.util.List;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -34,6 +36,8 @@ public class CallScreen extends AppCompatActivity {
     Call call;
     String num;
     SinchClient sinchClient;
+    MediaRecorder recorder;
+    private File audiofile;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -84,6 +88,44 @@ public class CallScreen extends AppCompatActivity {
             listener.onCallEnded(call);
         });
 
+
+        record.setOnClickListener(v -> {
+            startMediaRecorder(MediaRecorder.AudioSource.VOICE_CALL);
+        });
+    }
+
+    private boolean startMediaRecorder(final int audioSource) {
+        recorder = new MediaRecorder();
+        try {
+            recorder.reset();
+            recorder.setAudioSource(audioSource);
+            recorder.setAudioSamplingRate(8000);
+            recorder.setAudioEncodingBitRate(12200);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            String fileName = audiofile.getAbsolutePath();
+            recorder.setOutputFile(fileName);
+
+            MediaRecorder.OnErrorListener errorListener = (arg0, arg1, arg2) -> {
+                terminateAndEraseFile();
+            };
+            recorder.setOnErrorListener(errorListener);
+
+            MediaRecorder.OnInfoListener infoListener = (arg0, arg1, arg2) -> {
+                terminateAndEraseFile();
+            };
+            recorder.setOnInfoListener(infoListener);
+
+            recorder.prepare();
+            // Sometimes prepare takes some time to complete
+            Thread.sleep(2000);
+            recorder.start();
+            isRecordStarted = true;
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            return false;
+        }
     }
 
     @Override
@@ -111,6 +153,8 @@ public class CallScreen extends AppCompatActivity {
             call = null;
             state.setText("Call Ended");
             endedCall.hangup();
+            sinchClient.stopListeningOnActiveConnection();
+            sinchClient.terminate();
             setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
             Intent it = new Intent(CallScreen.this, LandingPage.class);
             startActivity(it);
