@@ -42,8 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:padding="4dp"
-            android:textColorHint="#2d2d2d"
-            app:hintTextColor="#2d2d2d"
+            android:textColorHint="#3E3E3E"
+            app:hintTextColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/iduser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -54,7 +54,7 @@
                 android:layout_height="match_parent"
                 android:hint="Name"
                 android:inputType="text"
-                android:textColor="@color/colorPrimaryDarker"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText,RtlSymmetry" />
 
@@ -66,8 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:padding="4dp"
-            android:textColorHint="#2d2d2d"
-            app:hintTextColor="#2d2d2d"
+            android:textColorHint="#3E3E3E"
+            app:hintTextColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/tpass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -78,8 +78,8 @@
                 android:layout_height="match_parent"
                 android:hint="Email Id"
                 android:inputType="text"
-                android:textColor="@color/colorPrimaryDarker"
-                android:textColorHint="#2D2D2D"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="#3E3E3E"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText,RtlSymmetry" />
 
@@ -92,9 +92,10 @@
             android:layout_height="70dp"
             android:layout_marginBottom="16dp"
             android:padding="4dp"
-            android:textColorHint="#2d2d2d"
-            app:hintTextColor="#2d2d2d"
-            app:passwordToggleEnabled="true">
+            android:textColorHint="#3E3E3E"
+            app:hintTextColor="@color/colorAccent"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorAccent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
@@ -102,8 +103,7 @@
                 android:layout_height="match_parent"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:textColor="@color/colorPrimaryDarker"
-                android:textColorHint="#2D2D2D"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText,RtlSymmetry" />
 
@@ -130,7 +130,7 @@
                 android:onClick="cancel"
                 android:padding="16dp"
                 android:text="Cancel"
-                android:textColor="@color/colorPrimaryDarker"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:autoSizeTextType="uniform" />
 
@@ -141,11 +141,11 @@
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:elevation="20dp"
-                android:backgroundTint="@color/colorPrimaryDarker"
+                android:backgroundTint="@color/colorPrimary"
                 android:onClick="reg"
                 android:padding="16dp"
                 android:text="REGISTER"
-                android:textColor="#eee"
+                android:textColor="@color/colorPrimaryDarker"
                 android:textSize="14sp"
                 app:autoSizeTextType="uniform" />
         </LinearLayout>

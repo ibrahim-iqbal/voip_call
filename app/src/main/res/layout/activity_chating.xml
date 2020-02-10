@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:padding="12dp"
             android:src="@drawable/ic_arrow_back_black_24dp"
-            android:tint="@color/colorPrimaryDarker"
+            android:tint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:src="@drawable/ic_user"
-            android:tint="@color/colorPrimaryDarker"
+            android:tint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/backchat"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +69,7 @@
             android:layout_height="fill_parent"
             android:gravity="center_vertical"
             android:text="heyy"
-            android:textColor="@color/colorPrimaryDarker"
+            android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/user"

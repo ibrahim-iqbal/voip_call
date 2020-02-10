@@ -10,13 +10,15 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:id="@+id/camera"
-        android:src="@drawable/ic_camera_alt_black_24dp"/>
+        android:src="@drawable/ic_camera_alt_black_24dp"
+        android:tint="#eee" />
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:id="@+id/gallery"
-        android:src="@drawable/ic_collections_black_24dp"/>
+        android:src="@drawable/ic_collections_black_24dp"
+        android:tint="#eee" />
 
 
 </LinearLayout>

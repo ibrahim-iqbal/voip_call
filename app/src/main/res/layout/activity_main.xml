@@ -31,7 +31,7 @@
         android:letterSpacing="0.1"
         android:text="VOIP CALLS"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDarker"
+        android:textColor="@color/colorAccent"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

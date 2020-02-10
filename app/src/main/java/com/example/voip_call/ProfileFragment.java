@@ -52,17 +52,16 @@ import static android.app.Activity.RESULT_OK;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ProfileFragment extends Fragment {
     private de.hdodenhof.circleimageview.CircleImageView profileimg;
-    private EditText etname, etemail;
+    private EditText etname;
     private ImageView camera, gallery;
     private AlertDialog alertDialog;
     private Button save, update;
     private Bitmap bitmap;
-    private String email, name, imgurl;
+    private String name, imgurl;
     Context context;
     private RecyclerView recycle;
     private DatabaseReference db;
     private FirebaseRecyclerAdapter<alluserinfo, allUser_ViewHolder> adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
 
@@ -78,7 +77,7 @@ public class ProfileFragment extends Fragment {
 
         profileimg = v.findViewById(R.id.profileimg);
         etname = v.findViewById(R.id.etname);
-        etemail = v.findViewById(R.id.etemail);
+        EditText etemail = v.findViewById(R.id.etemail);
         update = v.findViewById(R.id.update);
         save = v.findViewById(R.id.save);
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -93,12 +92,12 @@ public class ProfileFragment extends Fragment {
         etname.setEnabled(false);
         etemail.setEnabled(false);
         recycle = v.findViewById(R.id.contactView);
-        layoutManager = new LinearLayoutManager(context);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         recycle.setLayoutManager(layoutManager);
 
         db = FirebaseDatabase.getInstance().getReference("userinfo");
         mAuth = FirebaseAuth.getInstance();
-        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        String email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         db.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -142,10 +141,11 @@ public class ProfileFragment extends Fragment {
 
         update.setOnClickListener(v1 ->
         {
+            profileimg.setEnabled(true);
             save.animate().alpha(1f).setDuration(1000);
             save.setEnabled(true);
-            profileimg.animate().alpha(0f).setDuration(1000);
-            profileimg.setEnabled(false);
+            update.animate().alpha(0f).setDuration(1000);
+            update.setEnabled(true);
 
         });
         save.setOnClickListener(v1 ->
@@ -242,7 +242,7 @@ public class ProfileFragment extends Fragment {
             @NonNull
             @Override
             public allUser_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.allusserlayout, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_user, parent, false);
                 return new allUser_ViewHolder(view);
             }
         };
