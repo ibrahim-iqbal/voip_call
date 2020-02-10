@@ -76,7 +76,6 @@ public class ChattingActivity extends AppCompatActivity {
         tname = findViewById(R.id.tvname);
         tname.setText(chatname);
 
-
         assert chatuserid != null;
         send_btn.setOnClickListener(v -> {
             if (text_massage.getText().toString().trim().isEmpty()) {
@@ -173,6 +172,7 @@ public class ChattingActivity extends AppCompatActivity {
             }
         });
     }
+
     public String idgenrater(String c_userId, String chat_user) {
         String id = "";
         int id1 = Integer.parseInt(c_userId);
@@ -212,6 +212,11 @@ public class ChattingActivity extends AppCompatActivity {
         ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0, tsLong);
 
         r_db.child(chaterId).child(chatId).child(id).setValue(chat);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override

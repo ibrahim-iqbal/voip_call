@@ -30,22 +30,22 @@
             android:id="@+id/alu_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:text="user Name"
             android:textColor="@color/colorAccent"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/alu_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
             android:text="user email"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,12 +54,12 @@
         android:layout_weight="1"
         android:padding="6dp">
 
-        <com.google.android.material.card.MaterialCardView
+        <ImageView
             android:id="@+id/unreadbkg"
             android:layout_width="40dp"
+            app:layout_constraintCircleRadius="50dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/colorAccent"
-            app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
                 android:textColor="#fff"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
+        </ImageView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

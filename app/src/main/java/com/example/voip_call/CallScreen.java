@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -34,7 +33,6 @@ public class CallScreen extends AppCompatActivity {
     AppCompatImageButton record, hold, addcall, videoswitch, mute, speaker;
     TextView state, recipient_id;
     Call call;
-    MediaPlayer mp;
     String num;
     SinchClient sinchClient;
 
@@ -131,7 +129,6 @@ public class CallScreen extends AppCompatActivity {
         public void onCallEstablished(Call establishedCall) {
 
             state.setText("connected");
-            mp.stop();
             setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
         }
 
@@ -139,7 +136,6 @@ public class CallScreen extends AppCompatActivity {
         public void onCallProgressing(Call progressingCall) {
 
             state.setText("ringing");
-            mp.start();
         }
 
         @Override
