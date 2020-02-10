@@ -6,6 +6,7 @@
       <w>chatlayout</w>
       <w>chatname</w>
       <w>chatuser</w>
+      <w>clientapi</w>
       <w>crashlytics</w>
       <w>createnotification</w>
       <w>createuser</w>
@@ -17,6 +18,7 @@
       <w>imgurl</w>
       <w>maneger</w>
       <w>maxid</w>
+      <w>pagerv</w>
       <w>profileimg</w>
       <w>profileppic</w>
       <w>reciverchatinsert</w>
