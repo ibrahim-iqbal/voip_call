@@ -52,6 +52,7 @@ dependencies {
         transitive = true
     }
     implementation 'com.github.AppIntro:AppIntro:5.1.0'
+    implementation 'com.github.aykuttasil:CallRecorder:1.5.3'
     testImplementation 'junit:junit:4.13'
 
     androidTestImplementation 'androidx.test:runner:1.2.0'
