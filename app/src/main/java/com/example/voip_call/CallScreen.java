@@ -3,7 +3,6 @@ package com.example.voip_call;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Window;
@@ -69,7 +68,7 @@ public class CallScreen extends AppCompatActivity {
             if (call == null) {
                 recipient_id.setText(num);
                 call = sinchClient.getCallClient().callPhoneNumber("+46000000000");
-                state.setText("Hang Up");
+                state.setText("");
 
                 call.addCallListener(new SinchCallListener());
             } else {
@@ -81,10 +80,10 @@ public class CallScreen extends AppCompatActivity {
 
         endbtn.setOnClickListener(v ->
         {
-            endbtn.setBackgroundTintMode(PorterDuff.Mode.CLEAR);
             SinchCallListener listener = new SinchCallListener();
             listener.onCallEnded(call);
         });
+
     }
 
     @Override
@@ -106,20 +105,17 @@ public class CallScreen extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
     private class SinchCallListener implements CallListener {
         @Override
         public void onCallEnded(Call endedCall) {
             call = null;
             state.setText("Call Ended");
+            endedCall.hangup();
             setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
+            Intent it = new Intent(CallScreen.this, LandingPage.class);
+            startActivity(it);
+            finish();
         }
-
 
         @Override
         public void onCallEstablished(Call establishedCall) {
