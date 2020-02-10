@@ -69,7 +69,9 @@ public class ChatFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+        if (FirebaseDatabase.getInstance() != null) {
+            FirebaseDatabase.getInstance().goOnline();
+        }
 
         userlist = new ArrayList<>();
         userlist.clear();
@@ -78,19 +80,9 @@ public class ChatFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
-//                    String name = datas.child("name").getValue().toString();
-//                    String email = datas.child("email").getValue().toString();
-//                    String imgurl = datas.child("imgurl").getValue().toString();
-                    id = datas.child("id").getValue().toString();
-//                    u_name.setText(name);
-//                    u_email.setText(email);
-//                    if (imgurl.equals("")) {
-//                        imgurl = "jjd";
-//                    } else {
-//                        Picasso.get().load(imgurl).into(profileimg);
-//                    }
-//                    Toast.makeText(context, "" + id, Toast.LENGTH_SHORT).show();
 
+                    id = datas.child("id").getValue().toString();
+//
                     chatuser(id);
 
                 }
@@ -189,7 +181,7 @@ public class ChatFragment extends Fragment {
                     }
                 });
                 madpter = new Chat_RecyclerView_Adpter(context, userlist);
-                madpter.notifyItemChanged(1);
+                madpter.notifyDataSetChanged();
                 recyclerView.setAdapter(madpter);
 
 
@@ -202,5 +194,6 @@ public class ChatFragment extends Fragment {
         });
 
     }
+
 
 }

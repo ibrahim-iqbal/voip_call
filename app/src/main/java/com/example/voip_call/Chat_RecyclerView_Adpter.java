@@ -79,6 +79,7 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
                     .build();
             notificationManager.notify(1, notification);
             context.startActivity(it);
+//            ((Activity)context).finish();
         });
     }
     @Override
