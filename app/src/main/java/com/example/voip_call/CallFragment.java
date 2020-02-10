@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +36,7 @@ public class CallFragment extends Fragment {
     DatabaseReference r_db, db;
     RecyclerView.Adapter madpter;
     RecyclerView review;
-
+    FirebaseRecyclerAdapter<alluserinfo, allcalluserViewholder> adapter;
     private Context context;
     ValueEventListener listener;
 
@@ -73,6 +75,7 @@ public class CallFragment extends Fragment {
     public void onStart() {
         super.onStart();
 //        Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
+
 
         userlist = new ArrayList<>();
         userlist.clear();
@@ -199,5 +202,17 @@ public class CallFragment extends Fragment {
         super.onStop();
 //        Toast.makeText(context, "atop", Toast.LENGTH_SHORT).show();
 
+    }
+
+
+    public static class allcalluserViewholder extends RecyclerView.ViewHolder {
+
+        TextView all_name, all_email;
+
+        public allcalluserViewholder(@NonNull View itemView) {
+            super(itemView);
+            all_name = itemView.findViewById(R.id.all_name);
+            all_email = itemView.findViewById(R.id.all_email);
+        }
     }
 }

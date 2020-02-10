@@ -18,7 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +45,10 @@ public class ProfileFragment extends Fragment {
     String email, name;
     TextView cgpass;
     Context context;
+    RecyclerView recycle;
     DatabaseReference db;
+    FirebaseRecyclerAdapter<alluserinfo, alluserViewholder> adapter;
+    RecyclerView.LayoutManager layoutManager;
     FirebaseAuth mAuth;
     TourGuide tourGuide;
 
@@ -71,6 +78,9 @@ public class ProfileFragment extends Fragment {
 
         etname.setEnabled(false);
         etemail.setEnabled(false);
+        recycle = v.findViewById(R.id.contactView);
+        layoutManager = new LinearLayoutManager(context);
+        recycle.setLayoutManager(layoutManager);
 
         db = FirebaseDatabase.getInstance().getReference("userinfo");
         mAuth = FirebaseAuth.getInstance();
@@ -90,6 +100,71 @@ public class ProfileFragment extends Fragment {
         });
         etemail.setText(email);
 
+
         return v;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseRecyclerOptions<alluserinfo> options = new FirebaseRecyclerOptions.Builder<alluserinfo>()
+                .setQuery(db, alluserinfo.class)
+                .build();
+
+        adapter = new FirebaseRecyclerAdapter<alluserinfo, alluserViewholder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull alluserViewholder holder, int position, @NonNull alluserinfo model) {
+                String userid = getRef(position).getKey();
+
+                db.child(userid).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild("name")) {
+                            String name = dataSnapshot.child("name").getValue().toString();
+                            String email = dataSnapshot.child("email").getValue().toString();
+                            if (mAuth.getCurrentUser().getEmail().equals(email)) {
+                            } else {
+                                holder.all_name.setText(name);
+                                holder.all_email.setText(email);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+            @NonNull
+            @Override
+            public alluserViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.allusserlayout, parent, false);
+                return new alluserViewholder(view);
+            }
+        };
+        recycle.setAdapter(adapter);
+        adapter.startListening();
+    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        adapter.stopListening();
+//    }
+
+    public static class alluserViewholder extends RecyclerView.ViewHolder {
+
+        TextView all_name, all_email;
+
+        public alluserViewholder(@NonNull View itemView) {
+            super(itemView);
+            all_name = itemView.findViewById(R.id.all_name);
+            all_email = itemView.findViewById(R.id.all_email);
+        }
+    }
+
+
 }

@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-perf:19.0.5'
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+    implementation 'com.firebaseui:firebase-ui-database:6.2.0'
     implementation(name: 'sinch-android-rtc', version: '+', ext: 'aar')
     implementation('com.github.worker8:tourguide:2.0.0-SNAPSHOT@aar') {
         transitive = true
