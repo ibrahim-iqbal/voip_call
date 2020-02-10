@@ -36,6 +36,7 @@ public class CallFragment extends Fragment {
     RecyclerView review;
 
     private Context context;
+    ValueEventListener listener;
 
     public CallFragment(Context context) {
         this.context = context;
@@ -63,13 +64,15 @@ public class CallFragment extends Fragment {
 
 // finally change the color
         window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
-
+        FirebaseDatabase.getInstance().goOffline();
+//        Toast.makeText(context, "call create", Toast.LENGTH_SHORT).show();
         return v;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+//        Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
 
         userlist = new ArrayList<>();
         userlist.clear();
@@ -78,18 +81,8 @@ public class CallFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
-//                    String name = datas.child("name").getValue().toString();
-//                    String email = datas.child("email").getValue().toString();
-//                    String imgurl = datas.child("imgurl").getValue().toString();
+//
                     id = datas.child("id").getValue().toString();
-//                    u_name.setText(name);
-//                    u_email.setText(email);
-//                    if (imgurl.equals("")) {
-//                        imgurl = "jjd";
-//                    } else {
-//                        Picasso.get().load(imgurl).into(profileimg);
-//                    }
-//                    Toast.makeText(context, "" + id, Toast.LENGTH_SHORT).show();
 
                     chatuser(id);
 
@@ -105,7 +98,7 @@ public class CallFragment extends Fragment {
 
     public void chatuser(final String id) {
 
-        db.child(id).addValueEventListener(new ValueEventListener() {
+        listener = db.child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot da : dataSnapshot.getChildren()) {
@@ -200,4 +193,11 @@ public class CallFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+//        Toast.makeText(context, "atop", Toast.LENGTH_SHORT).show();
+
+    }
 }

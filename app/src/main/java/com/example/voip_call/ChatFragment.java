@@ -35,6 +35,7 @@ public class ChatFragment extends Fragment {
     String id, massage, name, Id, img;
     long time;
     Context context;
+    FirebaseDatabase DB;
 
     public ChatFragment(Context mcontext) {
         // Required empty public constructor
@@ -52,9 +53,11 @@ public class ChatFragment extends Fragment {
         } catch (Exception e) {
 
         }
-        r_db = FirebaseDatabase.getInstance().getReference("userinfo");
+        DB = FirebaseDatabase.getInstance();
+
+        r_db = DB.getReference("userinfo");
         r_db.keepSynced(true);
-        db = FirebaseDatabase.getInstance().getReference("chatinfo");
+        db = DB.getReference("chatinfo");
         db.keepSynced(true);
         userEmail = mauth.getCurrentUser().getEmail();
 
@@ -62,6 +65,9 @@ public class ChatFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 //        Toast.makeText(context, ""+mauth.getCurrentUser().get, Toast.LENGTH_SHORT).show();
+        userlist = new ArrayList<>();
+        FirebaseDatabase.getInstance().goOnline();
+//        Toast.makeText(context, "chat create", Toast.LENGTH_SHORT).show();
 
         return v;
     }
@@ -69,13 +75,7 @@ public class ChatFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (FirebaseDatabase.getInstance() != null) {
-            FirebaseDatabase.getInstance().goOnline();
-        }
-
-        userlist = new ArrayList<>();
-        userlist.clear();
-
+        FirebaseDatabase.getInstance().goOnline();
         r_db.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,6 +93,8 @@ public class ChatFragment extends Fragment {
 
             }
         });
+//        Toast.makeText(context, "onStart", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -196,4 +198,11 @@ public class ChatFragment extends Fragment {
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        FirebaseDatabase.getInstance().goOffline();
+//        Toast.makeText(context, "pause", Toast.LENGTH_SHORT).show();
+    }
 }
