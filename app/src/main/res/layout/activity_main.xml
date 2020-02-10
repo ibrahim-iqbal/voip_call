@@ -10,20 +10,22 @@
     <ImageView
         android:id="@+id/well"
         android:layout_width="match_parent"
-        android:layout_height="531dp"
-        android:alpha="1"
-        android:src="@drawable/ic_group2"
+        android:layout_height="500dp"
+        android:alpha="0"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:src="@drawable/ic_group_7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
-        android:layout_marginBottom="80dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/arsenal"
         android:letterSpacing="0.1"
@@ -32,9 +34,9 @@
         android:textColor="@color/colorPrimaryDarker"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/well"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

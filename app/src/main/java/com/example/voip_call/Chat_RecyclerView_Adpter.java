@@ -82,6 +82,7 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
 //            ((Activity)context).finish();
         });
     }
+
     @Override
     public int getItemCount() {
         return userList.size();

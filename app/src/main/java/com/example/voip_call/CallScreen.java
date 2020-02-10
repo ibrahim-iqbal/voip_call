@@ -3,10 +3,9 @@ package com.example.voip_call;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -27,24 +26,26 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-
 @SuppressLint("SetTextI18n")
 public class CallScreen extends AppCompatActivity {
     final int RC_AUDIO = 124;
     AppCompatImageButton record, hold, addcall, videoswitch, mute, speaker;
+    androidx.cardview.widget.CardView endbtn;
     TextView state, recipient_id;
     Call call;
-    MediaPlayer mp;
     String num;
     SinchClient sinchClient;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_screen);
+
         record = findViewById(R.id.record);
         recipient_id = findViewById(R.id.recipient_id);
         state = findViewById(R.id.state);
+        endbtn = findViewById(R.id.endbtn);
 
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -77,6 +78,13 @@ public class CallScreen extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Call Not Started", Toast.LENGTH_SHORT).show();
         }
+
+        endbtn.setOnClickListener(v ->
+        {
+            endbtn.setBackgroundTintMode(PorterDuff.Mode.CLEAR);
+            SinchCallListener listener = new SinchCallListener();
+            listener.onCallEnded(call);
+        });
     }
 
     @Override
@@ -98,31 +106,17 @@ public class CallScreen extends AppCompatActivity {
         }
     }
 
-    public void hold(View view) {
-        Toast.makeText(this, "hold", Toast.LENGTH_SHORT).show();
-    }
-
-    public void addcall(View view) {
-        Toast.makeText(this, "hold", Toast.LENGTH_SHORT).show();
-    }
-
-    public void videoswitch(View view) {
-        Toast.makeText(this, "hold", Toast.LENGTH_SHORT).show();
-    }
-
-    public void mute(View view) {
-        Toast.makeText(this, "hold", Toast.LENGTH_SHORT).show();
-    }
-
-    public void speaker(View view) {
-        Toast.makeText(this, "hold", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private class SinchCallListener implements CallListener {
         @Override
         public void onCallEnded(Call endedCall) {
             call = null;
-            state.setText("");
+            state.setText("Call Ended");
             setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
         }
 
@@ -130,16 +124,14 @@ public class CallScreen extends AppCompatActivity {
         @Override
         public void onCallEstablished(Call establishedCall) {
 
-            state.setText("connected");
-            mp.stop();
+            state.setText("Connected");
             setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
         }
 
         @Override
         public void onCallProgressing(Call progressingCall) {
 
-            state.setText("ringing");
-            mp.start();
+            state.setText("Ringing");
         }
 
         @Override
