@@ -45,8 +45,8 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewholder holder, final int position) {
-
+    public void onBindViewHolder(@NonNull final MyViewholder holder, final int position)
+    {
         holder.name.setText(userList.get(position).getName());
         holder.email.setText(userList.get(position).getMassage());
 //        int n = userList.get(position).getUnRno();

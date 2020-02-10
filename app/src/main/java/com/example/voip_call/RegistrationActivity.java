@@ -54,7 +54,6 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         name = findViewById(R.id.nameid);
 
-
         db = FirebaseDatabase.getInstance().getReference("userinfo");
 
         db.addValueEventListener(new ValueEventListener() {

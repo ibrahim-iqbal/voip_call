@@ -126,6 +126,13 @@ public class ChattingActivity extends AppCompatActivity {
                                         } else {
                                             show_chat.post(() -> show_chat.smoothScrollToPosition(chatAdpter.getItemCount() - 1));
                                         }
+                                        Runnable runnable=new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                scroll.fullScroll(ScrollView.FOCUS_DOWN);
+                                            }
+                                        };
+                                        scroll.post(runnable);
                                     }
 
                                     @Override
@@ -199,7 +206,13 @@ public class ChattingActivity extends AppCompatActivity {
         r_db.child(c_userId).child(chatId).child(id).setValue(chat);
         text_massage.setText("");
 
-
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        };
+        scroll.post(runnable);
     }
 
     public void reciverchatinsert() {
@@ -212,6 +225,13 @@ public class ChattingActivity extends AppCompatActivity {
         ChatInsertData chat = new ChatInsertData(chatId, Massage, c_userId, chaterId, 0, tsLong);
 
         r_db.child(chaterId).child(chatId).child(id).setValue(chat);
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        };
+        scroll.post(runnable);
     }
 
     @Override

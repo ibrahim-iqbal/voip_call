@@ -54,13 +54,11 @@
         android:layout_weight="1"
         android:padding="6dp">
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:id="@+id/unreadbkg"
             android:layout_width="40dp"
-            app:layout_constraintCircleRadius="50dp"
             android:layout_height="match_parent"
-            android:screenReaderFocusable="true"
-            app:cardCornerRadius="50dp"
+            android:background="@drawable/cir1"
             android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +77,7 @@
                 android:textColor="#fff"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

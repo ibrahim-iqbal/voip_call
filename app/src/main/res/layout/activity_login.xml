@@ -78,6 +78,7 @@
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDarker"
                     tools:ignore="HardcodedText,RtlSymmetry" />
 
             </com.google.android.material.textfield.TextInputLayout>
