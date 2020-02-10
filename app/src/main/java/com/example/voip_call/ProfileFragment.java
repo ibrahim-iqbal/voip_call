@@ -51,20 +51,19 @@ import static android.app.Activity.RESULT_OK;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ProfileFragment extends Fragment {
-    de.hdodenhof.circleimageview.CircleImageView profileimg;
-    EditText etname, etemail;
-    ImageView camera, gallery;
-    AlertDialog alertDialog;
-    Button save, update;
-    Bitmap bitmap;
-    String email, name, imgurl;
-    TextView cgpass;
+    private de.hdodenhof.circleimageview.CircleImageView profileimg;
+    private EditText etname, etemail;
+    private ImageView camera, gallery;
+    private AlertDialog alertDialog;
+    private Button save, update;
+    private Bitmap bitmap;
+    private String email, name, imgurl;
     Context context;
-    RecyclerView recycle;
-    DatabaseReference db;
-    FirebaseRecyclerAdapter<alluserinfo, alluserViewholder> adapter;
-    RecyclerView.LayoutManager layoutManager;
-    FirebaseAuth mAuth;
+    private RecyclerView recycle;
+    private DatabaseReference db;
+    private FirebaseRecyclerAdapter<alluserinfo, allUser_ViewHolder> adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
 
 
@@ -80,11 +79,13 @@ public class ProfileFragment extends Fragment {
         profileimg = v.findViewById(R.id.profileimg);
         etname = v.findViewById(R.id.etname);
         etemail = v.findViewById(R.id.etemail);
+        update = v.findViewById(R.id.update);
+        save = v.findViewById(R.id.save);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         profileimg.setEnabled(false);
 
-        Window window = getActivity().getWindow();
+        Window window = Objects.requireNonNull(getActivity()).getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
@@ -114,7 +115,7 @@ public class ProfileFragment extends Fragment {
         etemail.setText(email);
 
         profileimg.setOnClickListener(v13 -> {
-            AlertDialog.Builder ld = new AlertDialog.Builder(getContext());
+            AlertDialog.Builder ld = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
             LayoutInflater inflater1 = getLayoutInflater();
             @SuppressLint("InflateParams")
             View dialogView = inflater1.inflate(R.layout.custom_img, null);
@@ -139,37 +140,44 @@ public class ProfileFragment extends Fragment {
             });
         });
 
-        update.setOnClickListener(v1 -> {
-            profileimg.setEnabled(true);
+        update.setOnClickListener(v1 ->
+        {
+            save.animate().alpha(1f).setDuration(1000);
+            save.setEnabled(true);
+            profileimg.animate().alpha(0f).setDuration(1000);
+            profileimg.setEnabled(false);
 
-            if (bitmap!=null)
-            {
+        });
+        save.setOnClickListener(v1 ->
+        {
+            profileimg.setEnabled(false);
+            save.setEnabled(false);
+            save.animate().alpha(0f).setDuration(1000);
+            update.animate().alpha(1f).setDuration(1000);
+            update.setEnabled(true);
+
+            if (bitmap != null) {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                 byte[] b = baos.toByteArray();
 
                 final StorageReference sr = mStorageRef.child("Profile Images").child(b + "jpg");
                 final UploadTask uploadTask = sr.putBytes(b);
-                uploadTask.addOnCompleteListener((Activity) getContext(), new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                uploadTask.addOnCompleteListener((Activity) Objects.requireNonNull(getContext()), new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        imgurl = String.valueOf(uri);
-                                        Toast.makeText(getContext(), "" + imgurl, Toast.LENGTH_SHORT).show();
-                                    }
+                                sr.getDownloadUrl().addOnSuccessListener(uri -> {
+                                    imgurl = String.valueOf(uri);
+                                    Toast.makeText(getContext(), "" + imgurl, Toast.LENGTH_SHORT).show();
                                 });
                             }
                         });
                     }
                 });
-            }
-            else
-            {
+            } else {
                 Toast.makeText(context, "Select a Profile Photo", Toast.LENGTH_SHORT).show();
             }
         });
@@ -208,9 +216,9 @@ public class ProfileFragment extends Fragment {
                 .setQuery(db, alluserinfo.class)
                 .build();
 
-        adapter = new FirebaseRecyclerAdapter<alluserinfo, alluserViewholder>(options) {
+        adapter = new FirebaseRecyclerAdapter<alluserinfo, allUser_ViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull alluserViewholder holder, int position, @NonNull alluserinfo model) {
+            protected void onBindViewHolder(@NonNull allUser_ViewHolder holder, int position, @NonNull alluserinfo model) {
                 String userid = getRef(position).getKey();
 
                 db.child(userid).addValueEventListener(new ValueEventListener() {
@@ -226,20 +234,16 @@ public class ProfileFragment extends Fragment {
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
                 });
-
             }
-
             @NonNull
             @Override
-            public alluserViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public allUser_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.allusserlayout, parent, false);
-                return new alluserViewholder(view);
+                return new allUser_ViewHolder(view);
             }
         };
         recycle.setAdapter(adapter);
@@ -252,11 +256,11 @@ public class ProfileFragment extends Fragment {
         adapter.stopListening();
     }
 
-    public static class alluserViewholder extends RecyclerView.ViewHolder {
+    public static class allUser_ViewHolder extends RecyclerView.ViewHolder {
 
         TextView all_name, all_email;
 
-        public alluserViewholder(@NonNull View itemView) {
+        allUser_ViewHolder(@NonNull View itemView) {
             super(itemView);
             all_name = itemView.findViewById(R.id.all_name);
             all_email = itemView.findViewById(R.id.all_email);

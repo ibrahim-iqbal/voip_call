@@ -56,7 +56,9 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:alpha="0"
+                        android:id="@+id/save"
                         android:text="Save"
+                        android:enabled="false"
                         android:textColor="@color/colorPrimaryDarker" />
 
                     <Button
