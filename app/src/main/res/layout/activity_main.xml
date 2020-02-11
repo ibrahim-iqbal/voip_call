@@ -4,22 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_bkg"
-    android:paddingLeft="20dp"
-    android:paddingTop="40dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="40dp"
+    android:background="@color/colorPrimaryDarker"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/curve"
-        android:backgroundTint="@color/colorPrimaryDarker"
         android:elevation="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="50dp"
+        android:paddingTop="30dp"
         android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +31,8 @@
 
         <TextView
             android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_marginLeft="40dp"
             android:layout_marginEnd="40dp"

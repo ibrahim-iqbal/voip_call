@@ -6,12 +6,14 @@
     android:background="@drawable/rec1"
     android:orientation="vertical"
     android:weightSum="10">
+
     <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="0.2"
-        android:id="@+id/toolbar"
         android:background="@color/colorPrimaryDarker">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,8 +22,8 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
                 android:gravity="center_vertical"
                 android:text="@string/app_name"
@@ -43,38 +45,39 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.81"
         android:layout_gravity="bottom"
+        android:layout_weight="0.81"
         app:tabBackground="@color/colorPrimaryDark"
-        app:tabSelectedTextColor="@color/colorAccent"
-        app:tabTextColor="@color/colorPrimary"
-        app:tabUnboundedRipple="true"
         app:tabGravity="fill"
-        app:tabIndicatorAnimationDuration="800"
+        app:tabIndicatorAnimationDuration="1000"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="6dp"
         app:tabIndicatorColor="@color/colorAccent"
-        app:tabRippleColor="@color/colorPrimaryDark"
         app:tabIndicatorFullWidth="true"
         app:tabInlineLabel="true"
-        app:tabIndicatorHeight="3dp">
+        app:tabRippleColor="@color/colorPrimaryDark"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="@color/colorPrimary"
+        app:tabUnboundedRipple="true">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Call"
             android:scrollbarSize="12dp"
-            android:id="@+id/call"/>
+            android:text="Call" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chat"
-            android:id="@+id/chat"/>
+            android:text="Chat" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
-            android:id="@+id/profile"/>
+            android:text="Profile" />
 
     </com.google.android.material.tabs.TabLayout>
 
