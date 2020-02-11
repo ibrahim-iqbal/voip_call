@@ -62,7 +62,7 @@ public class ProfileFragment extends Fragment {
 	private AlertDialog alertDialog;
 	private Button save, update;
 	private Bitmap bitmap;
-	private String name, imgurl, id, number, url;
+	private String name, imgurl, id, number, url, Id, na, num, em;
 	private RecyclerView recycle;
 	private DatabaseReference db;
 	private FirebaseRecyclerAdapter<alluserinfo, allUser_ViewHolder> adapter;
@@ -95,6 +95,7 @@ public class ProfileFragment extends Fragment {
 
 		etname.setEnabled(false);
 		etemail.setEnabled(false);
+		etmob.setEnabled(false);
 		recycle = v.findViewById(R.id.contactView);
 		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
 		recycle.setLayoutManager(layoutManager);
@@ -111,7 +112,7 @@ public class ProfileFragment extends Fragment {
 					//number = dp.child("num").getValue().toString();
 					url = dp.child("imgurl").getValue().toString();
 					etname.setText(name);
-					//etmob.setText(number);
+					etmob.setText(number);
 
 					if (url == null) {
 						profileimg.setImageDrawable(getResources().getDrawable(R.drawable.ic_user));
@@ -127,7 +128,8 @@ public class ProfileFragment extends Fragment {
 		});
 		etemail.setText(email);
 
-		profileimg.setOnClickListener(v13 -> {
+		profileimg.setOnClickListener(v13 ->
+		{
 			AlertDialog.Builder ld = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
 			LayoutInflater inflater1 = getLayoutInflater();
 			@SuppressLint("InflateParams")
@@ -144,7 +146,6 @@ public class ProfileFragment extends Fragment {
 				Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				startActivityForResult(it, 0);
 			});
-
 			gallery.setOnClickListener(v1 ->
 			{
 				Toast.makeText(getContext(), "gallery", Toast.LENGTH_SHORT).show();
@@ -152,7 +153,6 @@ public class ProfileFragment extends Fragment {
 				startActivityForResult(it, 1);
 			});
 		});
-
 		update.setOnClickListener(v1 ->
 		{
 			profileimg.setEnabled(true);
@@ -161,6 +161,9 @@ public class ProfileFragment extends Fragment {
 			update.animate().alpha(0f).setDuration(1000);
 			update.setEnabled(true);
 
+			etname.setEnabled(true);
+			etemail.setEnabled(true);
+			etmob.setEnabled(true);
 		});
 		save.setOnClickListener(v1 ->
 		{
@@ -189,27 +192,31 @@ public class ProfileFragment extends Fragment {
 			} else {
 				Toast.makeText(context, "Select a Profile Photo", Toast.LENGTH_SHORT).show();
 			}
-
 			profileimg.setEnabled(false);
 			save.setEnabled(false);
 			save.animate().alpha(0f).setDuration(1000);
 			update.animate().alpha(1f).setDuration(1000);
 			update.setEnabled(true);
 
+			etname.setEnabled(false);
+			etemail.setEnabled(false);
+			etmob.setEnabled(false);
 		});
 		return v;
 	}
 
 	private void image() {
-		String Id = id.trim();
-		String name = etname.getText().toString().trim();
-		String em = etemail.getText().toString().trim();
+		Id = id.trim();
+		na = etname.getText().toString().trim();
+		em = etemail.getText().toString().trim();
+		num = etmob.getText().toString().trim();
 
 		Map<String, Object> post = new HashMap<>();
 		post.put("email", em);
 		post.put("id", Id);
 		post.put("imgurl", imgurl);
 		post.put("name", name);
+		post.put("number", num);
 		try {
 			db.child(id).updateChildren(post).addOnCompleteListener(new OnCompleteListener<Void>() {
 				@Override
@@ -272,12 +279,12 @@ public class ProfileFragment extends Fragment {
 							if (mAuth.getCurrentUser().getEmail().equals(email)) {
 							} else {
 								holder.all_name.setText(name);
-								holder.all_email.setText(email);
+								holder.all_email.setText(num);
 
 								if (iurl == null) {
 									profileimg.setImageDrawable(getResources().getDrawable(R.drawable.ic_user));
 								} else {
-									Picasso.get().load(iurl).centerCrop().resize(100,100).error(R.drawable.ic_user).into(holder.allimg);
+									Picasso.get().load(iurl).centerCrop().resize(100, 100).error(R.drawable.ic_user).into(holder.allimg);
 								}
 							}
 						}
