@@ -20,40 +20,34 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 @SuppressLint("Registered")
-public class MyFirebaseMessagingService extends FirebaseMessagingService
-{
+public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage)
-    {
+    public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
-        if (remoteMessage.getData().size() > 0)
-        {
+        if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             scheduleJob();
         } else {
             handleNow();
         }
 
-        if (remoteMessage.getNotification() != null)
-        {
+        if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
     }
 
     @Override
-    public void onNewToken(@NonNull String token)
-    {
+    public void onNewToken(@NonNull String token) {
         Log.d(TAG, "Refreshed token: " + token);
         sendRegistrationToServer(token);
     }
 
-    private void scheduleJob()
-    {
+    private void scheduleJob() {
         OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(MyWorker.class).build();
         WorkManager.getInstance().beginWith(work).enqueue();
     }
@@ -62,13 +56,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         Log.d(TAG, "Short lived task is done.");
     }
 
-    private void sendRegistrationToServer(String token)
-    {
+    private void sendRegistrationToServer(String token) {
 
     }
 
-    public void sendNotification(String messageBody)
-    {
+    public void sendNotification(String messageBody) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -85,8 +77,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
                     "Channel human readable title",
                     NotificationManager.IMPORTANCE_DEFAULT);

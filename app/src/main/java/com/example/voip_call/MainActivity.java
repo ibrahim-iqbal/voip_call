@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDarker));
 
         mp = MediaPlayer.create(this, R.raw.intro_melody);
-        wel.animate().alpha(0.8f).translationY(100f).scaleY(1f).scaleX(1f).setDuration(2000);
+        wel.animate().alpha(1f).translationY(100f).scaleY(1f).scaleX(1f).setDuration(2000);
+        mp.start();
 
         Handler h = new Handler();
         h.postDelayed(() ->

@@ -27,13 +27,10 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 @SuppressLint("SetTextI18n")
 public class CallScreen extends AppCompatActivity {
-    final int RC_AUDIO = 124;
-    AppCompatImageButton record;
-    androidx.cardview.widget.CardView endbtn;
-    TextView state, recipient_id;
-    Call call;
-    String num;
-    SinchClient sinchClient;
+    private final int RC_AUDIO = 124;
+    private TextView state;
+    private Call call;
+    private SinchClient sinchClient;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -41,10 +38,10 @@ public class CallScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_screen);
 
-        record = findViewById(R.id.record);
-        recipient_id = findViewById(R.id.recipient_id);
+        TextView recipient_id = findViewById(R.id.recipient_id);
         state = findViewById(R.id.state);
-        endbtn = findViewById(R.id.endbtn);
+        androidx.cardview.widget.CardView endbtn = findViewById(R.id.endbtn);
+        AppCompatImageButton speaker = findViewById(R.id.speaker);
 
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -52,7 +49,7 @@ public class CallScreen extends AppCompatActivity {
         window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDarker));
 
         Intent it = getIntent();
-        num = it.getStringExtra("callerid");
+        String num = it.getStringExtra("callerid");
 
         sinchClient = Sinch.getSinchClientBuilder().context(this)
                 .userId("145896")
@@ -78,13 +75,12 @@ public class CallScreen extends AppCompatActivity {
             Toast.makeText(this, "Call Not Started", Toast.LENGTH_SHORT).show();
         }
 
-
         endbtn.setOnClickListener(v ->
         {
             SinchCallListener listener = new SinchCallListener();
             listener.onCallEnded(call);
         });
-
+        speaker.setOnClickListener(v -> setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE));
     }
 
     @Override
@@ -106,6 +102,11 @@ public class CallScreen extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private class SinchCallListener implements CallListener {
         @Override
         public void onCallEnded(Call endedCall) {
@@ -115,21 +116,17 @@ public class CallScreen extends AppCompatActivity {
             sinchClient.stopListeningOnActiveConnection();
             sinchClient.terminate();
             setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
-            Intent it = new Intent(CallScreen.this, LandingPage.class);
-            startActivity(it);
-            finish();
+            onBackPressed();
         }
 
         @Override
         public void onCallEstablished(Call establishedCall) {
-
             state.setText("Connected");
             setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
         }
 
         @Override
         public void onCallProgressing(Call progressingCall) {
-
             state.setText("Ringing");
         }
 

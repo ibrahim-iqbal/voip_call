@@ -27,15 +27,19 @@ public class OnBoarding extends AppIntro implements ISlideBackgroundColorHolder 
         sliderPage1.setTitle("Hello");
         sliderPage1.setDescription("Welcome to the App");
         sliderPage1.setImageDrawable(R.drawable.googleg_standard_color_18);
-        sliderPage1.setBgColor(R.color.DarkKhaki);
         addSlide(AppIntroFragment.newInstance(sliderPage1));
 
         SliderPage sliderPage2 = new SliderPage();
         sliderPage2.setTitle("Hello");
         sliderPage2.setDescription("Welcome to the App");
         sliderPage2.setImageDrawable(R.drawable.googleg_standard_color_18);
-        sliderPage2.setBgColor(R.color.CornflowerBlue);
         addSlide(AppIntroFragment.newInstance(sliderPage2));
+
+        SliderPage sliderPage3 = new SliderPage();
+        sliderPage3.setTitle("Hello");
+        sliderPage3.setDescription("Welcome to the App");
+        sliderPage3.setImageDrawable(R.drawable.googleg_standard_color_18);
+        addSlide(AppIntroFragment.newInstance(sliderPage3));
 
         setDepthAnimation();
         isPagerIndicatorEnabled();
@@ -50,7 +54,6 @@ public class OnBoarding extends AppIntro implements ISlideBackgroundColorHolder 
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        // Do something when users tap on Skip button.
         Toast.makeText(this, "Skip Pressed", Toast.LENGTH_SHORT).show();
     }
 
