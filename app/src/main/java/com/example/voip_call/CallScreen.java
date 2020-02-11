@@ -28,7 +28,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 @SuppressLint("SetTextI18n")
 public class CallScreen extends AppCompatActivity {
     final int RC_AUDIO = 124;
-    AppCompatImageButton record, hold, addcall, videoswitch, mute, speaker;
+    AppCompatImageButton record;
     androidx.cardview.widget.CardView endbtn;
     TextView state, recipient_id;
     Call call;

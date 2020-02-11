@@ -4,39 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rec1"
+    android:background="@color/colorPrimaryDarker"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/well"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:alpha="0"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:src="@drawable/ic_group_7"
+        android:layout_height="match_parent"
+        android:elevation="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/arsenal"
-        android:letterSpacing="0.1"
-        android:text="VOIP CALLS"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/well"
-        tools:ignore="HardcodedText" />
+        <ImageView
+            android:id="@+id/well"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:alpha="0"
+            android:src="@drawable/ic_mainsvg" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginEnd="40dp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/arsenal"
+            android:letterSpacing="0.1"
+            android:text="VOIP CALLS"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="45dp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
