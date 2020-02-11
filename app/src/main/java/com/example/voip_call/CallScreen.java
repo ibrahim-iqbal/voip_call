@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class CallScreen extends AppCompatActivity {
 
         TextView recipient_id = findViewById(R.id.recipient_id);
         state = findViewById(R.id.state);
-        androidx.cardview.widget.CardView endbtn = findViewById(R.id.endbtn);
+        LinearLayout endbtn = findViewById(R.id.endbtn);
         AppCompatImageButton speaker = findViewById(R.id.speaker);
 
         Window window = this.getWindow();
@@ -59,7 +60,6 @@ public class CallScreen extends AppCompatActivity {
                 .build();
         sinchClient.setSupportCalling(true);
         sinchClient.start();
-
         if (requestPermissions()) {
             Toast.makeText(this, "Call Start", Toast.LENGTH_SHORT).show();
             if (call == null) {
