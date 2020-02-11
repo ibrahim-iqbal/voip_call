@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -286,6 +287,14 @@ public class ProfileFragment extends Fragment {
 								} else {
 									Picasso.get().load(iurl).centerCrop().resize(100, 100).error(R.drawable.ic_user).into(holder.allimg);
 								}
+								holder.all_use.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										startActivity(new Intent(context, ChattingActivity.class)
+												.putExtra("userid", model.getId())
+												.putExtra("name", model.getName()));
+									}
+								});
 							}
 						}
 					}
@@ -317,12 +326,14 @@ public class ProfileFragment extends Fragment {
 
 		TextView all_name, all_email;
 		ImageView allimg;
+		LinearLayout all_use;
 
 		allUser_ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			all_name = itemView.findViewById(R.id.all_name);
 			allimg = itemView.findViewById(R.id.allimg);
 			all_email = itemView.findViewById(R.id.all_email);
+			all_use = itemView.findViewById(R.id.all_use);
 		}
 	}
 }
