@@ -279,7 +279,7 @@ public class ProfileFragment extends Fragment {
 							if (mAuth.getCurrentUser().getEmail().equals(email)) {
 							} else {
 								holder.all_name.setText(name);
-								holder.all_email.setText(num);
+								holder.all_email.setText(email);
 
 								if (iurl == null) {
 									profileimg.setImageDrawable(getResources().getDrawable(R.drawable.ic_user));
