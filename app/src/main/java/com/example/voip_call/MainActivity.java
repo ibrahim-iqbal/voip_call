@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDarker));
 
-
         mp = MediaPlayer.create(this, R.raw.intro_melody);
-        wel.animate().alpha(0.8f).translationY(100f).scaleY(1.1f).scaleX(1.1f).setDuration(2000);
+        wel.animate().alpha(0.8f).translationY(100f).scaleY(1f).scaleX(1f).setDuration(2000);
 
         Handler h = new Handler();
         h.postDelayed(() ->
