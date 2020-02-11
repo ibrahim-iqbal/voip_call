@@ -27,7 +27,8 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 @SuppressLint("SetTextI18n")
-public class CallScreen extends AppCompatActivity {
+public class CallScreen extends AppCompatActivity
+{
     private final int RC_AUDIO = 124;
     private TextView state;
     private Call call;
@@ -35,7 +36,8 @@ public class CallScreen extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_screen);
 
@@ -68,13 +70,14 @@ public class CallScreen extends AppCompatActivity {
                 state.setText("");
 
                 call.addCallListener(new SinchCallListener());
-            } else {
+            }
+            else {
                 call.hangup();
             }
-        } else {
+        }
+        else {
             Toast.makeText(this, "Call Not Started", Toast.LENGTH_SHORT).show();
         }
-
         endbtn.setOnClickListener(v ->
         {
             SinchCallListener listener = new SinchCallListener();
