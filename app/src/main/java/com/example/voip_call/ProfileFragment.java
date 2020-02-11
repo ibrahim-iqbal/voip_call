@@ -223,7 +223,6 @@ public class ProfileFragment extends Fragment {
 				@Override
 				public void onComplete(@NonNull Task<Void> task) {
 					Toast.makeText(getContext(), "Your profile updated", Toast.LENGTH_SHORT).show();
-
 				}
 			}).addOnFailureListener(new OnFailureListener() {
 				@Override
