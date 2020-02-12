@@ -7,15 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,20 +24,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class CallFragment extends Fragment {
-    List<UserinfoList> userlist;
+    List<UserinfoList> usercalllist;
     String userEmail, id, massage, name, img, Id;
     long time;
     FirebaseAuth mauth;
-    DatabaseReference r_db, db;
+    DatabaseReference r_db1, db;
     RecyclerView.Adapter madpter;
     RecyclerView review;
-    FirebaseRecyclerAdapter<alluserinfo, allcalluserViewholder> adapter;
-    private Context context;
     String chatid;
     ValueEventListener listener;
+    private Context context;
 
     public CallFragment(Context context) {
         this.context = context;
@@ -52,7 +49,7 @@ public class CallFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_call, container, false);
         review = v.findViewById(R.id.review);
         mauth = FirebaseAuth.getInstance();
-        r_db = FirebaseDatabase.getInstance().getReference("userinfo");
+        r_db1 = FirebaseDatabase.getInstance().getReference("userinfo");
         db = FirebaseDatabase.getInstance().getReference("chatinfo");
         userEmail = mauth.getCurrentUser().getEmail();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
@@ -68,16 +65,8 @@ public class CallFragment extends Fragment {
 
 // finally change the color
         window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
-        FirebaseDatabase.getInstance().goOffline();
-//        Toast.makeText(context, "call create", Toast.LENGTH_SHORT).show();
-        return v;
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        r_db.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+        r_db1.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
@@ -94,16 +83,24 @@ public class CallFragment extends Fragment {
 
             }
         });
+        return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
 //        Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
 
 
-        userlist = new ArrayList<>();
-        userlist.clear();
+        usercalllist = new ArrayList<>();
+        usercalllist.clear();
 
 
     }
 
-    public void chatuser(final String id) {
+    private void chatuser(final String id) {
 
         db.child(id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -126,7 +123,7 @@ public class CallFragment extends Fragment {
                                 } else {
                                     show_userid = s_Id;
                                 }
-                                Toast.makeText(context, "jhjk" + show_userid, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "jhjk" + show_userid, Toast.LENGTH_SHORT).show();
                                 getuserinfo(show_userid, massage, time);
 
 
@@ -157,11 +154,12 @@ public class CallFragment extends Fragment {
 
 
     public void getuserinfo(String userid, String massage, long tm) {
+        LinkedHashSet<UserinfoList> uniqueStrings = new LinkedHashSet<UserinfoList>();
         String uid = userid;
         final String mass = massage;
         final long tmm = tm;
-        userlist.clear();
-        r_db.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+        usercalllist.clear();
+        r_db1.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot userda : dataSnapshot.getChildren()) {
@@ -169,11 +167,12 @@ public class CallFragment extends Fragment {
                     img = userda.child("imgurl").getValue().toString();
                     Id = userda.child("id").getValue().toString();
                     String email = userda.child("email").getValue().toString();
-                    userlist.add(new UserinfoList(img, name, Id, email));
+                    uniqueStrings.add(new UserinfoList(img, name, Id, email));
                 }
+                usercalllist.addAll(uniqueStrings);
 
 //                sort list according to sending and receiving massage
-                Collections.sort(userlist, new Comparator<UserinfoList>() {
+                Collections.sort(usercalllist, new Comparator<UserinfoList>() {
                     @Override
                     public int compare(UserinfoList o1, UserinfoList o2) {
                         int tm1 = (int) o1.getTm();
@@ -187,10 +186,9 @@ public class CallFragment extends Fragment {
 
                     }
                 });
-                madpter = new RecyclerAdapter(context, userlist);
+                madpter = new RecyclerAdapter(context, usercalllist);
                 madpter.notifyDataSetChanged();
                 review.setAdapter(madpter);
-//                madpter.notifyItemChanged(1);
             }
 
             @Override
@@ -210,14 +208,4 @@ public class CallFragment extends Fragment {
     }
 
 
-    public static class allcalluserViewholder extends RecyclerView.ViewHolder {
-
-        TextView all_name, all_email;
-
-        public allcalluserViewholder(@NonNull View itemView) {
-            super(itemView);
-            all_name = itemView.findViewById(R.id.usertag);
-            all_email = itemView.findViewById(R.id.userup);
-        }
-    }
 }

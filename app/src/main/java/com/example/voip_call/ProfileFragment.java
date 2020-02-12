@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -231,6 +232,14 @@ public class ProfileFragment extends Fragment {
                             } else {
                                 holder.all_name.setText(name);
                                 holder.all_email.setText(email);
+                                holder.all_user.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        startActivity(new Intent(context, ChattingActivity.class)
+                                                .putExtra("userid", model.getId())
+                                                .putExtra("name", model.getName()));
+                                    }
+                                });
                             }
                         }
                     }
@@ -259,11 +268,13 @@ public class ProfileFragment extends Fragment {
     public static class allUser_ViewHolder extends RecyclerView.ViewHolder {
 
         TextView all_name, all_email;
+        LinearLayout all_user;
 
         allUser_ViewHolder(@NonNull View itemView) {
             super(itemView);
             all_name = itemView.findViewById(R.id.all_name);
             all_email = itemView.findViewById(R.id.all_email);
+            all_user = itemView.findViewById(R.id.all_use);
         }
     }
 

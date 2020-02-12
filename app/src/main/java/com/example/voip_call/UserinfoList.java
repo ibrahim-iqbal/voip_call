@@ -4,6 +4,32 @@ public class UserinfoList
 {
     String imageurl, name, massage, id, Email;
 
+    public UserinfoList() {
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMassage(String massage) {
+        this.massage = massage;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public void setTm(long tm) {
+        this.tm = tm;
+    }
 
     public UserinfoList(String imageurl, String name, String id, String email) {
         this.imageurl = imageurl;
