@@ -12,7 +12,7 @@ public class UserinfoList {
 		Email = email;
 	}
 
-	public UserinfoList(String imageurl, String name, String massage, String Id, long tm) {
+	UserinfoList(String imageurl, String name, String massage, String Id, long tm) {
 		this.imageurl = imageurl;
 		this.name = name;
 		this.massage = massage;

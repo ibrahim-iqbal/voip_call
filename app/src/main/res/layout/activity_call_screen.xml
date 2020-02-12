@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rec1"
-    android:padding="60dp"
+    android:padding="80dp"
     tools:context=".CallScreen">
 
     <LinearLayout
@@ -21,8 +21,9 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:background="@android:color/transparent"
+            android:contentDescription="caller image"
             android:src="@drawable/ic_user"
             android:tint="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,26 +81,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:tint="@color/colorPrimary"
                 android:id="@+id/hold"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginEnd="50dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_pause" />
+                android:src="@drawable/ic_pause"
+                android:tint="@color/colorPrimary" />
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:tint="@color/colorPrimary"
+                android:id="@+id/speaker"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_speaker"
+                android:tint="@color/colorPrimary" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/videoswitch"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_video" />
+                android:src="@drawable/ic_video"
+                android:tint="@color/colorPrimary" />
 
         </LinearLayout>
 
@@ -108,7 +117,7 @@
             android:layout_height="20dp"
             android:layout_marginBottom="20dp"
             android:baselineAligned="false"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <TextView
                 android:layout_width="0dp"
@@ -118,66 +127,21 @@
                 android:text="HOLD"
                 android:textColor="@color/colorPrimary" />
 
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginStart="50dp"
-                android:text="SPEAKER"
-                android:textColor="@color/colorPrimary" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:weightSum="2">
-
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:tint="@color/colorPrimary"
-                android:id="@+id/mute"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_mute" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:tint="@color/colorPrimary"
-                android:id="@+id/speaker"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_speaker" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="20dp"
-            android:baselineAligned="false"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="50dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="VIDEO"
-                android:textColor="@color/colorPrimary" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="MUTE"
+                android:textColor="@color/colorPrimary" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="SPEAKER"
                 android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
@@ -192,8 +156,8 @@
                 android:id="@+id/endbtn"
                 android:layout_width="55dp"
                 android:layout_height="match_parent"
-                android:backgroundTint="#e71d1d"
-                android:background="@drawable/cir1">
+                android:background="@drawable/cir1"
+                android:backgroundTint="#e71d1d">
 
                 <ImageView
                     android:layout_width="match_parent"
