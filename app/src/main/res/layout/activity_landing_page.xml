@@ -45,16 +45,11 @@
         android:layout_gravity="bottom"
         android:layout_weight="0.81"
         app:tabBackground="@color/colorPrimaryDark"
-        app:tabGravity="fill"
-        app:tabIndicatorAnimationDuration="1000"
-        app:tabIndicatorGravity="bottom"
-        app:tabIndicatorHeight="6dp"
         app:tabIndicatorColor="@color/colorAccent"
-        app:tabIndicatorFullWidth="true"
-        app:tabInlineLabel="true"
-        app:tabRippleColor="@color/colorPrimaryDark"
+        app:tabIndicatorHeight="5dp"
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextColor="@color/colorPrimary"
+        app:tabRippleColor="@color/holo_yellow_dark"
         app:tabUnboundedRipple="true">
 
         <com.google.android.material.tabs.TabItem

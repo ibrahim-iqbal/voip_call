@@ -60,7 +60,7 @@ public class ProfileFragment extends Fragment {
 	private ImageView camera, gallery;
 	private AlertDialog alertDialog;
 	private Button save, update;
-	private Bitmap bitmap, bitm1;
+	private Bitmap bitmap, bitm;
 	private String name, imgurl, id, number, url, na;
 	private RecyclerView recycle;
 	private DatabaseReference db;
@@ -183,7 +183,9 @@ public class ProfileFragment extends Fragment {
 						)
 				);
 			} else {
-				Toast.makeText(context, "Select a Profile Photo", Toast.LENGTH_SHORT).show();
+				imgurl = url;
+				update();
+				pd.dismiss();
 			}
 
 			profileimg.setEnabled(false);
@@ -262,6 +264,7 @@ public class ProfileFragment extends Fragment {
 							//String num = dataSnapshot.child("num").getValue().toString();
 							String iurl = Objects.requireNonNull(dataSnapshot.child("imgurl").getValue()).toString();
 							String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
+
 							if (Objects.equals(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail(), email)) {
 							} else {
 								holder.all_name.setText(name);

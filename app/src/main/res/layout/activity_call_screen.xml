@@ -85,12 +85,24 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/hold"
+                android:onClick="speaker"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_pause"
-                android:tint="@color/colorPrimary" />
+                android:tint="@color/colorPrimary"
+                android:tintMode="multiply" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/mute"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_speaker"
+                android:tint="@color/colorPrimary"
+                android:tintMode="multiply" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/speaker"
@@ -98,17 +110,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_speaker"
-                android:tint="@color/colorPrimary" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/videoswitch"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_video"
-                android:tint="@color/colorPrimary" />
+                android:src="@drawable/ic_mute"
+                android:tint="@color/colorPrimary"
+                android:tintMode="multiply" />
 
         </LinearLayout>
 
