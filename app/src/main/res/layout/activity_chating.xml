@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rec1"
-            android:paddingBottom="75dp"
-            android:paddingTop="40dp">
+            android:paddingTop="40dp"
+            android:paddingBottom="75dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/show_chat"
@@ -38,6 +38,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -45,35 +47,37 @@
             android:id="@+id/backchat"
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:padding="12dp"
             android:src="@drawable/ic_arrow_back_black_24dp"
-            android:tint="@color/colorPrimaryDark"
+            android:tint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/user"
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:padding="10dp"
             android:src="@drawable/ic_user"
-            android:tint="@color/colorPrimaryDark"
+            android:tint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/backchat"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription,RtlSymmetry" />
 
         <TextView
             android:id="@+id/tvname"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="heyy"
+            android:text="Heyy"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/user"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -93,9 +97,10 @@
             android:layout_gravity="bottom"
             android:layout_weight="2.5"
             android:hint="Enter Message"
-            android:textColor="@color/colorPrimaryDarker"
+            android:textColor="@color/colorPrimary"
             android:textColorHint="#929292"
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            tools:ignore="Autofill,HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/send_button"

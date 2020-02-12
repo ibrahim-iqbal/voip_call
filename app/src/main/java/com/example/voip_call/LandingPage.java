@@ -68,9 +68,13 @@ public class LandingPage extends AppCompatActivity {
             case R.id.item1:
                 Toast.makeText(getApplicationContext(), "Item 1 Selected", Toast.LENGTH_LONG).show();
                 return true;
+
             case R.id.item2:
+                Intent it = new Intent(LandingPage.this, OnBoarding.class);
+                LandingPage.this.startActivity(it);
                 Toast.makeText(getApplicationContext(), "Item 2 Selected", Toast.LENGTH_LONG).show();
                 return true;
+
             case R.id.item3:
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                 builder1.setMessage("You Want to Exit?");
@@ -78,8 +82,8 @@ public class LandingPage extends AppCompatActivity {
                 builder1.setPositiveButton("Yes", (dialog, ids) -> {
                     SharedPreferences sa = LandingPage.this.getSharedPreferences("user", Context.MODE_PRIVATE);
                     sa.edit().remove("id").apply();
-                    Intent it = new Intent(LandingPage.this, LoginActivity.class);
-                    LandingPage.this.startActivity(it);
+                    Intent it1 = new Intent(LandingPage.this, LoginActivity.class);
+                    LandingPage.this.startActivity(it1);
                     Toast.makeText(LandingPage.this, "Thank you for Login In!", Toast.LENGTH_SHORT).show();
                 });
 
