@@ -26,27 +26,40 @@
       <w>firebase</w>
       <w>getuserinfo</w>
       <w>gsign</w>
+      <w>heyy</w>
       <w>idgenrater</w>
+      <w>iduser</w>
       <w>imageurl</w>
       <w>imgurl</w>
       <w>iurl</w>
       <w>lchat</w>
+      <w>mainsvg</w>
       <w>maneger</w>
       <w>mauth</w>
       <w>maxid</w>
       <w>mcontext</w>
+      <w>nameid</w>
       <w>onboard</w>
       <w>opentok</w>
       <w>pagerv</w>
       <w>profileimg</w>
+      <w>profilepic</w>
       <w>profileppic</w>
+      <w>recic</w>
       <w>reciver</w>
       <w>reciverchatinsert</w>
       <w>showlayout</w>
       <w>sinch</w>
+      <w>temail</w>
       <w>tname</w>
+      <w>tnumber</w>
       <w>topcir</w>
+      <w>tpass</w>
+      <w>tvemail</w>
+      <w>tvmob</w>
+      <w>tvname</w>
       <w>unda</w>
+      <w>unreadbkg</w>
       <w>unreadcount</w>
       <w>updateunradmassage</w>
       <w>usercalllist</w>
@@ -60,6 +73,7 @@
       <w>usertag</w>
       <w>userup</w>
       <w>viewholder</w>
+      <w>voip</w>
     </words>
   </dictionary>
 </component>

@@ -2,6 +2,7 @@ package com.example.voip_call;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -163,6 +164,12 @@ public class ProfileFragment extends Fragment {
 		});
 		save.setOnClickListener(v1 ->
 		{
+			ProgressDialog pd = new ProgressDialog(getContext());
+			pd.setMessage("Please wait...");
+			pd.setCancelable(false);
+			pd.setCanceledOnTouchOutside(false);
+			pd.setIcon(getResources().getDrawable(R.drawable.fab_bg_mini));
+			pd.show();
 			if (bitmap != null) {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
@@ -175,8 +182,8 @@ public class ProfileFragment extends Fragment {
 								sr.getDownloadUrl().addOnSuccessListener(uri ->
 										{
 											imgurl = String.valueOf(uri);
-											Toast.makeText(getContext(), "" + imgurl, Toast.LENGTH_SHORT).show();
-											image();
+											update();
+											pd.dismiss();
 										}
 								)
 						)
@@ -197,7 +204,8 @@ public class ProfileFragment extends Fragment {
 		return v;
 	}
 
-	private void image() {
+	private void update() {
+
 		String id1 = id.trim();
 		na = etname.getText().toString().trim();
 		String em = etemail.getText().toString().trim();
@@ -211,9 +219,9 @@ public class ProfileFragment extends Fragment {
 		post.put("number", num);
 		try {
 			db.child(id).updateChildren(post).addOnCompleteListener(task ->
-					Toast.makeText(getContext(), "Your profile updated", Toast.LENGTH_SHORT).show())
+					Toast.makeText(ProfileFragment.this.getContext(), "Your profile updated", Toast.LENGTH_SHORT).show())
 					.addOnFailureListener(e ->
-							Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show());
+							Toast.makeText(getContext(), "Profile Not Updated" + e.getMessage(), Toast.LENGTH_SHORT).show());
 		} catch (Exception e) {
 			Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 		}

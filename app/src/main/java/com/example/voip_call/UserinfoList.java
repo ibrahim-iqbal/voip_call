@@ -23,6 +23,9 @@ public class UserinfoList {
 		this.tm = tm;
 	}
 
+	public UserinfoList() {
+	}
+
 	public String getEmail() {
 		return Email;
 	}

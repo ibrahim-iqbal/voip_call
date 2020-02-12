@@ -18,6 +18,7 @@
             android:layout_height="220dp"
             android:background="@drawable/curve"
             android:backgroundTint="@color/colorPrimaryDarker"
+            android:baselineAligned="false"
             android:elevation="20dp"
             android:orientation="horizontal"
             android:padding="14dp"
@@ -63,12 +64,15 @@
 
                     <Button
                         android:id="@+id/update"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:background="@drawable/curve"
+                        android:autoSizeTextType="uniform"
                         android:text="Update"
-                        android:textColor="@color/colorPrimaryDarker" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        tools:targetApi="o" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -84,7 +88,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:paddingStart="4dp"
-                    android:text="Name"
+                    android:paddingEnd="4dp"
+                    android:text="@string/name"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -102,7 +107,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:paddingStart="4dp"
-                    android:text="Email"
+                    android:paddingEnd="4dp"
+                    android:text="@string/email"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -120,7 +126,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:paddingStart="4dp"
-                    android:text="Mobile Number"
+                    android:paddingEnd="4dp"
+                    android:text="@string/number"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     android:textStyle="bold" />
