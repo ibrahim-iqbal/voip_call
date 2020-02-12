@@ -99,9 +99,12 @@ public class ChatFragment extends Fragment {
                     protected void onBindViewHolder(@NonNull MyViewholder holder, int position, @NonNull UserinfoList model) {
                         String idd = getRef(position).getKey();
                         assert idd != null;
+
+                        usal.clear();
                         db.child(id).child(idd).limitToLast(1).orderByKey().addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                                 for (DataSnapshot lchat : dataSnapshot.getChildren()) {
                                     massage = Objects.requireNonNull(lchat.child("massage").getValue()).toString();
                                     time = (long) lchat.child("time").getValue();
@@ -125,16 +128,16 @@ public class ChatFragment extends Fragment {
 
                                             }
 //											Toast.makeText(context, ""+usal.get(0).getUid(), Toast.LENGTH_SHORT).show();
-
-
                                         }
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                         }
+
                                     });
-                                    userinfo.add(new alldataclass(massage, show_userid, time, nam));
-                                    holder.email.setText(massage);
+
+                                    userinfo.add(new alldataclass(massage, show_userid, time));
+
                                     holder.userlayout.setOnClickListener(v ->
                                     {
                                         Intent itt = new Intent(context, ChattingActivity.class);
@@ -142,6 +145,29 @@ public class ChatFragment extends Fragment {
                                         startActivity(itt);
                                     });
                                 }
+                                usal.addAll(userinfo);
+//                                Collections.sort(usal, new Comparator<alldataclass>() {
+//                                    @Override
+//                                    public int compare(alldataclass o1, alldataclass o2) {
+//                                        int t1=(int)o1.getTime();
+//                                        int t2=(int)o2.getTime();
+//                                        if(t1<t2)
+//                                        {
+//                                            return 1;
+//                                        }
+//                                        else
+//                                        {
+//                                            return -1;
+//                                        }
+//                                    }
+//                                });
+                                for (int i = 0; i < usal.size(); i++) {
+//                                    Toast.makeText(context, ""+usal.size(), Toast.LENGTH_SHORT).show();
+                                    holder.email.setText(usal.get(i).getShow_id());
+                                }
+
+
+
                             }
 
                             @Override
@@ -159,6 +185,7 @@ public class ChatFragment extends Fragment {
                     }
                 };
                 recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 adapter.startListening();
             }
 
@@ -277,6 +304,7 @@ public class ChatFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        usal.clear();
         userlist.clear();
         FirebaseDatabase.getInstance().goOnline();
     }
@@ -284,6 +312,7 @@ public class ChatFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        usal.clear();
         userlist.clear();
         FirebaseDatabase.getInstance().goOffline();
         Toast.makeText(context, "pause", Toast.LENGTH_SHORT).show();

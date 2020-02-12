@@ -9,10 +9,11 @@
     android:backgroundTint="#2d2d2d"
     android:elevation="10dp"
     android:orientation="vertical"
+    android:id="@+id/all_use"
     android:padding="8dp">
 
     <LinearLayout
-        android:id="@+id/all_use"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="7"

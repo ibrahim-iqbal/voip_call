@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,7 +60,7 @@ public class ProfileFragment extends Fragment {
 	private ImageView camera, gallery;
 	private AlertDialog alertDialog;
 	private Button save, update;
-	private Bitmap bitmap, bitm;
+	private Bitmap bitmap, bitm1;
 	private String name, imgurl, id, number, url, na;
 	private RecyclerView recycle;
 	private DatabaseReference db;
@@ -183,9 +183,7 @@ public class ProfileFragment extends Fragment {
 						)
 				);
 			} else {
-				imgurl = url;
-				update();
-				pd.dismiss();
+				Toast.makeText(context, "Select a Profile Photo", Toast.LENGTH_SHORT).show();
 			}
 
 			profileimg.setEnabled(false);
@@ -256,34 +254,53 @@ public class ProfileFragment extends Fragment {
 				String userid = getRef(position).getKey();
 
 				assert userid != null;
-				db.child(userid).addValueEventListener(new ValueEventListener() {
-					@Override
-					public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-						if (dataSnapshot.hasChild("name")) {
-							String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
-							//String num = dataSnapshot.child("num").getValue().toString();
-							String iurl = Objects.requireNonNull(dataSnapshot.child("imgurl").getValue()).toString();
-							String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
+				if (model.getId().equals(id)) {
+					Toast.makeText(context, "" + model.getName(), Toast.LENGTH_SHORT).show();
+					holder.all_user.setVisibility(View.INVISIBLE);
+				} else {
+					holder.all_name.setText(model.getName());
+					holder.all_email.setText(model.getEmail());
 
-							if (Objects.equals(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail(), email)) {
-							} else {
-								holder.all_name.setText(name);
-								holder.all_email.setText(email);
+					Picasso.get().load(model.getImgurl()).centerCrop().resize(100, 100).error(R.drawable.ic_user).into(holder.allimg);
 
-								Picasso.get().load(iurl).centerCrop().resize(100, 100).error(R.drawable.ic_user).into(holder.allimg);
+					holder.all_user.setOnClickListener(v ->
+							startActivity(new Intent(context, ChattingActivity.class)
+									.putExtra("userid", model.getId())
+									.putExtra("name", model.getName())));
+				}
 
-								holder.all_user.setOnClickListener(v ->
-										startActivity(new Intent(context, ChattingActivity.class)
-												.putExtra("userid", model.getId())
-												.putExtra("name", model.getName())));
-							}
-						}
-					}
-
-					@Override
-					public void onCancelled(@NonNull DatabaseError databaseError) {
-					}
-				});
+//				if(userid.equals(id))
+//				{
+//
+//				}
+//				else {
+//					db.child(userid).addValueEventListener(new ValueEventListener() {
+//						@Override
+//						public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//							if (dataSnapshot.hasChild("name")) {
+//								String name = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
+//								//String num = dataSnapshot.child("num").getValue().toString();
+//								String iurl = Objects.requireNonNull(dataSnapshot.child("imgurl").getValue()).toString();
+//								String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
+//
+//									holder.all_name.setText(model.getName());
+//									holder.all_email.setText(model.getEmail());
+//
+//									Picasso.get().load(iurl).centerCrop().resize(100, 100).error(R.drawable.ic_user).into(holder.allimg);
+//
+//									holder.all_user.setOnClickListener(v ->
+//											startActivity(new Intent(context, ChattingActivity.class)
+//													.putExtra("userid", model.getId())
+//													.putExtra("name", model.getName())));
+//
+//							}
+//						}
+//
+//						@Override
+//						public void onCancelled(@NonNull DatabaseError databaseError) {
+//						}
+//					});
+//				}
 			}
 
 			@NonNull
@@ -307,7 +324,7 @@ public class ProfileFragment extends Fragment {
 
 		TextView all_name, all_email;
 		ImageView allimg;
-		LinearLayout all_user;
+		ConstraintLayout all_user;
 
 		allUser_ViewHolder(@NonNull View itemView) {
 			super(itemView);

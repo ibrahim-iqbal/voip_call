@@ -1,25 +1,17 @@
 package com.example.voip_call;
 
 public class alldataclass {
-    String massage, show_id, name;
+    String massage, show_id;
     long time;
 
     public alldataclass() {
     }
 
-    public alldataclass(String massage, String show_id, long time, String name) {
+    public alldataclass(String massage, String show_id, long time) {
         this.massage = massage;
         this.show_id = show_id;
         this.time = time;
-        this.name = name;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMassage() {
