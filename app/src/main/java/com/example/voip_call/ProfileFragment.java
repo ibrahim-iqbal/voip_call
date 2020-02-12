@@ -45,6 +45,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -110,7 +111,6 @@ public class ProfileFragment extends Fragment {
 					url = Objects.requireNonNull(dp.child("imgurl").getValue()).toString();
 					etname.setText(name);
 					etmob.setText(number);
-
 					if (url == null) {
 						profileimg.setImageDrawable(getResources().getDrawable(R.drawable.ic_user));
 					} else {
@@ -137,21 +137,17 @@ public class ProfileFragment extends Fragment {
 			camera = alertDialog.findViewById(R.id.camera);
 			gallery = alertDialog.findViewById(R.id.gallery);
 
-			camera.setOnClickListener(v12 ->
-			{
-				Toast.makeText(getContext(), "Camera", Toast.LENGTH_SHORT).show();
+			camera.setOnClickListener(v12 -> {
 				Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				startActivityForResult(it, 0);
 			});
-			gallery.setOnClickListener(v1 ->
-			{
-				Toast.makeText(getContext(), "gallery", Toast.LENGTH_SHORT).show();
+			gallery.setOnClickListener(v1 -> {
 				Intent it = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				startActivityForResult(it, 1);
 			});
 		});
-		update.setOnClickListener(v1 ->
-		{
+
+		update.setOnClickListener(v1 -> {
 			profileimg.setEnabled(true);
 			save.animate().alpha(1f).setDuration(1000);
 			save.setEnabled(true);
@@ -162,8 +158,8 @@ public class ProfileFragment extends Fragment {
 			etemail.setEnabled(true);
 			etmob.setEnabled(true);
 		});
-		save.setOnClickListener(v1 ->
-		{
+
+		save.setOnClickListener(v1 -> {
 			ProgressDialog pd = new ProgressDialog(getContext());
 			pd.setMessage("Please wait...");
 			pd.setCancelable(false);
@@ -174,13 +170,11 @@ public class ProfileFragment extends Fragment {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
 				byte[] b = baos.toByteArray();
-
-				final StorageReference sr = mStorageRef.child("Profile Images").child(b + "jpg");
+				final StorageReference sr = mStorageRef.child("Profile Images").child(Arrays.toString(b) + "jpg");
 				final UploadTask uploadTask = sr.putBytes(b);
 				uploadTask.addOnCompleteListener((Activity) Objects.requireNonNull(getContext()), task ->
 						uploadTask.addOnSuccessListener(taskSnapshot ->
-								sr.getDownloadUrl().addOnSuccessListener(uri ->
-										{
+								sr.getDownloadUrl().addOnSuccessListener(uri -> {
 											imgurl = String.valueOf(uri);
 											update();
 											pd.dismiss();
@@ -191,12 +185,12 @@ public class ProfileFragment extends Fragment {
 			} else {
 				Toast.makeText(context, "Select a Profile Photo", Toast.LENGTH_SHORT).show();
 			}
+
 			profileimg.setEnabled(false);
 			save.setEnabled(false);
 			save.animate().alpha(0f).setDuration(1000);
 			update.animate().alpha(1f).setDuration(1000);
 			update.setEnabled(true);
-
 			etname.setEnabled(false);
 			etemail.setEnabled(false);
 			etmob.setEnabled(false);
@@ -205,7 +199,6 @@ public class ProfileFragment extends Fragment {
 	}
 
 	private void update() {
-
 		String id1 = id.trim();
 		na = etname.getText().toString().trim();
 		String em = etemail.getText().toString().trim();
