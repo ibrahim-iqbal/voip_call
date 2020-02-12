@@ -2,6 +2,7 @@ package com.example.voip_call;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
 public class Depth implements ViewPager.PageTransformer {
@@ -9,7 +10,7 @@ public class Depth implements ViewPager.PageTransformer {
     private static final float MIN_ALPHA = 0.3f;
 
     @Override
-    public void transformPage(View page, float position)
+    public void transformPage(@NonNull View page, float position)
     {
     //depth animation
 

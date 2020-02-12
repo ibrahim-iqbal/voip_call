@@ -1,13 +1,13 @@
 package com.example.voip_call;
 
 public class Createuser {
-	String Email;
-	String Id;
-	String imgurl;
 	String name;
-	String num;
+	private String Email;
+	private String Id;
+	private String imgurl;
+	private String num;
 
-	public Createuser(String email, String id, String imgurl, String name, String num) {
+	Createuser(String email, String id, String imgurl, String name, String num) {
 		Email = email;
 		Id = id;
 		this.imgurl = imgurl;

@@ -1,74 +1,71 @@
 package com.example.voip_call;
 
-public class UserinfoList
-{
-    String imageurl, name, massage, id, Email;
+public class UserinfoList {
+	String imageurl, name, massage, id, Email;
+	private long tm;
 
-    public UserinfoList() {
-    }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
-    }
+	UserinfoList(String imageurl, String name, String id, String email) {
+		this.imageurl = imageurl;
+		this.name = name;
+		this.id = id;
+		Email = email;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public UserinfoList(String imageurl, String name, String massage, String Id, long tm) {
+		this.imageurl = imageurl;
+		this.name = name;
+		this.massage = massage;
+		id = Id;
 
-    public void setMassage(String massage) {
-        this.massage = massage;
-    }
+		this.tm = tm;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getEmail() {
+		return Email;
+	}
 
-    public void setEmail(String email) {
-        Email = email;
-    }
+	public void setEmail(String email) {
+		Email = email;
+	}
 
-    public void setTm(long tm) {
-        this.tm = tm;
-    }
+	long getTm() {
+		return tm;
+	}
 
-    public UserinfoList(String imageurl, String name, String id, String email) {
-        this.imageurl = imageurl;
-        this.name = name;
-        this.id = id;
-        Email = email;
-    }
+	public void setTm(long tm) {
+		this.tm = tm;
+	}
 
-    public String getEmail() {
-        return Email;
-    }
-    long tm;
+	String getImageurl() {
+		return imageurl;
+	}
 
-    public UserinfoList(String imageurl, String name, String massage, String Id, long tm) {
-        this.imageurl = imageurl;
-        this.name = name;
-        this.massage = massage;
-        id = Id;
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
+	}
 
-        this.tm = tm;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public long getTm() {
-        return tm;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getImageurl() {
-        return imageurl;
-    }
+	String getMassage() {
+		return massage;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setMassage(String massage) {
+		this.massage = massage;
+	}
 
-    public String getMassage() {
-        return massage;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 }

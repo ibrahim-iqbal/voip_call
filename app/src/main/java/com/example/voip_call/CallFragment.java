@@ -23,189 +23,182 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class CallFragment extends Fragment {
-    List<UserinfoList> usercalllist;
-    String userEmail, id, massage, name, img, Id;
-    long time;
-    FirebaseAuth mauth;
-    DatabaseReference r_db1, db;
-    RecyclerView.Adapter madpter;
-    RecyclerView review;
-    String chatid;
-    ValueEventListener listener;
-    private Context context;
+	ValueEventListener listener;
+	private List<UserinfoList> usercalllist;
+	private String userEmail, id, massage, name, img, Id;
+	private long time;
+	private DatabaseReference r_db1, db;
+	private RecyclerView.Adapter mAdapter;
+	private RecyclerView review;
+	private String chatid;
+	private Context context;
 
-    public CallFragment(Context context) {
-        this.context = context;
-    }
+	CallFragment(Context context) {
+		this.context = context;
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_call, container, false);
-        review = v.findViewById(R.id.review);
-        mauth = FirebaseAuth.getInstance();
-        r_db1 = FirebaseDatabase.getInstance().getReference("userinfo");
-        db = FirebaseDatabase.getInstance().getReference("chatinfo");
-        userEmail = mauth.getCurrentUser().getEmail();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-        review.setLayoutManager(layoutManager);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// Inflate the layout for this fragment
+		View v = inflater.inflate(R.layout.fragment_call, container, false);
+		review = v.findViewById(R.id.review);
+		FirebaseAuth mauth = FirebaseAuth.getInstance();
+		r_db1 = FirebaseDatabase.getInstance().getReference("userinfo");
+		db = FirebaseDatabase.getInstance().getReference("chatinfo");
+		userEmail = Objects.requireNonNull(mauth.getCurrentUser()).getEmail();
+		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+		review.setLayoutManager(layoutManager);
 
-        Window window = getActivity().getWindow();
+		Window window = Objects.requireNonNull(getActivity()).getWindow();
 
 // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
 // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 // finally change the color
-        window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
+		window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
 
-        r_db1.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot datas : dataSnapshot.getChildren()) {
+		r_db1.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				for (DataSnapshot datas : dataSnapshot.getChildren()) {
 //
-                    id = datas.child("id").getValue().toString();
+					id = Objects.requireNonNull(datas.child("id").getValue()).toString();
 
-                    chatuser(id);
+					chatuser(id);
 
-                }
-            }
+				}
+			}
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-        return v;
-    }
+			}
+		});
+		return v;
+	}
 
-    @Override
-    public void onStart() {
-        super.onStart();
+	@Override
+	public void onStart() {
+		super.onStart();
 
 
 //        Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
 
 
-        usercalllist = new ArrayList<>();
-        usercalllist.clear();
+		usercalllist = new ArrayList<>();
+		usercalllist.clear();
 
 
-    }
+	}
 
-    private void chatuser(final String id) {
+	private void chatuser(final String id) {
 
-        db.child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (final DataSnapshot da : dataSnapshot.getChildren()) {
-                    chatid = da.getKey();
+		db.child(id).addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				for (final DataSnapshot da : dataSnapshot.getChildren()) {
+					chatid = da.getKey();
 //                    Toast.makeText(context, ""+chatid, Toast.LENGTH_SHORT).show();
-                    Query query = db.child(id).child(chatid).limitToLast(1).orderByKey();
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot lchat : dataSnapshot.getChildren()) {
-                                massage = lchat.child("massage").getValue().toString();
-                                time = (long) lchat.child("time").getValue();
-                                String s_Id = lchat.child("senderId").getValue().toString();
-                                String re_Id = lchat.child("reciverId").getValue().toString();
-                                String show_userid;
-                                if (s_Id.equals(id)) {
-                                    show_userid = re_Id;
-                                } else {
-                                    show_userid = s_Id;
-                                }
+					Query query = db.child(id).child(chatid).limitToLast(1).orderByKey();
+					query.addListenerForSingleValueEvent(new ValueEventListener() {
+						@Override
+						public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+							for (DataSnapshot lchat : dataSnapshot.getChildren()) {
+								time = (long) lchat.child("time").getValue();
+								massage = Objects.requireNonNull(lchat.child("massage").getValue()).toString();
+								String s_Id = Objects.requireNonNull(lchat.child("senderId").getValue()).toString();
+								String re_Id = Objects.requireNonNull(lchat.child("reciverId").getValue()).toString();
+								String show_userid;
+								if (s_Id.equals(id)) {
+									show_userid = re_Id;
+								} else {
+									show_userid = s_Id;
+								}
 //                                Toast.makeText(context, "jhjk" + show_userid, Toast.LENGTH_SHORT).show();
-                                getuserinfo(show_userid, massage, time);
+								getuserinfo(show_userid, massage, time);
 
 
 //                                Toast.makeText(context, "" + show_userid, Toast.LENGTH_SHORT).show();
 //                                Toast.makeText(context, "last" + massage, Toast.LENGTH_SHORT).show();
-                            }
+							}
 
-                        }
+						}
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+						@Override
+						public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+						}
+					});
 
 
-    }
+				}
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
+
+			}
+		});
 
 
-    public void getuserinfo(String userid, String massage, long tm) {
-        LinkedHashSet<UserinfoList> uniqueStrings = new LinkedHashSet<UserinfoList>();
-        String uid = userid;
-        final String mass = massage;
-        final long tmm = tm;
-        usercalllist.clear();
-        r_db1.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot userda : dataSnapshot.getChildren()) {
-                    name = userda.child("name").getValue().toString();
-                    img = userda.child("imgurl").getValue().toString();
-                    Id = userda.child("id").getValue().toString();
-                    String email = userda.child("email").getValue().toString();
-                    uniqueStrings.add(new UserinfoList(img, name, Id, email));
-                }
-                usercalllist.addAll(uniqueStrings);
+	}
+
+
+	private void getuserinfo(String userid, String massage, long tm) {
+		LinkedHashSet<UserinfoList> uniqueStrings = new LinkedHashSet<>();
+		String uid = userid;
+		final String mass = massage;
+		final long tmm = tm;
+		usercalllist.clear();
+		r_db1.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				for (DataSnapshot userda : dataSnapshot.getChildren()) {
+					name = Objects.requireNonNull(userda.child("name").getValue()).toString();
+					img = Objects.requireNonNull(userda.child("imgurl").getValue()).toString();
+					Id = Objects.requireNonNull(userda.child("id").getValue()).toString();
+					String email = Objects.requireNonNull(userda.child("email").getValue()).toString();
+					uniqueStrings.add(new UserinfoList(img, name, Id, email));
+				}
+				usercalllist.addAll(uniqueStrings);
 
 //                sort list according to sending and receiving massage
-                Collections.sort(usercalllist, new Comparator<UserinfoList>() {
-                    @Override
-                    public int compare(UserinfoList o1, UserinfoList o2) {
-                        int tm1 = (int) o1.getTm();
-                        int tm2 = (int) o2.getTm();
+				Collections.sort(usercalllist, (o1, o2) -> {
+					int tm1 = (int) o1.getTm();
+					int tm2 = (int) o2.getTm();
 
-                        if (tm1 < tm2) {
-                            return 1;
-                        } else {
-                            return -1;
-                        }
+					if (tm1 < tm2) {
+						return 1;
+					} else {
+						return -1;
+					}
 
-                    }
-                });
-                madpter = new RecyclerAdapter(context, usercalllist);
-                madpter.notifyDataSetChanged();
-                review.setAdapter(madpter);
-            }
+				});
+				mAdapter = new RecyclerAdapter(context, usercalllist);
+				mAdapter.notifyDataSetChanged();
+				review.setAdapter(mAdapter);
+			}
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+			}
+		});
 
-    }
+	}
 
-
-    @Override
-    public void onStop() {
-        super.onStop();
+	@Override
+	public void onStop() {
+		super.onStop();
 //        Toast.makeText(context, "atop", Toast.LENGTH_SHORT).show();
 
-    }
-
-
+	}
 }
