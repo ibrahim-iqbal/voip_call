@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +70,6 @@ public class ProfileFragment extends Fragment {
 	private FirebaseAuth mAuth;
 	private StorageReference mStorageRef;
 
-
 	ProfileFragment(Context context) {
 		this.context = context;
 	}
@@ -121,7 +121,6 @@ public class ProfileFragment extends Fragment {
 					}
 				}
 			}
-
 			@Override
 			public void onCancelled(@NonNull DatabaseError databaseError) {
 			}
@@ -222,7 +221,6 @@ public class ProfileFragment extends Fragment {
 				@Override
 				public void onComplete(@NonNull Task<Void> task) {
 					Toast.makeText(getContext(), "Your profile updated", Toast.LENGTH_SHORT).show();
-
 				}
 			}).addOnFailureListener(new OnFailureListener() {
 				@Override
@@ -279,13 +277,21 @@ public class ProfileFragment extends Fragment {
 							if (mAuth.getCurrentUser().getEmail().equals(email)) {
 							} else {
 								holder.all_name.setText(name);
-								holder.all_email.setText(num);
+								holder.all_email.setText(email);
 
 								if (iurl == null) {
 									profileimg.setImageDrawable(getResources().getDrawable(R.drawable.ic_user));
 								} else {
 									Picasso.get().load(iurl).centerCrop().resize(100, 100).error(R.drawable.ic_user).into(holder.allimg);
 								}
+								holder.all_user.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										startActivity(new Intent(context, ChattingActivity.class)
+												.putExtra("userid", model.getId())
+												.putExtra("name", model.getName()));
+									}
+								});
 							}
 						}
 					}
@@ -317,12 +323,14 @@ public class ProfileFragment extends Fragment {
 
 		TextView all_name, all_email;
 		ImageView allimg;
+		LinearLayout all_user;
 
 		allUser_ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			all_name = itemView.findViewById(R.id.all_name);
 			allimg = itemView.findViewById(R.id.allimg);
 			all_email = itemView.findViewById(R.id.all_email);
+			all_user = itemView.findViewById(R.id.all_use);
 		}
 	}
 }

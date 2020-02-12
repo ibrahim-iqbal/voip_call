@@ -11,9 +11,8 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="32dp"
+        android:padding="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,11 +22,11 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginBottom="80dp"
-            android:letterSpacing="0.1"
-            android:text="Sign Up"
+            android:drawableLeft="@drawable/ic_lock"
             android:fontFamily="@font/poppins_light"
+            android:letterSpacing="0.1"
+            android:text=" Sign Up"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="55sp"
@@ -106,6 +105,7 @@
                 tools:ignore="HardcodedText,RtlSymmetry" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tpass"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -161,12 +161,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:elevation="20dp"
-                android:backgroundTint="@color/colorPrimary"
                 android:onClick="reg"
                 android:padding="16dp"
                 android:text="REGISTER"
-                android:textColor="@color/colorPrimaryDarker"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 app:autoSizeTextType="uniform" />
         </LinearLayout>
