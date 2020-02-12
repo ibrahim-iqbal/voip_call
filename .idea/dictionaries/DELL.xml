@@ -2,8 +2,10 @@
   <dictionary name="DELL">
     <words>
       <w>adpter</w>
+      <w>baos</w>
       <w>callerid</w>
       <w>chatbox</w>
+      <w>chatinfo</w>
       <w>chatl</w>
       <w>chatlayout</w>
       <w>chatname</w>
@@ -12,6 +14,7 @@
       <w>crashlytics</w>
       <w>createnotification</w>
       <w>createuser</w>
+      <w>datas</w>
       <w>endbtn</w>
       <w>etemail</w>
       <w>etmob</w>
@@ -21,13 +24,18 @@
       <w>idgenrater</w>
       <w>imageurl</w>
       <w>imgurl</w>
+      <w>iurl</w>
+      <w>lchat</w>
       <w>maneger</w>
+      <w>mauth</w>
       <w>maxid</w>
+      <w>mcontext</w>
       <w>onboard</w>
       <w>opentok</w>
       <w>pagerv</w>
       <w>profileimg</w>
       <w>profileppic</w>
+      <w>reciver</w>
       <w>reciverchatinsert</w>
       <w>showlayout</w>
       <w>sinch</w>
@@ -38,6 +46,7 @@
       <w>userimg</w>
       <w>userinfo</w>
       <w>userlayout</w>
+      <w>userlist</w>
       <w>usertag</w>
       <w>userup</w>
       <w>viewholder</w>

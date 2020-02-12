@@ -23,170 +23,144 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ChatFragment extends Fragment {
-    String userEmail;
-    FirebaseAuth mauth;
-    RecyclerView recyclerView;
-    RecyclerView.Adapter madpter;
-    RecyclerView.LayoutManager layoutManager;
-    String id, massage, name, Id, img;
-    long time;
-    Context context;
-    FirebaseDatabase DB;
-    List<Long> tm;
-    String nam, imgurl, uid;
-    FirebaseRecyclerAdapter<UserinfoList, MyViewholder> adapter;
-    private List<UserinfoList> userlist;
-    private DatabaseReference r_db, db;
+	public String userEmail;
+	RecyclerView.Adapter madpter;
+	Context context;
+	List<Long> tm;
+	private FirebaseAuth mauth;
+	private RecyclerView recyclerView;
+	private String id, massage, name, Id, img;
+	private long time;
+	private String nam, imgurl, uid;
+	private FirebaseRecyclerAdapter<UserinfoList, MyViewholder> adapter;
+	private List<UserinfoList> userlist;
+	private DatabaseReference r_db, db;
 
-    public ChatFragment(Context mcontext) {
-        // Required empty public constructor
-        context = mcontext;
-    }
+	ChatFragment(Context mcontext) {
+		context = mcontext;
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_chat, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        mauth = FirebaseAuth.getInstance();
-        try {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        } catch (Exception e) {
+		mauth = FirebaseAuth.getInstance();
 
-        }
-        DB = FirebaseDatabase.getInstance();
+		try {
+			FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+		} catch (Exception e) {
+		}
 
-        r_db = DB.getReference("userinfo");
-        r_db.keepSynced(true);
-        db = DB.getReference("chatinfo");
-        db.keepSynced(true);
-        userEmail = mauth.getCurrentUser().getEmail();
+		FirebaseDatabase DB = FirebaseDatabase.getInstance();
 
-        recyclerView = v.findViewById(R.id.recic);
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-//        Toast.makeText(context, ""+mauth.getCurrentUser().get, Toast.LENGTH_SHORT).show();
+		r_db = DB.getReference("userinfo");
+		r_db.keepSynced(true);
+		db = DB.getReference("chatinfo");
+		db.keepSynced(true);
+		userEmail = Objects.requireNonNull(mauth.getCurrentUser()).getEmail();
 
-        return v;
-    }
+		recyclerView = v.findViewById(R.id.recic);
+		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+		recyclerView.setLayoutManager(layoutManager);
+		return v;
+	}
 
-    @Override
-    public void onStart() {
-        super.onStart();
+	@Override
+	public void onStart() {
+		super.onStart();
 
-        userlist = new ArrayList<>();
-        userlist.clear();
-        r_db.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot datas : dataSnapshot.getChildren()) {
+		userlist = new ArrayList<>();
+		userlist.clear();
+		r_db.orderByChild("email").equalTo(Objects.requireNonNull(mauth.getCurrentUser()).getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				for (DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                    id = datas.child("id").getValue().toString();
-
+					id = Objects.requireNonNull(datas.child("id").getValue()).toString();
 //                    chatuser(id);
+				}
 
 
-                }
+				FirebaseRecyclerOptions<UserinfoList> options = new FirebaseRecyclerOptions.Builder<UserinfoList>()
+						.setQuery(db.child(id), UserinfoList.class).build();
+				adapter = new FirebaseRecyclerAdapter<UserinfoList, MyViewholder>(options) {
+					@Override
+					protected void onBindViewHolder(@NonNull MyViewholder holder, int position, @NonNull UserinfoList model) {
+						String idd = getRef(position).getKey();
+						assert idd != null;
+						db.child(id).child(idd).limitToLast(1).orderByKey().addValueEventListener(new ValueEventListener() {
+							@Override
+							public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+								for (DataSnapshot lchat : dataSnapshot.getChildren()) {
+									massage = Objects.requireNonNull(lchat.child("massage").getValue()).toString();
+									time = (long) lchat.child("time").getValue();
+									String s_Id = Objects.requireNonNull(lchat.child("senderId").getValue()).toString();
+									String re_Id = Objects.requireNonNull(lchat.child("reciverId").getValue()).toString();
+									String show_userid;
+									if (s_Id.equals(id)) {
+										show_userid = re_Id;
+									} else {
+										show_userid = s_Id;
+									}
+									r_db.orderByKey().equalTo(show_userid).addValueEventListener(new ValueEventListener() {
+										@Override
+										public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+											for (DataSnapshot ud : dataSnapshot.getChildren()) {
+												nam = Objects.requireNonNull(ud.child("name").getValue()).toString();
+												uid = Objects.requireNonNull(ud.child("id").getValue()).toString();
+												imgurl = Objects.requireNonNull(ud.child("imgurl").getValue()).toString();
+												userlist.add(new UserinfoList(imgurl, nam, massage, uid, time));
+												holder.name.setText(nam);
+												Picasso.get().load(imgurl).centerCrop().resize(80, 80).error(R.drawable.ic_user).into(holder.profileppic);
+												holder.userlayout.setOnClickListener(v ->
+												{
+													Intent it = new Intent(context, ChattingActivity.class);
+													it.putExtra("userid", uid).putExtra("name", name);
+													startActivity(it);
+												});
+											}
+										}
 
+										@Override
+										public void onCancelled(@NonNull DatabaseError databaseError) {
+										}
+									});
+									holder.email.setText(massage);
+								}
+							}
 
-                FirebaseRecyclerOptions<UserinfoList> options = new FirebaseRecyclerOptions.Builder<UserinfoList>()
-                        .setQuery(db.child(id), UserinfoList.class)
-                        .build();
-                adapter = new FirebaseRecyclerAdapter<UserinfoList, MyViewholder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull MyViewholder holder, int position, @NonNull UserinfoList model) {
-                        String idd = getRef(position).getKey();
-                        db.child(id).child(idd).limitToLast(1).orderByKey().addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot lchat : dataSnapshot.getChildren()) {
-                                    massage = lchat.child("massage").getValue().toString();
-                                    time = (long) lchat.child("time").getValue();
-                                    String s_Id = lchat.child("senderId").getValue().toString();
-                                    String re_Id = lchat.child("reciverId").getValue().toString();
-                                    String show_userid;
-                                    if (s_Id.equals(id)) {
-                                        show_userid = re_Id;
-                                    } else {
-                                        show_userid = s_Id;
-                                    }
-                                    r_db.orderByKey().equalTo(show_userid).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+							@Override
+							public void onCancelled(@NonNull DatabaseError databaseError) {
+							}
+						});
+					}
 
-                                            for (DataSnapshot ud : dataSnapshot.getChildren()) {
-                                                nam = ud.child("name").getValue().toString();
-                                                uid = ud.child("id").getValue().toString();
-                                                imgurl = ud.child("imgurl").getValue().toString();
-//                                        Toast.makeText(context, ""+massage, Toast.LENGTH_SHORT).show();
-                                                userlist.add(new UserinfoList(imgurl, nam, massage, uid, time));
-                                                holder.name.setText(nam);
-                                                holder.userlayout.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        Intent it = new Intent(context, ChattingActivity.class);
-                                                        it.putExtra("userid", uid)
-                                                                .putExtra("name", name);
+					@NonNull
+					@Override
+					public MyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+						LayoutInflater inflater = LayoutInflater.from(context);
+						View view = inflater.inflate(R.layout.alluserlayout, parent, false);
+						return new MyViewholder(view);
+					}
+				};
+				recyclerView.setAdapter(adapter);
+				adapter.startListening();
+			}
 
-                                                        startActivity(it);
-                                                    }
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
+			}
+		});
+	}
 
-                                                });
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-//                            Toast.makeText(context, ""+nam, Toast.LENGTH_SHORT).show();
-
-
-                                    holder.email.setText(massage);
-
-
-                                }
-
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }
-
-                    @NonNull
-                    @Override
-                    public MyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        LayoutInflater inflater = LayoutInflater.from(context);
-                        View view = inflater.inflate(R.layout.alluserlayout, parent, false);
-                        return new MyViewholder(view);
-                    }
-                };
-                recyclerView.setAdapter(adapter);
-                adapter.startListening();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-
-//    public void chatuser(final String id) {
+	//    public void chatuser(final String id) {
 //
 //
 //        db.child(id).addValueEventListener(new ValueEventListener() {
@@ -286,40 +260,39 @@ public class ChatFragment extends Fragment {
 //        });
 //
 //    }
+	@Override
+	public void onStop() {
+		super.onStop();
+		adapter.stopListening();
+	}
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
+	@Override
+	public void onResume() {
+		super.onResume();
+		userlist.clear();
+		FirebaseDatabase.getInstance().goOnline();
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        userlist.clear();
-        FirebaseDatabase.getInstance().goOnline();
-    }
+	@Override
+	public void onPause() {
+		super.onPause();
+		userlist.clear();
+		FirebaseDatabase.getInstance().goOffline();
+		Toast.makeText(context, "pause", Toast.LENGTH_SHORT).show();
+	}
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        userlist.clear();
-        FirebaseDatabase.getInstance().goOffline();
-        Toast.makeText(context, "pause", Toast.LENGTH_SHORT).show();
-    }
+	static class MyViewholder extends RecyclerView.ViewHolder {
+		de.hdodenhof.circleimageview.CircleImageView profileppic;
+		TextView name, email, unread;
+		LinearLayout userlayout;
 
-    static class MyViewholder extends RecyclerView.ViewHolder {
-        de.hdodenhof.circleimageview.CircleImageView profileppic;
-        TextView name, email, unread;
-        LinearLayout userlayout;
-
-        MyViewholder(@NonNull View itemView) {
-            super(itemView);
-            profileppic = itemView.findViewById(R.id.profilepic);
-            name = itemView.findViewById(R.id.alu_name);
-            email = itemView.findViewById(R.id.alu_email);
-            unread = itemView.findViewById(R.id.unreadcount);
-            userlayout = itemView.findViewById(R.id.userlayout);
-        }
-    }
+		MyViewholder(@NonNull View itemView) {
+			super(itemView);
+			profileppic = itemView.findViewById(R.id.profilepic);
+			name = itemView.findViewById(R.id.alu_name);
+			email = itemView.findViewById(R.id.alu_email);
+			unread = itemView.findViewById(R.id.unreadcount);
+			userlayout = itemView.findViewById(R.id.userlayout);
+		}
+	}
 }
