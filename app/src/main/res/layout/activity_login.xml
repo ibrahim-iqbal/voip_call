@@ -24,7 +24,7 @@
             android:layout_marginTop="48dp"
             android:layout_marginBottom="64dp"
             android:drawableLeft="@drawable/ic_key"
-            android:fontFamily="@font/poppins_light"
+            android:fontFamily="@font/montserrat"
             android:gravity="center|bottom"
             android:letterSpacing="0.1"
             android:text="Sign In"
@@ -55,7 +55,7 @@
                     android:hint="Email Id"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="#2D2D2D"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     tools:ignore="HardcodedText,RtlSymmetry" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +105,7 @@
                     android:autoSizeTextType="uniform"
                     android:onClick="register"
                     android:padding="15dp"
-                    android:text="REGISTER"
+                    android:text="@string/Sign_Up"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp" />
 
@@ -120,7 +120,7 @@
                     android:elevation="20dp"
                     android:onClick="login"
                     android:padding="15dp"
-                    android:text="Login"
+                    android:text="@string/Sign_In"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp" />
 

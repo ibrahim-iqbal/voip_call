@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
-        <item>@font/aldrich</item>
-        <item>@font/arsenal</item>
-        <item>@font/cinzel</item>
-        <item>@font/poppins_light</item>
+        <item>@font/montserrat_alternates</item>
     </array>
 </resources>

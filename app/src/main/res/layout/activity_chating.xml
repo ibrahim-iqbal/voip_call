@@ -86,6 +86,7 @@
         android:layout_height="50dp"
         android:background="@drawable/chatbox"
         android:weightSum="3"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

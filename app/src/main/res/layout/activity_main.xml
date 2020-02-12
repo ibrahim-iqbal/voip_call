@@ -23,6 +23,7 @@
             android:layout_height="270dp"
             android:alpha="0"
             android:translationY="-100dp"
+            android:contentDescription="Welcome image"
             android:src="@drawable/ic_mainsvg" />
 
         <TextView
@@ -30,12 +31,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoSizeTextType="uniform"
-            android:fontFamily="@font/arsenal"
+            android:fontFamily="@font/montserrat_alternates"
             android:letterSpacing="0.1"
-            android:text="VOIP CALLS"
+            android:text="@string/app_name"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="45dp"
+            android:textSize="45sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
