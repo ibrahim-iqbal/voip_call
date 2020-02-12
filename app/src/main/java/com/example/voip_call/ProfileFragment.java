@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment {
 	private ImageView camera, gallery;
 	private AlertDialog alertDialog;
 	private Button save, update;
-	private Bitmap bitmap;
+	private Bitmap bitmap, bitm1;
 	private String name, imgurl, id, number, url, na;
 	private RecyclerView recycle;
 	private DatabaseReference db;
