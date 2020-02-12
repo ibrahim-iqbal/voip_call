@@ -1,10 +1,7 @@
 package com.example.voip_call;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,32 +47,32 @@ public class Chat_RecyclerView_Adpter extends RecyclerView.Adapter<Chat_Recycler
 //        int n = userList.get(position).getUnRno();
 //        holder.unread.setText("" + n);
 
-        if (userList.get(position).imageurl.equals("")) {
-            Log.d(TAG, "Hey");
-        } else {
-            Picasso.get().load(userList.get(position).getImageurl()).into(holder.profileppic);
-        }
+//        if (userList.get(position).imageurl.equals("")) {
+//            Log.d(TAG, "Hey");
+//        } else {
+////            Picasso.get().load(userList.get(position).getImageurl()).into(holder.profileppic);
+//        }
         holder.userlayout.setOnClickListener(v ->
         {
-            Intent it = new Intent(context, ChattingActivity.class);
-            it.putExtra("userid", userList.get(position).getId())
-                    .putExtra("name", userList.get(position).getName())
-                    .putExtra("img", userList.get(position).getImageurl());
-
-            Intent intent = new Intent(context, ChattingActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+//            Intent it = new Intent(context, ChattingActivity.class);
+//            it.putExtra("userid", userList.get(position).getId())
+//                    .putExtra("name", userList.get(position).getName())
+//                    .putExtra("img", userList.get(position).getImageurl());
+//
+//            Intent intent = new Intent(context, ChattingActivity.class);
+//            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
             Notification notification = new NotificationCompat.Builder(context, CHANNEL1)
                     .setSmallIcon(R.drawable.ic_notifications_active_black_24dp)
                     .setContentTitle(userList.get(position).getName())
-                    .setContentText(userList.get(position).getId())
+//                    .setContentText(userList.get(position).getId())
                     .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                    .addAction(android.R.drawable.ic_menu_view, "VIEW", pendingIntent)
+//                    .addAction(android.R.drawable.ic_menu_view, "VIEW", pendingIntent)
                     .build();
             notificationManager.notify(1, notification);
-            context.startActivity(it);
+//            context.startActivity(it);
 //            ((Activity)context).finish();
         });
     }

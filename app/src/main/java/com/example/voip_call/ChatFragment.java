@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,6 +43,9 @@ public class ChatFragment extends Fragment {
 	private FirebaseRecyclerAdapter<UserinfoList, MyViewholder> adapter;
 	private List<UserinfoList> userlist;
 	private DatabaseReference r_db, db;
+	LinkedHashSet<alldataclass> userinfo = new LinkedHashSet<alldataclass>();
+	List<alldataclass> usal = new ArrayList<alldataclass>();
+
 
 	ChatFragment(Context mcontext) {
 		context = mcontext;
@@ -116,23 +120,28 @@ public class ChatFragment extends Fragment {
 												nam = Objects.requireNonNull(ud.child("name").getValue()).toString();
 												uid = Objects.requireNonNull(ud.child("id").getValue()).toString();
 												imgurl = Objects.requireNonNull(ud.child("imgurl").getValue()).toString();
-												userlist.add(new UserinfoList(imgurl, nam, massage, uid, time));
 												holder.name.setText(nam);
 												Picasso.get().load(imgurl).centerCrop().resize(80, 80).error(R.drawable.ic_user).into(holder.profileppic);
-												holder.userlayout.setOnClickListener(v ->
-												{
-													Intent it = new Intent(context, ChattingActivity.class);
-													it.putExtra("userid", uid).putExtra("name", name);
-													startActivity(it);
-												});
+
 											}
+//											Toast.makeText(context, ""+usal.get(0).getUid(), Toast.LENGTH_SHORT).show();
+
+
 										}
 
 										@Override
 										public void onCancelled(@NonNull DatabaseError databaseError) {
 										}
 									});
+
 									holder.email.setText(massage);
+									holder.userlayout.setOnClickListener(v ->
+									{
+										Intent itt = new Intent(context, ChattingActivity.class);
+										itt.putExtra("userid", show_userid);
+										startActivity(itt);
+									});
+
 								}
 							}
 

@@ -4,6 +4,8 @@ public class UserinfoList {
 	String imageurl, name, massage, id, Email;
 	private long tm;
 
+	public UserinfoList() {
+	}
 
 	UserinfoList(String imageurl, String name, String id, String email) {
 		this.imageurl = imageurl;

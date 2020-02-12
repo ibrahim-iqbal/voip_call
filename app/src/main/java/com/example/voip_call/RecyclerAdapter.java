@@ -11,8 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -35,8 +33,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 	@Override
 	public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 		holder.usertag.setText(userList.get(position).getName());
-		holder.userup.setText(userList.get(position).getEmail());
-		Picasso.get().load(userList.get(position).getImageurl()).centerCrop().resize(80, 80).into(holder.userimg);
+//		holder.userup.setText(userList.get(position).getEmail());
+//		Picasso.get().load(userList.get(position).getImageurl()).centerCrop().resize(80, 80).into(holder.userimg);
 		holder.call_img.setOnClickListener(v ->
 		{
 			Intent it = new Intent(context, CallScreen.class);
