@@ -252,11 +252,10 @@ public class ProfileFragment extends Fragment {
 			@Override
 			protected void onBindViewHolder(@NonNull allUser_ViewHolder holder, int position, @NonNull alluserinfo model) {
 				String userid = getRef(position).getKey();
-
 				assert userid != null;
 				if (model.getId().equals(id)) {
-					Toast.makeText(context, "" + model.getName(), Toast.LENGTH_SHORT).show();
-					holder.all_user.setVisibility(View.INVISIBLE);
+//					Toast.makeText(context, "" + model.getName(), Toast.LENGTH_SHORT).show();
+
 				} else {
 					holder.all_name.setText(model.getName());
 					holder.all_email.setText(model.getEmail());
@@ -306,6 +305,7 @@ public class ProfileFragment extends Fragment {
 			@NonNull
 			@Override
 			public allUser_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
 				View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_user, parent, false);
 				return new allUser_ViewHolder(view);
 			}
