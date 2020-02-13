@@ -5,9 +5,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BlendMode;
+import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -54,7 +54,7 @@ public class CallScreen extends AppCompatActivity {
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 		window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDarker));
 
-		mute.setOnClickListener(v -> mute.setImageTintBlendMode(BlendMode.SRC_ATOP));
+		mute.setOnClickListener(v -> mute.setImageTintMode(PorterDuff.Mode.ADD));
 
 		Intent it = getIntent();
 		String num = it.getStringExtra("callerid");
@@ -67,6 +67,7 @@ public class CallScreen extends AppCompatActivity {
 				.build();
 		sinchClient.setSupportCalling(true);
 		sinchClient.start();
+
 		if (requestPermissions()) {
 			Toast.makeText(this, "Call Start", Toast.LENGTH_SHORT).show();
 			if (call == null) {
@@ -112,7 +113,7 @@ public class CallScreen extends AppCompatActivity {
 		super.onBackPressed();
 	}
 
-	public void speaker(View view) {
+	public void speaker() {
 		setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
 		speaker.setImageTintBlendMode(BlendMode.SRC_ATOP);
 	}

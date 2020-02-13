@@ -1,6 +1,5 @@
 package com.example.voip_call;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,15 +54,6 @@ public class LandingPage extends AppCompatActivity {
 		pagerv.setAdapter(adapter);
 		pagerv.setPageTransformer(true, depth);
 		tabs.setupWithViewPager(pagerv);
-
-		ProgressDialog pd = new ProgressDialog(this);
-		pd.setMessage("Loading...");
-		pd.setCancelable(false);
-		pd.setCanceledOnTouchOutside(false);
-		pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		pd.show();
-
-		h.postDelayed(pd::dismiss, 6000);
 	}
 
 	@Override

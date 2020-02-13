@@ -9,19 +9,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        tools:context=".DashActivity">
+        android:background="@android:color/transparent">
 
         <LinearLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:background="@drawable/curve"
-            android:backgroundTint="@color/colorPrimaryDarker"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:baselineAligned="false"
-            android:elevation="20dp"
+            android:elevation="10dp"
             android:orientation="horizontal"
-            android:padding="14dp"
+            android:padding="16dp"
             android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +29,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2"
+                android:layout_weight="1.5"
                 android:orientation="vertical"
                 android:weightSum="5">
 
@@ -38,25 +37,25 @@
                     android:id="@+id/profileimg"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="3"
+                    android:layout_weight="4"
                     android:padding="8dp"
                     android:src="@drawable/ic_profpic" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:weightSum="2">
 
                     <Button
                         android:id="@+id/save"
                         style="@style/Widget.MaterialComponents.Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="0.8"
                         android:alpha="0"
                         android:enabled="false"
                         android:text="Save"
@@ -65,12 +64,13 @@
                     <Button
                         android:id="@+id/update"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="0.8"
                         android:autoSizeTextType="uniform"
                         android:text="Update"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
                         android:textSize="14sp"
                         tools:targetApi="o" />
                 </LinearLayout>
@@ -79,77 +79,71 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.8"
-                android:orientation="vertical">
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="3">
 
-                <TextView
-                    android:id="@+id/tvname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
-                    android:text="@string/name"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/etname"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#eee"
-                    android:textSize="18sp" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintTextColor="@color/colorAccent">
 
-                <TextView
-                    android:id="@+id/tvemail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
-                    android:text="@string/email"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etname"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/name"
+                        android:textColor="#eee"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/etemail"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#eee"
-                    android:textSize="18sp" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintTextColor="@color/colorAccent">
 
-                <TextView
-                    android:id="@+id/tvmob"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
-                    android:text="@string/number"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etemail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/email"
+                        android:textColor="#eee"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/etmob"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#eee"
-                    android:textSize="18sp" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintTextColor="@color/colorAccent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etmob"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/number"
+                        android:textColor="#eee"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
         </LinearLayout>
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/curve"
             android:backgroundTint="@color/colorPrimaryDarker"
-            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

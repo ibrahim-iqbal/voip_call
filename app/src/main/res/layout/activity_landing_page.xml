@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rec1"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    tools:context=".LandingPage">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -21,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/montserrat_alternates"
                 android:gravity="center_vertical"
                 android:text="@string/app_name"
                 android:textAllCaps="true"
@@ -43,10 +45,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
-        android:layout_weight="0.81"
+        android:layout_weight="0.82"
+        android:textAlignment="center"
         app:tabBackground="@color/colorPrimaryDark"
         app:tabIndicatorColor="@color/colorAccent"
-        app:tabIndicatorHeight="5dp"
+        app:tabIndicatorHeight="4dp"
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextColor="@color/colorPrimary"
         app:tabRippleColor="@color/holo_yellow_dark"

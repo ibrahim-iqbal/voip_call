@@ -99,7 +99,7 @@
             android:layout_weight="2.5"
             android:hint="Enter Message"
             android:textColor="@color/colorPrimary"
-            android:textColorHint="#929292"
+            android:textColorHint="@color/colorPrimaryDarker"
             android:textSize="20sp"
             tools:ignore="Autofill,HardcodedText" />
 

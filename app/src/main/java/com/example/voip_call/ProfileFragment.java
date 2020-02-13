@@ -60,12 +60,11 @@ public class ProfileFragment extends Fragment {
 	private ImageView camera, gallery;
 	private AlertDialog alertDialog;
 	private Button save, update;
-	private Bitmap bitmap, bitm1;
+	private Bitmap bitmap;
 	private String name, imgurl, id, number, url, na;
 	private RecyclerView recycle;
 	private DatabaseReference db;
 	private FirebaseRecyclerAdapter<alluserinfo, allUser_ViewHolder> adapter;
-	private FirebaseAuth mAuth;
 	private StorageReference mStorageRef;
 
 	ProfileFragment(Context context) {
@@ -99,7 +98,7 @@ public class ProfileFragment extends Fragment {
 		recycle.setLayoutManager(layoutManager);
 
 		db = FirebaseDatabase.getInstance().getReference("userinfo");
-		mAuth = FirebaseAuth.getInstance();
+		FirebaseAuth mAuth = FirebaseAuth.getInstance();
 		String email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
 		db.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
@@ -252,10 +251,10 @@ public class ProfileFragment extends Fragment {
 			@Override
 			protected void onBindViewHolder(@NonNull allUser_ViewHolder holder, int position, @NonNull alluserinfo model) {
 				String userid = getRef(position).getKey();
+
 				assert userid != null;
 				if (model.getId().equals(id)) {
-//					Toast.makeText(context, "" + model.getName(), Toast.LENGTH_SHORT).show();
-
+					Toast.makeText(context, "" + model.getName(), Toast.LENGTH_SHORT).show();
 				} else {
 					holder.all_name.setText(model.getName());
 					holder.all_email.setText(model.getEmail());
@@ -263,11 +262,8 @@ public class ProfileFragment extends Fragment {
 					Picasso.get().load(model.getImgurl()).centerCrop().resize(100, 100).error(R.drawable.ic_user).into(holder.allimg);
 
 					holder.all_user.setOnClickListener(v ->
-							startActivity(new Intent(context, ChattingActivity.class)
-									.putExtra("userid", model.getId())
-									.putExtra("name", model.getName())));
+							startActivity(new Intent(context, ChattingActivity.class).putExtra("userid", model.getId()).putExtra("name", model.getName())));
 				}
-
 //				if(userid.equals(id))
 //				{
 //
@@ -305,7 +301,6 @@ public class ProfileFragment extends Fragment {
 			@NonNull
 			@Override
 			public allUser_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
 				View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_user, parent, false);
 				return new allUser_ViewHolder(view);
 			}

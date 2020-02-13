@@ -55,14 +55,8 @@ public class CallFragment extends Fragment {
 		review.setLayoutManager(layoutManager);
 
 		Window window = Objects.requireNonNull(getActivity()).getWindow();
-
-// clear FLAG_TRANSLUCENT_STATUS flag:
 		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-// finally change the color
 		window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarker));
 
 		r_db1.orderByChild("email").equalTo(mauth.getCurrentUser().getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,12 +118,9 @@ public class CallFragment extends Fragment {
 								}
 //                                Toast.makeText(context, "jhjk" + show_userid, Toast.LENGTH_SHORT).show();
 								getuserinfo(show_userid, massage, time);
-
-
 //                                Toast.makeText(context, "" + show_userid, Toast.LENGTH_SHORT).show();
 //                                Toast.makeText(context, "last" + massage, Toast.LENGTH_SHORT).show();
 							}
-
 						}
 
 						@Override
