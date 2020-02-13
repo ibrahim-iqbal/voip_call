@@ -27,18 +27,21 @@ public class OnBoarding extends AppIntro implements ISlideBackgroundColorHolder 
         sliderPage1.setTitle("Hello");
         sliderPage1.setDescription("Welcome to the App");
         sliderPage1.setImageDrawable(R.drawable.googleg_standard_color_18);
+        sliderPage1.setTitleColor(getResources().getColor(R.color.colorAccent));
         addSlide(AppIntroFragment.newInstance(sliderPage1));
 
         SliderPage sliderPage2 = new SliderPage();
         sliderPage2.setTitle("Hello");
         sliderPage2.setDescription("Welcome to the App");
         sliderPage2.setImageDrawable(R.drawable.googleg_standard_color_18);
+        sliderPage2.setTitleColor(getResources().getColor(R.color.colorAccent));
         addSlide(AppIntroFragment.newInstance(sliderPage2));
 
         SliderPage sliderPage3 = new SliderPage();
         sliderPage3.setTitle("Hello");
         sliderPage3.setDescription("Welcome to the App");
         sliderPage3.setImageDrawable(R.drawable.googleg_standard_color_18);
+        sliderPage3.setTitleColor(getResources().getColor(R.color.colorAccent));
         addSlide(AppIntroFragment.newInstance(sliderPage3));
 
         setDepthAnimation();

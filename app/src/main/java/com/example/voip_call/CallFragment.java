@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,7 +29,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class CallFragment extends Fragment {
-	ValueEventListener listener;
 	private List<UserinfoList> usercalllist;
 	private String userEmail, id, massage, name, img, Id;
 	private long time;
@@ -82,15 +82,9 @@ public class CallFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-
-
-//        Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
-
-
+		Toast.makeText(context, "call start", Toast.LENGTH_SHORT).show();
 		usercalllist = new ArrayList<>();
 		usercalllist.clear();
-
-
 	}
 
 	private void chatuser(final String id) {
@@ -142,7 +136,6 @@ public class CallFragment extends Fragment {
 
 	}
 
-
 	private void getuserinfo(String userid, String massage, long tm) {
 		LinkedHashSet<UserinfoList> uniqueStrings = new LinkedHashSet<>();
 		String uid = userid;
@@ -160,7 +153,6 @@ public class CallFragment extends Fragment {
 					uniqueStrings.add(new UserinfoList(img, name, Id, email));
 				}
 				usercalllist.addAll(uniqueStrings);
-
 //                sort list according to sending and receiving massage
 				Collections.sort(usercalllist, (o1, o2) -> {
 					int tm1 = (int) o1.getTm();
@@ -171,7 +163,6 @@ public class CallFragment extends Fragment {
 					} else {
 						return -1;
 					}
-
 				});
 				mAdapter = new RecyclerAdapter(context, usercalllist);
 				mAdapter.notifyDataSetChanged();
@@ -180,16 +171,12 @@ public class CallFragment extends Fragment {
 
 			@Override
 			public void onCancelled(@NonNull DatabaseError databaseError) {
-
 			}
 		});
-
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-//        Toast.makeText(context, "atop", Toast.LENGTH_SHORT).show();
-
 	}
 }

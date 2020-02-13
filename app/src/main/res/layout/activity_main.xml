@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/well"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="270dp"
             android:alpha="0"
             android:translationY="-100dp"
@@ -33,7 +33,6 @@
             android:autoSizeTextType="uniform"
             android:fontFamily="@font/montserrat_alternates"
             android:letterSpacing="0.1"
-            android:transitionName="name"
             android:text="@string/app_name"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"

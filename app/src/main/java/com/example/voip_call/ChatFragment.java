@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,65 +30,65 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChatFragment extends Fragment {
-    public String userEmail;
-    RecyclerView.Adapter madpter;
-    Context context;
-    List<Long> tm;
-    LinkedHashSet<alldataclass> userinfo = new LinkedHashSet<alldataclass>();
-    List<alldataclass> usal = new ArrayList<alldataclass>();
-    private FirebaseAuth mauth;
-    private RecyclerView recyclerView;
-    private String id, massage, name, Id, img, show_userid;
-    private long time;
-    private String nam, imgurl, uid;
-    private FirebaseRecyclerAdapter<UserinfoList, MyViewholder> adapter;
-    private List<UserinfoList> userlist;
-    private DatabaseReference r_db, db;
+	public String userEmail;
+	RecyclerView.Adapter madpter;
+	Context context;
+	List<Long> tm;
+	LinkedHashSet<alldataclass> userinfo = new LinkedHashSet<alldataclass>();
+	List<alldataclass> usal = new ArrayList<alldataclass>();
+	private FirebaseAuth mauth;
+	private RecyclerView recyclerView;
+	private String id, massage, name, Id, img, show_userid;
+	private long time;
+	private String nam, imgurl, uid;
+	private FirebaseRecyclerAdapter<UserinfoList, MyViewholder> adapter;
+	private List<UserinfoList> userlist;
+	private DatabaseReference r_db, db;
 
 
-    ChatFragment(Context mcontext) {
-        context = mcontext;
-    }
+	ChatFragment(Context mcontext) {
+		context = mcontext;
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_chat, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        mauth = FirebaseAuth.getInstance();
+		mauth = FirebaseAuth.getInstance();
 
-        try {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        } catch (Exception e) {
-        }
+		try {
+			FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+		} catch (Exception e) {
+		}
 
-        FirebaseDatabase DB = FirebaseDatabase.getInstance();
+		FirebaseDatabase DB = FirebaseDatabase.getInstance();
 
-        r_db = DB.getReference("userinfo");
-        r_db.keepSynced(true);
-        db = DB.getReference("chatinfo");
-        db.keepSynced(true);
-        userEmail = Objects.requireNonNull(mauth.getCurrentUser()).getEmail();
+		r_db = DB.getReference("userinfo");
+		r_db.keepSynced(true);
+		db = DB.getReference("chatinfo");
+		db.keepSynced(true);
+		userEmail = Objects.requireNonNull(mauth.getCurrentUser()).getEmail();
 
-        recyclerView = v.findViewById(R.id.recic);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        return v;
-    }
+		recyclerView = v.findViewById(R.id.recic);
+		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+		recyclerView.setLayoutManager(layoutManager);
+		return v;
+	}
 
-    @Override
-    public void onStart() {
-        super.onStart();
+	@Override
+	public void onStart() {
+		super.onStart();
 
-        userlist = new ArrayList<>();
-        userlist.clear();
-        r_db.orderByChild("email").equalTo(Objects.requireNonNull(mauth.getCurrentUser()).getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot datas : dataSnapshot.getChildren()) {
+		userlist = new ArrayList<>();
+		userlist.clear();
+		r_db.orderByChild("email").equalTo(Objects.requireNonNull(mauth.getCurrentUser()).getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				for (DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                    id = Objects.requireNonNull(datas.child("id").getValue()).toString();
-                    chatuser(id);
-                }
+					id = Objects.requireNonNull(datas.child("id").getValue()).toString();
+					chatuser(id);
+				}
 
 
 //                FirebaseRecyclerOptions<UserinfoList> options = new FirebaseRecyclerOptions.Builder<UserinfoList>()
@@ -187,154 +186,155 @@ public class ChatFragment extends Fragment {
 //                recyclerView.setAdapter(adapter);
 //                adapter.notifyDataSetChanged();
 //                adapter.startListening();
-            }
+			}
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
+			}
+		});
+	}
 
-    public void chatuser(final String id) {
+	public void chatuser(final String id) {
 
 
-        db.child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (final DataSnapshot da : dataSnapshot.getChildren()) {
-                    String chatid = da.getKey();
-                    userlist.clear();
-                    Toast.makeText(context, "" + userlist.size(), Toast.LENGTH_SHORT).show();
-                    Query query = db.child(id).child(chatid).limitToLast(1).orderByKey();
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+		db.child(id).addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				for (final DataSnapshot da : dataSnapshot.getChildren()) {
+					String chatid = da.getKey();
+					userlist.clear();
+					//Toast.makeText(context, "" + userlist.size(), Toast.LENGTH_SHORT).show();
+					Query query = db.child(id).child(chatid).limitToLast(1).orderByKey();
+					query.addListenerForSingleValueEvent(new ValueEventListener() {
+						@Override
+						public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                            Toast.makeText(context, "onStart", Toast.LENGTH_SHORT).show();
-                            String show_userid = "";
-                            for (DataSnapshot lchat : dataSnapshot.getChildren()) {
-                                massage = lchat.child("massage").getValue().toString();
-                                time = (long) lchat.child("time").getValue();
-                                String s_Id = lchat.child("senderId").getValue().toString();
-                                String re_Id = lchat.child("reciverId").getValue().toString();
+							String show_userid = "";
+							for (DataSnapshot lchat : dataSnapshot.getChildren()) {
+								massage = lchat.child("massage").getValue().toString();
+								time = (long) lchat.child("time").getValue();
+								String s_Id = lchat.child("senderId").getValue().toString();
+								String re_Id = lchat.child("reciverId").getValue().toString();
 
-                                if (s_Id.equals(id)) {
-                                    show_userid = re_Id;
-                                } else {
-                                    show_userid = s_Id;
-                                }
-
-
-                            }
-                            getuserinfo(show_userid, massage, time);
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+								if (s_Id.equals(id)) {
+									show_userid = re_Id;
+								} else {
+									show_userid = s_Id;
+								}
 
 
-                }
-            }
+							}
+							getuserinfo(show_userid, massage, time);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+						}
 
-            }
-        });
+						@Override
+						public void onCancelled(@NonNull DatabaseError databaseError) {
+
+						}
+					});
 
 
-    }
+				}
+			}
 
-    public void getuserinfo(final String userid, String massage, long tm) {
-        LinkedHashSet<UserinfoList> uniqueStrings = new LinkedHashSet<UserinfoList>();
-        final String mass = massage;
-        final long tmm = tm;
-        userlist.clear();
-        uniqueStrings.clear();
-        r_db.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+			}
+		});
 
-                for (DataSnapshot userda : dataSnapshot.getChildren()) {
-                    name = userda.child("name").getValue().toString();
-                    img = userda.child("imgurl").getValue().toString();
-                    Id = userda.child("id").getValue().toString();
-                    uniqueStrings.add(new UserinfoList(img, name, mass, Id, tmm));
 
-                }
-                userlist.addAll(uniqueStrings);
+	}
+
+	public void getuserinfo(final String userid, String massage, long tm) {
+		LinkedHashSet<UserinfoList> uniqueStrings = new LinkedHashSet<UserinfoList>();
+		final String mass = massage;
+		final long tmm = tm;
+		userlist.clear();
+		uniqueStrings.clear();
+		r_db.orderByKey().equalTo(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+				for (DataSnapshot userda : dataSnapshot.getChildren()) {
+					name = userda.child("name").getValue().toString();
+					img = userda.child("imgurl").getValue().toString();
+					Id = userda.child("id").getValue().toString();
+					uniqueStrings.add(new UserinfoList(img, name, mass, Id, tmm));
+
+				}
+				userlist.addAll(uniqueStrings);
 //                Toast.makeText(context, ""+userlist.size(), Toast.LENGTH_SHORT).show();
-                uniqueStrings.clear();
+				uniqueStrings.clear();
 //                sort list according to sending and receiving massage
-                Collections.sort(userlist, new Comparator<UserinfoList>() {
-                    @Override
-                    public int compare(UserinfoList o1, UserinfoList o2) {
-                        int tm1 = (int) o1.getTm();
-                        int tm2 = (int) o2.getTm();
+				Collections.sort(userlist, new Comparator<UserinfoList>() {
+					@Override
+					public int compare(UserinfoList o1, UserinfoList o2) {
+						int tm1 = (int) o1.getTm();
+						int tm2 = (int) o2.getTm();
 
-                        if (tm1 < tm2) {
-                            return 1;
-                        } else {
-                            return -1;
-                        }
+						if (tm1 < tm2) {
+							return 1;
+						} else {
+							return -1;
+						}
 
-                    }
-                });
+					}
+				});
 //                Toast.makeText(context, ""+userlist.size(), Toast.LENGTH_SHORT).show();
-                madpter = new Chat_RecyclerView_Adpter(context, userlist);
-                madpter.notifyDataSetChanged();
-                recyclerView.setAdapter(madpter);
+				madpter = new Chat_RecyclerView_Adpter(context, userlist);
+				madpter.notifyDataSetChanged();
+				recyclerView.setAdapter(madpter);
 
 
-            }
+			}
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+			}
+		});
 
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
 //        adapter.stopListening();
-    }
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        userlist.clear();
+	@Override
+	public void onResume() {
+		super.onResume();
+		userlist.clear();
 
-        usal.clear();
-        FirebaseDatabase.getInstance().goOnline();
-    }
+		usal.clear();
+		FirebaseDatabase.getInstance().goOnline();
+	}
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        usal.clear();
-        userlist.clear();
-        FirebaseDatabase.getInstance().goOffline();
-        Toast.makeText(context, "pause", Toast.LENGTH_SHORT).show();
-    }
+	@Override
+	public void onPause() {
+		super.onPause();
+		usal.clear();
+		userlist.clear();
+		FirebaseDatabase.getInstance().goOffline();
+		//Toast.makeText(context, "pause", Toast.LENGTH_SHORT).show();
+	}
 
-    static class MyViewholder extends RecyclerView.ViewHolder {
-        de.hdodenhof.circleimageview.CircleImageView profileppic;
-        TextView name, email, unread;
-        LinearLayout userlayout;
+	static class MyViewholder extends RecyclerView.ViewHolder {
+		de.hdodenhof.circleimageview.CircleImageView profileppic;
+		TextView name, email, unread;
+		LinearLayout userlayout;
 
-        MyViewholder(@NonNull View itemView) {
-            super(itemView);
-            profileppic = itemView.findViewById(R.id.profilepic);
-            name = itemView.findViewById(R.id.alu_name);
-            email = itemView.findViewById(R.id.alu_email);
-            unread = itemView.findViewById(R.id.unreadcount);
-            userlayout = itemView.findViewById(R.id.userlayout);
-        }
-    }
+		MyViewholder(@NonNull View itemView) {
+			super(itemView);
+			profileppic = itemView.findViewById(R.id.profilepic);
+			name = itemView.findViewById(R.id.alu_name);
+			email = itemView.findViewById(R.id.alu_email);
+			unread = itemView.findViewById(R.id.unreadcount);
+			userlayout = itemView.findViewById(R.id.userlayout);
+		}
+	}
 }

@@ -1,6 +1,5 @@
 package com.example.voip_call;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 		window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDarker));
 
 		mp = MediaPlayer.create(this, R.raw.intro_melody);
-		wel.animate().alpha(1f).translationY(100f).scaleY(1f).scaleX(1f).setDuration(2000);
+		wel.animate().alpha(1f).translationY(20f).scaleY(2.5f).scaleX(2.5f).setDuration(2000);
 		mp.start();
 
 		Handler h = new Handler();
@@ -42,15 +41,15 @@ public class MainActivity extends AppCompatActivity {
 			int is = sp.getInt("id", 0);
 			if (is == 1) {
 				Intent it = new Intent(this, LoginActivity.class);
-				ActivityOptions options =
-						ActivityOptions.makeSceneTransitionAnimation(this, text, "name");
-				startActivity(it, options.toBundle());
+				startActivity(it);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 				finish();
 			} else {
 				Intent it = new Intent(this, OnBoarding.class);
 				startActivity(it);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 				finish();
 			}
-		}, 4000);
+		}, 3000);
 	}
 }
