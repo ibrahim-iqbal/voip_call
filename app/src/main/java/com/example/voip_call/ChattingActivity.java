@@ -230,9 +230,7 @@ public class ChattingActivity extends AppCompatActivity {
 
 	@Override
 	public void onPause() {
-
 		super.onPause();
-
 		if (FirebaseDatabase.getInstance() != null) {
 			FirebaseDatabase.getInstance().goOffline();
 		}
@@ -241,6 +239,7 @@ public class ChattingActivity extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
 
 	}
 }

@@ -287,8 +287,6 @@ public class ChatFragment extends Fragment {
 				madpter = new Chat_RecyclerView_Adpter(context, userlist);
 				madpter.notifyDataSetChanged();
 				recyclerView.setAdapter(madpter);
-
-
 			}
 
 			@Override

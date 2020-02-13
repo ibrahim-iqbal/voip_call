@@ -117,4 +117,15 @@ public class LandingPage extends AppCompatActivity {
 		alert11.show();
 
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
 }
